@@ -1,3 +1,14 @@
-# WIP
+# 1 Rules Overview
 
-here be dragons...
+## ExampleRector
+
+// `@todo` fill the description
+
+- class: [`Ghostwriter\Revamp\Rule\ExampleRector`](../src/Rector/ExampleRector.php)
+
+```diff
+-// @todo fill code before
++// @todo fill code after
+```
+
+<br>
