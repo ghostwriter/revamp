@@ -93,6 +93,7 @@ return RectorConfig::configure()
 ### Credits
 
 - [Nathanael Esayeas](https://github.com/ghostwriter)
+- [Rector - Maintainers & Contributors](https://github.com/rectorphp/rector/contributors)
 - [All Contributors](https://github.com/ghostwriter/revamp/contributors)
 
 ### Changelog
