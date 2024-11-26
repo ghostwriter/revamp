@@ -11,7 +11,7 @@
 
 Rector upgrade rules for PHP frameworks, libraries, and tools.
 
-> [!INFO]
+> [!NOTE]
 >
 > Star ⭐ this repo if you find it useful.
 >
