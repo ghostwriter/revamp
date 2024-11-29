@@ -30,10 +30,6 @@ composer require rector/rector --dev
 composer require ghostwriter/revamp --dev
 ```
 
-### Rector Rules
-
-To see all the rules, check the [docs/README.md](./docs/README.md) file.
-
 ## Usage
 
 To add a rule or set to your config, with package version constants:
