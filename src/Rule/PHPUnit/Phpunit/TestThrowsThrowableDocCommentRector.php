@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Revamp\Rule\PHPUnit;
+namespace Ghostwriter\Revamp\Rule\PHPUnit\Phpunit;
 
 use Ghostwriter\Revamp\AbstractRevampRector;
-use Ghostwriter\RevampTests\Rule\PHPUnit\TestThrowsThrowableDocCommentRectorTest;
+use Ghostwriter\RevampTests\Rule\PHPUnit\PHPUnit\TestThrowsThrowableDocCommentRectorTest;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
 
