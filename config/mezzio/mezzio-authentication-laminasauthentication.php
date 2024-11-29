@@ -6,7 +6,9 @@ use Rector\Config\RectorConfig;
 
 return RectorConfig::configure()
     ->withRules(
-        [\Ghostwriter\Revamp\Rule\Mezzio\MezzioAuthenticationLaminasauthentication\RevampMezzioAuthenticationLaminasauthenticationRector::class]
+        [
+            \Ghostwriter\Revamp\Rule\Mezzio\MezzioAuthenticationLaminasauthentication\RevampMezzioAuthenticationLaminasauthenticationRector::class,
+        ]
     )
 //    ->withSetProviders(
 //      // once this method is accepted, uncomment this line
