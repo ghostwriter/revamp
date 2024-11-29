@@ -39,20 +39,34 @@
     ],
     "require": {
         "php": ">=8.3",
-        "ghostwriter/container": "^4.0.3",
-        "ghostwriter/event-dispatcher": "^5.0.2",
-        "ghostwriter/json": "^3.0.0"
+        "ext-mbstring": "*",
+        "composer-plugin-api": "^2.6.0",
+        "composer-runtime-api": "^2.2.2",
+        "rector/rector": "^2.0 || dev-main"
     },
     "require-dev": {
-        "ghostwriter/coding-standard": "@dev",
-        "ghostwriter/psalm-plugin": "@dev",
-        "rector/rector": "@dev",
-        "symplify/rule-doc-generator": "^12.2.5"
+        "ghostwriter/case-converter": "^1.0.0",
+        "ghostwriter/clock": "^3.0.0",
+        "ghostwriter/coding-standard": "dev-main",
+        "ghostwriter/collection": "^2.0.0",
+        "ghostwriter/config": "^0.4.1",
+        "ghostwriter/container": "^4.0.3",
+        "ghostwriter/event-dispatcher": "^5.0.2",
+        "ghostwriter/filesystem": "^0.1.1",
+        "ghostwriter/json": "^3.0.0",
+        "ghostwriter/option": "^1.5.1",
+        "ghostwriter/plex": "^0.1.3",
+        "ghostwriter/result": "^1.3.0",
+        "ghostwriter/shell": "^0.1.0",
+        "ghostwriter/uuid": "^1.0.1",
+        "mockery/mockery": "^1.6 || ^2.0",
+        "phpunit/phpunit": "^9.5 || ^10.5 || ^11.4 || ^12.0",
+        "psr/container": "^1.1 || ^2.0"
     },
     "conflict": {
         "rector/rector": "<1.2"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
@@ -64,7 +78,7 @@
             "Ghostwriter\\RevampTests\\": "tests/unit/"
         },
         "exclude-from-classmap": [
-            "/tests/fixture/"
+            "tests/fixture/"
         ]
     },
     "config": {
@@ -79,7 +93,6 @@
             "php": "8.3.999"
         },
         "preferred-install": "dist",
-        "prepend-autoloader": true,
         "process-timeout": 5000,
         "sort-packages": true,
         "use-parent-dir": false
