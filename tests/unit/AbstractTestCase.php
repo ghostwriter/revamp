@@ -60,7 +60,11 @@ abstract class AbstractTestCase extends AbstractRectorTestCase
 
             if ($realPath === false) {
                 throw new FixtureDirectoryDoesNotExistException(
-                    \sprintf('Fixture directory "%s" does not exist', $fixtureDirectory)
+                    \sprintf(
+                        'Fixture directory "%s" does not exist for test case "%s"',
+                        $fixtureDirectory,
+                        static::class
+                    )
                 );
             }
 
