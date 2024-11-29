@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Revamp\Rule;
+namespace Ghostwriter\Revamp\Rule\PHP\PHP80;
 
 use Ghostwriter\Revamp\AbstractRevampRector;
-use Ghostwriter\RevampTests\Rule\RemoveDuplicateAttributesRectorTest;
+use Ghostwriter\RevampTests\Rule\PHP\PHP80\RemoveDuplicateAttributesRectorTest;
 use PhpParser\Node;
 use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\Class_;
