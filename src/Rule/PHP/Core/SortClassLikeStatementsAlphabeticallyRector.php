@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Revamp\Rule;
+namespace Ghostwriter\Revamp\Rule\PHP\Core;
 
 use Ghostwriter\Revamp\AbstractRevampRector;
-use Ghostwriter\RevampTests\Rule\SortClassLikeStatementsAlphabeticallyRectorTest;
+use Ghostwriter\RevampTests\Rule\PHP\Core\SortClassLikeStatementsAlphabeticallyRectorTest;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Stmt\ClassLike;
