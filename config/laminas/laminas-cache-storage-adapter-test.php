@@ -6,7 +6,9 @@ use Rector\Config\RectorConfig;
 
 return RectorConfig::configure()
     ->withRules(
-        [\Ghostwriter\Revamp\Rule\Laminas\LaminasCacheStorageAdapterTest\RevampLaminasCacheStorageAdapterTestRector::class]
+        [
+            \Ghostwriter\Revamp\Rule\Laminas\LaminasCacheStorageAdapterTest\RevampLaminasCacheStorageAdapterTestRector::class,
+        ]
     )
 //    ->withSetProviders(
 //      // once this method is accepted, uncomment this line
