@@ -2,14 +2,11 @@
 
 declare(strict_types=1);
 
+use Ghostwriter\Revamp\Package\Ghostwriter\Phpt\PhptRector;
+use Ghostwriter\Revamp\Package\Ghostwriter\Phpt\PhptSetProvider;
 use Rector\Config\RectorConfig;
 
 return RectorConfig::configure()
-    ->withRules([\Ghostwriter\Revamp\Rule\Ghostwriter\PHPt\RevampPHPtRector::class])
-//    ->withSetProviders(
-//      // once this method is accepted, uncomment this line
-//        \Ghostwriter\Revamp\SetProvider\Ghostwriter\PHPt\PHPtSetProvider::class,
-//    )
-    ->withSets([
-        // your sets here
-    ]);
+    ->withRules([PhptRector::class])
+    // ->withSetProviders(PhptSetProvider::class)
+;
