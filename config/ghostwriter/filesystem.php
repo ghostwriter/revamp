@@ -2,14 +2,11 @@
 
 declare(strict_types=1);
 
+use Ghostwriter\Revamp\Package\Ghostwriter\Filesystem\FilesystemRector;
+use Ghostwriter\Revamp\Package\Ghostwriter\Filesystem\FilesystemSetProvider;
 use Rector\Config\RectorConfig;
 
 return RectorConfig::configure()
-    ->withRules([\Ghostwriter\Revamp\Rule\Ghostwriter\Filesystem\RevampFilesystemRector::class])
-//    ->withSetProviders(
-//      // once this method is accepted, uncomment this line
-//        \Ghostwriter\Revamp\SetProvider\Ghostwriter\Filesystem\FilesystemSetProvider::class,
-//    )
-    ->withSets([
-        // your sets here
-    ]);
+    ->withRules([FilesystemRector::class])
+    // ->withSetProviders(FilesystemSetProvider::class)
+;
