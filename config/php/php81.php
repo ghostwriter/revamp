@@ -2,14 +2,11 @@
 
 declare(strict_types=1);
 
+use Ghostwriter\Revamp\Package\Php\Php81\Php81Rector;
+use Ghostwriter\Revamp\Package\Php\Php81\Php81SetProvider;
 use Rector\Config\RectorConfig;
 
 return RectorConfig::configure()
-    ->withRules([\Ghostwriter\Revamp\Rule\PHP\PHP81\RevampPHP81Rector::class])
-//    ->withSetProviders(
-//      // once this method is accepted, uncomment this line
-//        \Ghostwriter\Revamp\SetProvider\PHP\PHP81\PHP81SetProvider::class,
-//    )
-    ->withSets([
-        // your sets here
-    ]);
+    ->withRules([Php81Rector::class])
+    // ->withSetProviders(Php81SetProvider::class)
+;
