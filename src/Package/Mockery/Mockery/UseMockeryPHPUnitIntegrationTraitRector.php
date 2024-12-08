@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Revamp\Rule\Mockery;
+namespace Ghostwriter\Revamp\Package\Mockery\Mockery;
 
 use Ghostwriter\Revamp\AbstractRevampRector;
-use Ghostwriter\RevampTests\Rule\Mockery\UseMockeryPHPUnitIntegrationTraitRectorTest;
+use Override;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
+use Tests\Unit\Rule\Mockery\UseMockeryPHPUnitIntegrationTraitRectorTest;
+use Throwable;
 
 /**
  * @see UseMockeryPHPUnitIntegrationTraitRectorTest
@@ -17,16 +19,16 @@ final class UseMockeryPHPUnitIntegrationTraitRector extends AbstractRevampRector
     /**
      * @return array<class-string<Class_>>
      */
-    #[\Override]
+    #[Override]
     public function getNodeTypes(): array
     {
         return [Class_::class];
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
-    #[\Override]
+    #[Override]
     public function refactor(Node $node): ?Node
     {
         return match (true) {
@@ -36,7 +38,7 @@ final class UseMockeryPHPUnitIntegrationTraitRector extends AbstractRevampRector
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     private function refactorClass(Class_ $class): ?Class_
     {
