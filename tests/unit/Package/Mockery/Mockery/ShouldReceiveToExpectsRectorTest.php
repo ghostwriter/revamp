@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\RevampTests\Rule\Mockery;
+namespace Tests\Unit\Package\Mockery\Mockery;
 
-use Ghostwriter\Revamp\Rule\Mockery\ShouldReceiveToExpectsRector;
-use Ghostwriter\RevampTests\AbstractTestCase;
+use Ghostwriter\Revamp\Package\Mockery\Mockery\ShouldReceiveToExpectsRector;
 use PHPUnit\Framework\Attributes\CoversClass;
+use Tests\Unit\AbstractTestCase;
 
 #[CoversClass(ShouldReceiveToExpectsRector::class)]
 final class ShouldReceiveToExpectsRectorTest extends AbstractTestCase
