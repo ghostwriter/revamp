@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Revamp\Rule\Mockery;
+namespace Ghostwriter\Revamp\Package\Mockery\Mockery;
 
 use Ghostwriter\Revamp\AbstractRevampRector;
-use Ghostwriter\RevampTests\Rule\Mockery\HamcrestToPHPUnitRectorTest;
 use Hamcrest\MatcherAssert;
+use Override;
 use PhpParser\Node;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr;
@@ -21,13 +21,14 @@ use PhpParser\Node\Stmt\Class_;
 use PHPUnit\Framework\Constraint\IsType;
 use PHPUnit\Framework\TestCase;
 use Rector\Exception\ShouldNotHappenException;
+use Tests\Unit\Rule\Mockery\HamcrestToPHPUnitRectorTest;
 
 /**
  * @see HamcrestToPHPUnitRectorTest
  */
 final class HamcrestToPHPUnitRector extends AbstractRevampRector
 {
-    public const array HAMCREST_FUNCTIONS_TO_PHPUNIT_CONSTRAINT = [
+    public const array HAMCREST_FUNCTIONS_TO_PHPUnit_CONSTRAINT = [
         // Hamcrest - https://github.com/hamcrest/hamcrest-php
         'allOf' => 'logicalAnd',
         'anArray' => 'isArray',
@@ -113,7 +114,7 @@ final class HamcrestToPHPUnitRector extends AbstractRevampRector
     /**
      * @return array<class-string<CallLike>>
      */
-    #[\Override]
+    #[Override]
     public function getNodeTypes(): array
     {
         TestCase::assertNotFalse(true);
@@ -124,7 +125,7 @@ final class HamcrestToPHPUnitRector extends AbstractRevampRector
     /**
      * @param Class_ $node
      */
-    #[\Override]
+    #[Override]
     public function refactor(Node $node): ?Node
     {
         return match (true) {
@@ -149,7 +150,7 @@ final class HamcrestToPHPUnitRector extends AbstractRevampRector
 
         $functionName = $this->getName($funcCall);
 
-        if (! \array_key_exists($functionName, self::HAMCREST_FUNCTIONS_TO_PHPUNIT_CONSTRAINT)) {
+        if (! \array_key_exists($functionName, self::HAMCREST_FUNCTIONS_TO_PHPUnit_CONSTRAINT)) {
             return null;
         }
 
@@ -175,7 +176,7 @@ final class HamcrestToPHPUnitRector extends AbstractRevampRector
         $functionName = $this->getName($staticCall->name) ?? 'not-found';
 
         $fullyQualifiedFunctionName = $className . '::' . $functionName;
-        if (! \array_key_exists($fullyQualifiedFunctionName, self::HAMCREST_FUNCTIONS_TO_PHPUNIT_CONSTRAINT)) {
+        if (! \array_key_exists($fullyQualifiedFunctionName, self::HAMCREST_FUNCTIONS_TO_PHPUnit_CONSTRAINT)) {
             return null;
         }
 
@@ -183,7 +184,7 @@ final class HamcrestToPHPUnitRector extends AbstractRevampRector
 
         return $this->createStaticCall(
             'self',
-            self::HAMCREST_FUNCTIONS_TO_PHPUNIT_CONSTRAINT[$fullyQualifiedFunctionName],
+            self::HAMCREST_FUNCTIONS_TO_PHPUnit_CONSTRAINT[$fullyQualifiedFunctionName],
             $staticCall->args
         );
     }
@@ -245,7 +246,7 @@ final class HamcrestToPHPUnitRector extends AbstractRevampRector
         }
 
         $secondArgFunctionName = $this->getName($secondArg);
-        if (! \array_key_exists($secondArgFunctionName, self::HAMCREST_FUNCTIONS_TO_PHPUNIT_CONSTRAINT)) {
+        if (! \array_key_exists($secondArgFunctionName, self::HAMCREST_FUNCTIONS_TO_PHPUnit_CONSTRAINT)) {
             return null;
         }
 
@@ -254,7 +255,7 @@ final class HamcrestToPHPUnitRector extends AbstractRevampRector
             'numericValue' => $this->createStaticCall('self', 'assertIsNumeric', [$args[0]]),
             //            'equalTo' => $this->createStaticCall(
             //                'self',
-            //                self::HAMCREST_FUNCTIONS_TO_PHPUNIT_CONSTRAINT[$secondArgFunctionName],
+            //                self::HAMCREST_FUNCTIONS_TO_PHPUnit_CONSTRAINT[$secondArgFunctionName],
             //                [
             //                    $args[0],
             //                    $secondArg->args[0],
@@ -274,7 +275,7 @@ final class HamcrestToPHPUnitRector extends AbstractRevampRector
 
         return $this->createStaticCall(
             'self',
-            self::HAMCREST_FUNCTIONS_TO_PHPUNIT_CONSTRAINT[$functionName],
+            self::HAMCREST_FUNCTIONS_TO_PHPUnit_CONSTRAINT[$functionName],
             $funcCall->args
         );
     }
@@ -289,7 +290,7 @@ final class HamcrestToPHPUnitRector extends AbstractRevampRector
 
         return new New_(
             $name,
-            [new Arg(new ClassConstFetch($name, self::HAMCREST_FUNCTIONS_TO_PHPUNIT_CONSTRAINT[$functionName]))]
+            [new Arg(new ClassConstFetch($name, self::HAMCREST_FUNCTIONS_TO_PHPUnit_CONSTRAINT[$functionName]))]
         );
     }
 }
