@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\RevampTests\Rule\{{ $vendor }}\{{ $package }};
+namespace Tests\Unit\Package\{{ $vendor }}\{{ $package }};
 
-use Ghostwriter\Revamp\Rule\{{ $vendor }}\{{ $package }}\{{ $rule }};
-use Ghostwriter\RevampTests\AbstractTestCase;
+use Ghostwriter\Revamp\Package\{{ $vendor }}\{{ $package }}\{{ $rule }};
+use Ghostwriter\Revamp\Package\{{ $vendor }}\{{ $package }}\{{ $setProvider }};
 use PHPUnit\Framework\Attributes\CoversClass;
+use Tests\Unit\AbstractTestCase;
 
 #[CoversClass({{ $rule }}::class)]
-final class {{ $rule }}Test extends AbstractTestCase
+#[CoversClass({{ $setProvider }}::class)]
+final class {{ $test }} extends AbstractTestCase
 {
 }
