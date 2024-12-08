@@ -2,14 +2,11 @@
 
 declare(strict_types=1);
 
+use Ghostwriter\Revamp\Package\Ghostwriter\Clock\ClockRector;
+use Ghostwriter\Revamp\Package\Ghostwriter\Clock\ClockSetProvider;
 use Rector\Config\RectorConfig;
 
 return RectorConfig::configure()
-    ->withRules([\Ghostwriter\Revamp\Rule\Ghostwriter\Clock\RevampClockRector::class])
-//    ->withSetProviders(
-//      // once this method is accepted, uncomment this line
-//        \Ghostwriter\Revamp\SetProvider\Ghostwriter\Clock\ClockSetProvider::class,
-//    )
-    ->withSets([
-        // your sets here
-    ]);
+    ->withRules([ClockRector::class])
+    // ->withSetProviders(ClockSetProvider::class)
+;
