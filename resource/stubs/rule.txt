@@ -2,17 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Revamp\Rule\{{ $vendor }}\{{ $package }};
+namespace Ghostwriter\Revamp\Package\{{ $vendor }}\{{ $package }};
 
 use Ghostwriter\Revamp\AbstractRevampRector;
+use Override;
 use PhpParser\Node;
+use Tests\Unit\Package\{{ $vendor }}\{{ $package }}\{{ $test }};
 
 /**
- * @see {{ $rule }}Test
+ * @see {{ $test }}
  */
 final class {{ $rule }} extends AbstractRevampRector
 {
-    #[\Override]
+    #[Override]
     public function refactor(Node $node): ?Node
     {
         return $node;
