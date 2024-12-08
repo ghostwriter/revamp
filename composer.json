@@ -1,14 +1,12 @@
 {
     "name": "ghostwriter/revamp",
-    "description": "Rector upgrade rules for PHP frameworks, libraries, and tools.",
+    "description": "Upgrade your PHP frameworks, libraries, and tools.",
     "license": "BSD-3-Clause",
     "type": "rector-extension",
     "keywords": [
         "ghostwriter",
         "revamp",
-        "php",
-        "rector",
-        "rector-extension"
+        "php"
     ],
     "authors": [
         {
@@ -42,6 +40,7 @@
         "ext-mbstring": "*",
         "composer-plugin-api": "^2.6.0",
         "composer-runtime-api": "^2.2.2",
+        "nikic/php-parser": "^5.3.1",
         "rector/rector": "^2.0 || dev-main"
     },
     "require-dev": {
@@ -56,15 +55,15 @@
         "ghostwriter/json": "^3.0.0",
         "ghostwriter/option": "^1.5.1",
         "ghostwriter/plex": "^0.1.3",
+        "ghostwriter/psalm-plugin": "dev-main",
         "ghostwriter/result": "^1.3.0",
         "ghostwriter/shell": "^0.1.0",
         "ghostwriter/uuid": "^1.0.1",
-        "mockery/mockery": "^1.6 || ^2.0",
-        "phpunit/phpunit": "^9.5 || ^10.5 || ^11.4 || ^12.0",
-        "psr/container": "^1.1 || ^2.0"
+        "mockery/mockery": "^1.6.12",
+        "phpunit/phpunit": "^11.5.0"
     },
     "conflict": {
-        "rector/rector": "<1.2"
+        "rector/rector": "<2.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -75,7 +74,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Ghostwriter\\RevampTests\\": "tests/unit/"
+            "Tests\\Unit\\": "tests/unit/"
         },
         "exclude-from-classmap": [
             "tests/fixture/"
@@ -93,20 +92,77 @@
             "php": "8.3.999"
         },
         "preferred-install": "dist",
+        "prepend-autoloader": true,
         "process-timeout": 5000,
         "sort-packages": true,
         "use-parent-dir": false
     },
+    "extra": {
+        "rector2": {
+            "includes": [
+                "config/ghostwriter/arm.php",
+                "config/ghostwriter/case-converter.php",
+                "config/ghostwriter/cli.php",
+                "config/ghostwriter/clock.php",
+                "config/ghostwriter/coding-standard.php",
+                "config/ghostwriter/collection.php",
+                "config/ghostwriter/compliance.php",
+                "config/ghostwriter/config.php",
+                "config/ghostwriter/container.php",
+                "config/ghostwriter/environment.php",
+                "config/ghostwriter/event-dispatcher.php",
+                "config/ghostwriter/filesystem.php",
+                "config/ghostwriter/gfm.php",
+                "config/ghostwriter/handrail.php",
+                "config/ghostwriter/http.php",
+                "config/ghostwriter/json.php",
+                "config/ghostwriter/option.php",
+                "config/ghostwriter/phormat.php",
+                "config/ghostwriter/phpt.php",
+                "config/ghostwriter/plex.php",
+                "config/ghostwriter/psalm-plugin.php",
+                "config/ghostwriter/result.php",
+                "config/ghostwriter/revamp.php",
+                "config/ghostwriter/shell.php",
+                "config/ghostwriter/testify.php",
+                "config/ghostwriter/uuid.php",
+                "config/mockery/mockery.php",
+                "config/nikic/php-parser.php",
+                "config/php/php53.php",
+                "config/php/php54.php",
+                "config/php/php56.php",
+                "config/php/php70.php",
+                "config/php/php71.php",
+                "config/php/php72.php",
+                "config/php/php73.php",
+                "config/php/php74.php",
+                "config/php/php80.php",
+                "config/php/php81.php",
+                "config/php/php82.php",
+                "config/php/php83.php",
+                "config/php/php84.php",
+                "config/php/php85.php",
+                "config/phpunit/phpunit.php",
+                "config/vimeo/psalm.php"
+            ]
+        }
+    },
     "scripts": {
         "bin_ecs": "ecs check --clear-cache --no-interaction",
-        "bin_infection": "vendor/ghostwriter/coding-standard/tools/infection --ansi --show-mutations --threads=max --min-msi=0 --min-covered-msi=0",
+        "bin_infection": [
+            "@xdebug",
+            "vendor/ghostwriter/coding-standard/tools/infection --ansi --show-mutations --threads=max --min-msi=0 --min-covered-msi=0"
+        ],
         "bin_phive": "vendor/ghostwriter/coding-standard/tools/phive",
-        "bin_phpunit": "vendor/bin/phpunit --do-not-cache-result --colors=always",
+        "bin_phpunit": [
+            "@xdebug",
+            "vendor/ghostwriter/coding-standard/tools/phpunit --do-not-cache-result --colors=always"
+        ],
         "bin_psalm": "vendor/ghostwriter/coding-standard/tools/psalm --no-cache",
         "bin_rector": "rector process --no-ansi --clear-cache",
         "cache:clear": "rm -rf ./.cache/*",
         "check": [
-            "@composer validate",
+            "vendor/ghostwriter/coding-standard/tools/composer validate",
             "@ecs",
             "@test"
         ],
@@ -137,6 +193,7 @@
             "@phpunit",
             "@psalm:shepherd",
             "@infection"
-        ]
+        ],
+        "xdebug": "@putenv XDEBUG_MODE=coverage"
     }
 }
