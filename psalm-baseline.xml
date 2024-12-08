@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
   <file src="src/AbstractRevampRector.php">
-    <DeprecatedConstant>
-      <code><![CDATA[NodeTraverser::REMOVE_NODE]]></code>
-      <code><![CDATA[NodeTraverser::STOP_TRAVERSAL]]></code>
-    </DeprecatedConstant>
     <ImplicitToStringCast>
       <code><![CDATA[$throwable]]></code>
       <code><![CDATA[$throwable]]></code>
@@ -13,16 +9,13 @@
       <code><![CDATA[[$this->importName($fullyQualifiedClassName)]]]></code>
     </InvalidArgument>
     <LessSpecificReturnStatement>
-      <code><![CDATA[$this->addThrowsDocComment($classMethod, \Throwable::class)]]></code>
+      <code><![CDATA[$this->addThrowsDocComment($classMethod, Throwable::class)]]></code>
     </LessSpecificReturnStatement>
     <LessSpecificReturnType>
       <code><![CDATA[?int]]></code>
       <code><![CDATA[?int]]></code>
+      <code><![CDATA[int]]></code>
     </LessSpecificReturnType>
-    <MissingClassConstType>
-      <code><![CDATA[REMOVE_NODE = NodeTraverser::REMOVE_NODE]]></code>
-      <code><![CDATA[STOP_TRAVERSAL = NodeTraverser::STOP_TRAVERSAL]]></code>
-    </MissingClassConstType>
     <MissingThrowsDocblock>
       <code><![CDATA[importName]]></code>
       <code><![CDATA[importName]]></code>
@@ -40,7 +33,7 @@
       <code><![CDATA[$this->nameStartsWith($classMethod, 'test'),
             // has @test annotation
             $this->hasPhpAnnotations($classMethod, 'test'),
-            // has #[\PHPUnit\Framework\Attributes\Test] attribute
+            // has #[\PhpUnit\Framework\Attributes\Test] attribute
             $this->hasPhpAttributes($classMethod, Test::class) => true]]></code>
     </ParadoxicalCondition>
     <PossiblyNullArgument>
@@ -54,38 +47,47 @@
       <code><![CDATA[$property->props[0]]]></code>
     </PossiblyUndefinedIntArrayOffset>
     <PossiblyUnusedMethod>
+      <code><![CDATA[addArrayItemByKey]]></code>
       <code><![CDATA[currentFile]]></code>
       <code><![CDATA[extend]]></code>
       <code><![CDATA[extendsClass]]></code>
       <code><![CDATA[getRuleDefinition]]></code>
+      <code><![CDATA[getValue]]></code>
       <code><![CDATA[hasAttribute]]></code>
       <code><![CDATA[hasClassParentClassMethod]]></code>
       <code><![CDATA[hasConstant]]></code>
-      <code><![CDATA[hasInterface]]></code>
+      <code><![CDATA[hasImplements]]></code>
       <code><![CDATA[hasMethod]]></code>
       <code><![CDATA[hasMethodParameter]]></code>
       <code><![CDATA[hasProperty]]></code>
       <code><![CDATA[hasTestCaseTearDownMockeryCloseWithOptionalParentTearDown]]></code>
       <code><![CDATA[isAbstract]]></code>
+      <code><![CDATA[isAssertCallLikeName]]></code>
       <code><![CDATA[isFinalByKeyword]]></code>
-      <code><![CDATA[isSubclassOfMockeryPHPUnitTestCase]]></code>
+      <code><![CDATA[isPHPUnitMethodCallNames]]></code>
+      <code><![CDATA[isSubclassOfMockeryTestCase]]></code>
       <code><![CDATA[isSubclassOfPHPUnitTestCase]]></code>
+      <code><![CDATA[isTestClassMethod]]></code>
       <code><![CDATA[nameEndsWith]]></code>
       <code><![CDATA[removeClassMethodTeardown]]></code>
+      <code><![CDATA[removeImplements]]></code>
       <code><![CDATA[removeStmts]]></code>
       <code><![CDATA[removeUseStatements]]></code>
       <code><![CDATA[resolveParentClassName]]></code>
+      <code><![CDATA[sortImplements]]></code>
+      <code><![CDATA[unsetArrayItemByKey]]></code>
       <code><![CDATA[usesClass]]></code>
       <code><![CDATA[usesConstant]]></code>
       <code><![CDATA[usesFunction]]></code>
     </PossiblyUnusedMethod>
     <PossiblyUnusedProperty>
       <code><![CDATA[$aliasNameResolver]]></code>
+      <code><![CDATA[$changedNodeScopeRefresher]]></code>
+      <code><![CDATA[$currentFileProvider]]></code>
       <code><![CDATA[$docBlockNameImporter]]></code>
       <code><![CDATA[$docBlockUpdater]]></code>
       <code><![CDATA[$nestedAttrGroupsFactory]]></code>
       <code><![CDATA[$phpAttributeAnalyzer]]></code>
-      <code><![CDATA[$testsNodeAnalyzer]]></code>
       <code><![CDATA[$useImportsAdder]]></code>
       <code><![CDATA[$useStatements]]></code>
     </PossiblyUnusedProperty>
@@ -93,1489 +95,282 @@
       <code><![CDATA[Class_]]></code>
     </PossiblyUnusedReturnValue>
     <PropertyNotSetInConstructor>
-      <code><![CDATA[AbstractRevampRector]]></code>
-      <code><![CDATA[AbstractRevampRector]]></code>
-      <code><![CDATA[AbstractRevampRector]]></code>
-      <code><![CDATA[AbstractRevampRector]]></code>
-      <code><![CDATA[AbstractRevampRector]]></code>
-      <code><![CDATA[AbstractRevampRector]]></code>
+      <code><![CDATA[$file]]></code>
+      <code><![CDATA[$nodeComparator]]></code>
+      <code><![CDATA[$nodeFactory]]></code>
+      <code><![CDATA[$nodeNameResolver]]></code>
+      <code><![CDATA[$nodeTypeResolver]]></code>
+      <code><![CDATA[$skipper]]></code>
     </PropertyNotSetInConstructor>
+    <RedundantFunctionCall>
+      <code><![CDATA[\array_values]]></code>
+    </RedundantFunctionCall>
     <UndefinedFunction>
       <code><![CDATA[\dump([$node::class, \count($node->uses)])]]></code>
       <code><![CDATA[\dump([$usesKey, $this->getName($useUse)])]]></code>
     </UndefinedFunction>
   </file>
-  <file src="src/Rule/Composer/Composer/RevampComposerRector.php">
+  <file src="src/Package/Ghostwriter/Arm/ArmRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampComposerRector]]></code>
-      <code><![CDATA[RevampComposerRector]]></code>
-      <code><![CDATA[RevampComposerRector]]></code>
-      <code><![CDATA[RevampComposerRector]]></code>
-      <code><![CDATA[RevampComposerRector]]></code>
-      <code><![CDATA[RevampComposerRector]]></code>
+      <code><![CDATA[ArmRector]]></code>
+      <code><![CDATA[ArmRector]]></code>
+      <code><![CDATA[ArmRector]]></code>
+      <code><![CDATA[ArmRector]]></code>
+      <code><![CDATA[ArmRector]]></code>
+      <code><![CDATA[ArmRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Fig/HttpMessageUtil/RevampHttpMessageUtilRector.php">
+  <file src="src/Package/Ghostwriter/CaseConverter/CaseConverterRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampHttpMessageUtilRector]]></code>
-      <code><![CDATA[RevampHttpMessageUtilRector]]></code>
-      <code><![CDATA[RevampHttpMessageUtilRector]]></code>
-      <code><![CDATA[RevampHttpMessageUtilRector]]></code>
-      <code><![CDATA[RevampHttpMessageUtilRector]]></code>
-      <code><![CDATA[RevampHttpMessageUtilRector]]></code>
+      <code><![CDATA[CaseConverterRector]]></code>
+      <code><![CDATA[CaseConverterRector]]></code>
+      <code><![CDATA[CaseConverterRector]]></code>
+      <code><![CDATA[CaseConverterRector]]></code>
+      <code><![CDATA[CaseConverterRector]]></code>
+      <code><![CDATA[CaseConverterRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Filp/Whoops/RevampWhoopsRector.php">
+  <file src="src/Package/Ghostwriter/Cli/CliRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampWhoopsRector]]></code>
-      <code><![CDATA[RevampWhoopsRector]]></code>
-      <code><![CDATA[RevampWhoopsRector]]></code>
-      <code><![CDATA[RevampWhoopsRector]]></code>
-      <code><![CDATA[RevampWhoopsRector]]></code>
-      <code><![CDATA[RevampWhoopsRector]]></code>
+      <code><![CDATA[CliRector]]></code>
+      <code><![CDATA[CliRector]]></code>
+      <code><![CDATA[CliRector]]></code>
+      <code><![CDATA[CliRector]]></code>
+      <code><![CDATA[CliRector]]></code>
+      <code><![CDATA[CliRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Arm/RevampArmRector.php">
+  <file src="src/Package/Ghostwriter/Clock/ClockRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampArmRector]]></code>
-      <code><![CDATA[RevampArmRector]]></code>
-      <code><![CDATA[RevampArmRector]]></code>
-      <code><![CDATA[RevampArmRector]]></code>
-      <code><![CDATA[RevampArmRector]]></code>
-      <code><![CDATA[RevampArmRector]]></code>
+      <code><![CDATA[ClockRector]]></code>
+      <code><![CDATA[ClockRector]]></code>
+      <code><![CDATA[ClockRector]]></code>
+      <code><![CDATA[ClockRector]]></code>
+      <code><![CDATA[ClockRector]]></code>
+      <code><![CDATA[ClockRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/CaseConverter/RevampCaseConverterRector.php">
+  <file src="src/Package/Ghostwriter/CodingStandard/CodingStandardRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampCaseConverterRector]]></code>
-      <code><![CDATA[RevampCaseConverterRector]]></code>
-      <code><![CDATA[RevampCaseConverterRector]]></code>
-      <code><![CDATA[RevampCaseConverterRector]]></code>
-      <code><![CDATA[RevampCaseConverterRector]]></code>
-      <code><![CDATA[RevampCaseConverterRector]]></code>
+      <code><![CDATA[CodingStandardRector]]></code>
+      <code><![CDATA[CodingStandardRector]]></code>
+      <code><![CDATA[CodingStandardRector]]></code>
+      <code><![CDATA[CodingStandardRector]]></code>
+      <code><![CDATA[CodingStandardRector]]></code>
+      <code><![CDATA[CodingStandardRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Cli/RevampCliRector.php">
+  <file src="src/Package/Ghostwriter/Collection/CollectionRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampCliRector]]></code>
-      <code><![CDATA[RevampCliRector]]></code>
-      <code><![CDATA[RevampCliRector]]></code>
-      <code><![CDATA[RevampCliRector]]></code>
-      <code><![CDATA[RevampCliRector]]></code>
-      <code><![CDATA[RevampCliRector]]></code>
+      <code><![CDATA[CollectionRector]]></code>
+      <code><![CDATA[CollectionRector]]></code>
+      <code><![CDATA[CollectionRector]]></code>
+      <code><![CDATA[CollectionRector]]></code>
+      <code><![CDATA[CollectionRector]]></code>
+      <code><![CDATA[CollectionRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Clock/RevampClockRector.php">
+  <file src="src/Package/Ghostwriter/Compliance/ComplianceRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampClockRector]]></code>
-      <code><![CDATA[RevampClockRector]]></code>
-      <code><![CDATA[RevampClockRector]]></code>
-      <code><![CDATA[RevampClockRector]]></code>
-      <code><![CDATA[RevampClockRector]]></code>
-      <code><![CDATA[RevampClockRector]]></code>
+      <code><![CDATA[ComplianceRector]]></code>
+      <code><![CDATA[ComplianceRector]]></code>
+      <code><![CDATA[ComplianceRector]]></code>
+      <code><![CDATA[ComplianceRector]]></code>
+      <code><![CDATA[ComplianceRector]]></code>
+      <code><![CDATA[ComplianceRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/CodingStandard/RevampCodingStandardRector.php">
+  <file src="src/Package/Ghostwriter/Config/ConfigRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampCodingStandardRector]]></code>
-      <code><![CDATA[RevampCodingStandardRector]]></code>
-      <code><![CDATA[RevampCodingStandardRector]]></code>
-      <code><![CDATA[RevampCodingStandardRector]]></code>
-      <code><![CDATA[RevampCodingStandardRector]]></code>
-      <code><![CDATA[RevampCodingStandardRector]]></code>
+      <code><![CDATA[ConfigRector]]></code>
+      <code><![CDATA[ConfigRector]]></code>
+      <code><![CDATA[ConfigRector]]></code>
+      <code><![CDATA[ConfigRector]]></code>
+      <code><![CDATA[ConfigRector]]></code>
+      <code><![CDATA[ConfigRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Collection/RevampCollectionRector.php">
+  <file src="src/Package/Ghostwriter/Container/ContainerRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampCollectionRector]]></code>
-      <code><![CDATA[RevampCollectionRector]]></code>
-      <code><![CDATA[RevampCollectionRector]]></code>
-      <code><![CDATA[RevampCollectionRector]]></code>
-      <code><![CDATA[RevampCollectionRector]]></code>
-      <code><![CDATA[RevampCollectionRector]]></code>
+      <code><![CDATA[ContainerRector]]></code>
+      <code><![CDATA[ContainerRector]]></code>
+      <code><![CDATA[ContainerRector]]></code>
+      <code><![CDATA[ContainerRector]]></code>
+      <code><![CDATA[ContainerRector]]></code>
+      <code><![CDATA[ContainerRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Compliance/RevampComplianceRector.php">
+  <file src="src/Package/Ghostwriter/Environment/EnvironmentRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampComplianceRector]]></code>
-      <code><![CDATA[RevampComplianceRector]]></code>
-      <code><![CDATA[RevampComplianceRector]]></code>
-      <code><![CDATA[RevampComplianceRector]]></code>
-      <code><![CDATA[RevampComplianceRector]]></code>
-      <code><![CDATA[RevampComplianceRector]]></code>
+      <code><![CDATA[EnvironmentRector]]></code>
+      <code><![CDATA[EnvironmentRector]]></code>
+      <code><![CDATA[EnvironmentRector]]></code>
+      <code><![CDATA[EnvironmentRector]]></code>
+      <code><![CDATA[EnvironmentRector]]></code>
+      <code><![CDATA[EnvironmentRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Config/RevampConfigRector.php">
+  <file src="src/Package/Ghostwriter/EventDispatcher/EventDispatcherRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampConfigRector]]></code>
-      <code><![CDATA[RevampConfigRector]]></code>
-      <code><![CDATA[RevampConfigRector]]></code>
-      <code><![CDATA[RevampConfigRector]]></code>
-      <code><![CDATA[RevampConfigRector]]></code>
-      <code><![CDATA[RevampConfigRector]]></code>
+      <code><![CDATA[EventDispatcherRector]]></code>
+      <code><![CDATA[EventDispatcherRector]]></code>
+      <code><![CDATA[EventDispatcherRector]]></code>
+      <code><![CDATA[EventDispatcherRector]]></code>
+      <code><![CDATA[EventDispatcherRector]]></code>
+      <code><![CDATA[EventDispatcherRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Container/RevampContainerRector.php">
+  <file src="src/Package/Ghostwriter/Filesystem/FilesystemRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampContainerRector]]></code>
-      <code><![CDATA[RevampContainerRector]]></code>
-      <code><![CDATA[RevampContainerRector]]></code>
-      <code><![CDATA[RevampContainerRector]]></code>
-      <code><![CDATA[RevampContainerRector]]></code>
-      <code><![CDATA[RevampContainerRector]]></code>
+      <code><![CDATA[FilesystemRector]]></code>
+      <code><![CDATA[FilesystemRector]]></code>
+      <code><![CDATA[FilesystemRector]]></code>
+      <code><![CDATA[FilesystemRector]]></code>
+      <code><![CDATA[FilesystemRector]]></code>
+      <code><![CDATA[FilesystemRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Environment/RevampEnvironmentRector.php">
+  <file src="src/Package/Ghostwriter/Gfm/GfmRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampEnvironmentRector]]></code>
-      <code><![CDATA[RevampEnvironmentRector]]></code>
-      <code><![CDATA[RevampEnvironmentRector]]></code>
-      <code><![CDATA[RevampEnvironmentRector]]></code>
-      <code><![CDATA[RevampEnvironmentRector]]></code>
-      <code><![CDATA[RevampEnvironmentRector]]></code>
+      <code><![CDATA[GfmRector]]></code>
+      <code><![CDATA[GfmRector]]></code>
+      <code><![CDATA[GfmRector]]></code>
+      <code><![CDATA[GfmRector]]></code>
+      <code><![CDATA[GfmRector]]></code>
+      <code><![CDATA[GfmRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/EventDispatcher/RevampEventDispatcherRector.php">
+  <file src="src/Package/Ghostwriter/Handrail/HandrailRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampEventDispatcherRector]]></code>
-      <code><![CDATA[RevampEventDispatcherRector]]></code>
-      <code><![CDATA[RevampEventDispatcherRector]]></code>
-      <code><![CDATA[RevampEventDispatcherRector]]></code>
-      <code><![CDATA[RevampEventDispatcherRector]]></code>
-      <code><![CDATA[RevampEventDispatcherRector]]></code>
+      <code><![CDATA[HandrailRector]]></code>
+      <code><![CDATA[HandrailRector]]></code>
+      <code><![CDATA[HandrailRector]]></code>
+      <code><![CDATA[HandrailRector]]></code>
+      <code><![CDATA[HandrailRector]]></code>
+      <code><![CDATA[HandrailRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Filesystem/RevampFilesystemRector.php">
+  <file src="src/Package/Ghostwriter/Http/HttpRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampFilesystemRector]]></code>
-      <code><![CDATA[RevampFilesystemRector]]></code>
-      <code><![CDATA[RevampFilesystemRector]]></code>
-      <code><![CDATA[RevampFilesystemRector]]></code>
-      <code><![CDATA[RevampFilesystemRector]]></code>
-      <code><![CDATA[RevampFilesystemRector]]></code>
+      <code><![CDATA[HttpRector]]></code>
+      <code><![CDATA[HttpRector]]></code>
+      <code><![CDATA[HttpRector]]></code>
+      <code><![CDATA[HttpRector]]></code>
+      <code><![CDATA[HttpRector]]></code>
+      <code><![CDATA[HttpRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Gfm/RevampGfmRector.php">
+  <file src="src/Package/Ghostwriter/Json/JsonRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampGfmRector]]></code>
-      <code><![CDATA[RevampGfmRector]]></code>
-      <code><![CDATA[RevampGfmRector]]></code>
-      <code><![CDATA[RevampGfmRector]]></code>
-      <code><![CDATA[RevampGfmRector]]></code>
-      <code><![CDATA[RevampGfmRector]]></code>
+      <code><![CDATA[JsonRector]]></code>
+      <code><![CDATA[JsonRector]]></code>
+      <code><![CDATA[JsonRector]]></code>
+      <code><![CDATA[JsonRector]]></code>
+      <code><![CDATA[JsonRector]]></code>
+      <code><![CDATA[JsonRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Handrail/RevampHandrailRector.php">
+  <file src="src/Package/Ghostwriter/Option/OptionRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampHandrailRector]]></code>
-      <code><![CDATA[RevampHandrailRector]]></code>
-      <code><![CDATA[RevampHandrailRector]]></code>
-      <code><![CDATA[RevampHandrailRector]]></code>
-      <code><![CDATA[RevampHandrailRector]]></code>
-      <code><![CDATA[RevampHandrailRector]]></code>
+      <code><![CDATA[OptionRector]]></code>
+      <code><![CDATA[OptionRector]]></code>
+      <code><![CDATA[OptionRector]]></code>
+      <code><![CDATA[OptionRector]]></code>
+      <code><![CDATA[OptionRector]]></code>
+      <code><![CDATA[OptionRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Http/RevampHttpRector.php">
+  <file src="src/Package/Ghostwriter/Phormat/PhormatRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampHttpRector]]></code>
-      <code><![CDATA[RevampHttpRector]]></code>
-      <code><![CDATA[RevampHttpRector]]></code>
-      <code><![CDATA[RevampHttpRector]]></code>
-      <code><![CDATA[RevampHttpRector]]></code>
-      <code><![CDATA[RevampHttpRector]]></code>
+      <code><![CDATA[PhormatRector]]></code>
+      <code><![CDATA[PhormatRector]]></code>
+      <code><![CDATA[PhormatRector]]></code>
+      <code><![CDATA[PhormatRector]]></code>
+      <code><![CDATA[PhormatRector]]></code>
+      <code><![CDATA[PhormatRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Json/RevampJsonRector.php">
+  <file src="src/Package/Ghostwriter/Phpt/PhptRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampJsonRector]]></code>
-      <code><![CDATA[RevampJsonRector]]></code>
-      <code><![CDATA[RevampJsonRector]]></code>
-      <code><![CDATA[RevampJsonRector]]></code>
-      <code><![CDATA[RevampJsonRector]]></code>
-      <code><![CDATA[RevampJsonRector]]></code>
+      <code><![CDATA[PhptRector]]></code>
+      <code><![CDATA[PhptRector]]></code>
+      <code><![CDATA[PhptRector]]></code>
+      <code><![CDATA[PhptRector]]></code>
+      <code><![CDATA[PhptRector]]></code>
+      <code><![CDATA[PhptRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Option/RevampOptionRector.php">
+  <file src="src/Package/Ghostwriter/Plex/PlexRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampOptionRector]]></code>
-      <code><![CDATA[RevampOptionRector]]></code>
-      <code><![CDATA[RevampOptionRector]]></code>
-      <code><![CDATA[RevampOptionRector]]></code>
-      <code><![CDATA[RevampOptionRector]]></code>
-      <code><![CDATA[RevampOptionRector]]></code>
+      <code><![CDATA[PlexRector]]></code>
+      <code><![CDATA[PlexRector]]></code>
+      <code><![CDATA[PlexRector]]></code>
+      <code><![CDATA[PlexRector]]></code>
+      <code><![CDATA[PlexRector]]></code>
+      <code><![CDATA[PlexRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/PHPt/RevampPHPtRector.php">
+  <file src="src/Package/Ghostwriter/PsalmPlugin/PsalmPluginRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPHPtRector]]></code>
-      <code><![CDATA[RevampPHPtRector]]></code>
-      <code><![CDATA[RevampPHPtRector]]></code>
-      <code><![CDATA[RevampPHPtRector]]></code>
-      <code><![CDATA[RevampPHPtRector]]></code>
-      <code><![CDATA[RevampPHPtRector]]></code>
+      <code><![CDATA[PsalmPluginRector]]></code>
+      <code><![CDATA[PsalmPluginRector]]></code>
+      <code><![CDATA[PsalmPluginRector]]></code>
+      <code><![CDATA[PsalmPluginRector]]></code>
+      <code><![CDATA[PsalmPluginRector]]></code>
+      <code><![CDATA[PsalmPluginRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Phormat/RevampPhormatRector.php">
+  <file src="src/Package/Ghostwriter/Result/ResultRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPhormatRector]]></code>
-      <code><![CDATA[RevampPhormatRector]]></code>
-      <code><![CDATA[RevampPhormatRector]]></code>
-      <code><![CDATA[RevampPhormatRector]]></code>
-      <code><![CDATA[RevampPhormatRector]]></code>
-      <code><![CDATA[RevampPhormatRector]]></code>
+      <code><![CDATA[ResultRector]]></code>
+      <code><![CDATA[ResultRector]]></code>
+      <code><![CDATA[ResultRector]]></code>
+      <code><![CDATA[ResultRector]]></code>
+      <code><![CDATA[ResultRector]]></code>
+      <code><![CDATA[ResultRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Plex/RevampPlexRector.php">
+  <file src="src/Package/Ghostwriter/Revamp/RevampRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPlexRector]]></code>
-      <code><![CDATA[RevampPlexRector]]></code>
-      <code><![CDATA[RevampPlexRector]]></code>
-      <code><![CDATA[RevampPlexRector]]></code>
-      <code><![CDATA[RevampPlexRector]]></code>
-      <code><![CDATA[RevampPlexRector]]></code>
+      <code><![CDATA[RevampRector]]></code>
+      <code><![CDATA[RevampRector]]></code>
+      <code><![CDATA[RevampRector]]></code>
+      <code><![CDATA[RevampRector]]></code>
+      <code><![CDATA[RevampRector]]></code>
+      <code><![CDATA[RevampRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/PsalmPlugin/RevampPsalmPluginRector.php">
+  <file src="src/Package/Ghostwriter/Shell/ShellRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPsalmPluginRector]]></code>
-      <code><![CDATA[RevampPsalmPluginRector]]></code>
-      <code><![CDATA[RevampPsalmPluginRector]]></code>
-      <code><![CDATA[RevampPsalmPluginRector]]></code>
-      <code><![CDATA[RevampPsalmPluginRector]]></code>
-      <code><![CDATA[RevampPsalmPluginRector]]></code>
+      <code><![CDATA[ShellRector]]></code>
+      <code><![CDATA[ShellRector]]></code>
+      <code><![CDATA[ShellRector]]></code>
+      <code><![CDATA[ShellRector]]></code>
+      <code><![CDATA[ShellRector]]></code>
+      <code><![CDATA[ShellRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Result/RevampResultRector.php">
+  <file src="src/Package/Ghostwriter/Testify/TestifyRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampResultRector]]></code>
-      <code><![CDATA[RevampResultRector]]></code>
-      <code><![CDATA[RevampResultRector]]></code>
-      <code><![CDATA[RevampResultRector]]></code>
-      <code><![CDATA[RevampResultRector]]></code>
-      <code><![CDATA[RevampResultRector]]></code>
+      <code><![CDATA[TestifyRector]]></code>
+      <code><![CDATA[TestifyRector]]></code>
+      <code><![CDATA[TestifyRector]]></code>
+      <code><![CDATA[TestifyRector]]></code>
+      <code><![CDATA[TestifyRector]]></code>
+      <code><![CDATA[TestifyRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Revamp/RevampRevampRector.php">
+  <file src="src/Package/Ghostwriter/Uuid/UuidRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampRevampRector]]></code>
-      <code><![CDATA[RevampRevampRector]]></code>
-      <code><![CDATA[RevampRevampRector]]></code>
-      <code><![CDATA[RevampRevampRector]]></code>
-      <code><![CDATA[RevampRevampRector]]></code>
-      <code><![CDATA[RevampRevampRector]]></code>
+      <code><![CDATA[UuidRector]]></code>
+      <code><![CDATA[UuidRector]]></code>
+      <code><![CDATA[UuidRector]]></code>
+      <code><![CDATA[UuidRector]]></code>
+      <code><![CDATA[UuidRector]]></code>
+      <code><![CDATA[UuidRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Ghostwriter/Shell/RevampShellRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampShellRector]]></code>
-      <code><![CDATA[RevampShellRector]]></code>
-      <code><![CDATA[RevampShellRector]]></code>
-      <code><![CDATA[RevampShellRector]]></code>
-      <code><![CDATA[RevampShellRector]]></code>
-      <code><![CDATA[RevampShellRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Ghostwriter/Testify/RevampTestifyRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampTestifyRector]]></code>
-      <code><![CDATA[RevampTestifyRector]]></code>
-      <code><![CDATA[RevampTestifyRector]]></code>
-      <code><![CDATA[RevampTestifyRector]]></code>
-      <code><![CDATA[RevampTestifyRector]]></code>
-      <code><![CDATA[RevampTestifyRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Ghostwriter/Uuid/RevampUuidRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampUuidRector]]></code>
-      <code><![CDATA[RevampUuidRector]]></code>
-      <code><![CDATA[RevampUuidRector]]></code>
-      <code><![CDATA[RevampUuidRector]]></code>
-      <code><![CDATA[RevampUuidRector]]></code>
-      <code><![CDATA[RevampUuidRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasAuthentication/RevampLaminasAuthenticationRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasAuthenticationRector]]></code>
-      <code><![CDATA[RevampLaminasAuthenticationRector]]></code>
-      <code><![CDATA[RevampLaminasAuthenticationRector]]></code>
-      <code><![CDATA[RevampLaminasAuthenticationRector]]></code>
-      <code><![CDATA[RevampLaminasAuthenticationRector]]></code>
-      <code><![CDATA[RevampLaminasAuthenticationRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasBarcode/RevampLaminasBarcodeRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasBarcodeRector]]></code>
-      <code><![CDATA[RevampLaminasBarcodeRector]]></code>
-      <code><![CDATA[RevampLaminasBarcodeRector]]></code>
-      <code><![CDATA[RevampLaminasBarcodeRector]]></code>
-      <code><![CDATA[RevampLaminasBarcodeRector]]></code>
-      <code><![CDATA[RevampLaminasBarcodeRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasCache/RevampLaminasCacheRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasCacheRector]]></code>
-      <code><![CDATA[RevampLaminasCacheRector]]></code>
-      <code><![CDATA[RevampLaminasCacheRector]]></code>
-      <code><![CDATA[RevampLaminasCacheRector]]></code>
-      <code><![CDATA[RevampLaminasCacheRector]]></code>
-      <code><![CDATA[RevampLaminasCacheRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasCacheStorageAdapterApcu/RevampLaminasCacheStorageAdapterApcuRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterApcuRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterApcuRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterApcuRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterApcuRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterApcuRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterApcuRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasCacheStorageAdapterBenchmark/RevampLaminasCacheStorageAdapterBenchmarkRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterBenchmarkRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterBenchmarkRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterBenchmarkRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterBenchmarkRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterBenchmarkRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterBenchmarkRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasCacheStorageAdapterBlackhole/RevampLaminasCacheStorageAdapterBlackholeRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterBlackholeRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterBlackholeRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterBlackholeRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterBlackholeRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterBlackholeRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterBlackholeRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasCacheStorageAdapterExtMongodb/RevampLaminasCacheStorageAdapterExtMongodbRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterExtMongodbRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterExtMongodbRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterExtMongodbRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterExtMongodbRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterExtMongodbRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterExtMongodbRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasCacheStorageAdapterFilesystem/RevampLaminasCacheStorageAdapterFilesystemRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterFilesystemRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterFilesystemRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterFilesystemRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterFilesystemRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterFilesystemRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterFilesystemRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasCacheStorageAdapterMemcached/RevampLaminasCacheStorageAdapterMemcachedRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterMemcachedRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterMemcachedRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterMemcachedRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterMemcachedRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterMemcachedRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterMemcachedRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasCacheStorageAdapterMemory/RevampLaminasCacheStorageAdapterMemoryRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterMemoryRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterMemoryRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterMemoryRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterMemoryRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterMemoryRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterMemoryRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasCacheStorageAdapterRedis/RevampLaminasCacheStorageAdapterRedisRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterRedisRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterRedisRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterRedisRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterRedisRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterRedisRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterRedisRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasCacheStorageAdapterSession/RevampLaminasCacheStorageAdapterSessionRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterSessionRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterSessionRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterSessionRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterSessionRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterSessionRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterSessionRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasCacheStorageAdapterTest/RevampLaminasCacheStorageAdapterTestRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterTestRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterTestRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterTestRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterTestRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterTestRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageAdapterTestRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasCacheStorageDeprecatedFactory/RevampLaminasCacheStorageDeprecatedFactoryRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasCacheStorageDeprecatedFactoryRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageDeprecatedFactoryRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageDeprecatedFactoryRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageDeprecatedFactoryRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageDeprecatedFactoryRector]]></code>
-      <code><![CDATA[RevampLaminasCacheStorageDeprecatedFactoryRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasCaptcha/RevampLaminasCaptchaRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasCaptchaRector]]></code>
-      <code><![CDATA[RevampLaminasCaptchaRector]]></code>
-      <code><![CDATA[RevampLaminasCaptchaRector]]></code>
-      <code><![CDATA[RevampLaminasCaptchaRector]]></code>
-      <code><![CDATA[RevampLaminasCaptchaRector]]></code>
-      <code><![CDATA[RevampLaminasCaptchaRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasCli/RevampLaminasCliRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasCliRector]]></code>
-      <code><![CDATA[RevampLaminasCliRector]]></code>
-      <code><![CDATA[RevampLaminasCliRector]]></code>
-      <code><![CDATA[RevampLaminasCliRector]]></code>
-      <code><![CDATA[RevampLaminasCliRector]]></code>
-      <code><![CDATA[RevampLaminasCliRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasCode/RevampLaminasCodeRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasCodeRector]]></code>
-      <code><![CDATA[RevampLaminasCodeRector]]></code>
-      <code><![CDATA[RevampLaminasCodeRector]]></code>
-      <code><![CDATA[RevampLaminasCodeRector]]></code>
-      <code><![CDATA[RevampLaminasCodeRector]]></code>
-      <code><![CDATA[RevampLaminasCodeRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasCodingStandard/RevampLaminasCodingStandardRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasCodingStandardRector]]></code>
-      <code><![CDATA[RevampLaminasCodingStandardRector]]></code>
-      <code><![CDATA[RevampLaminasCodingStandardRector]]></code>
-      <code><![CDATA[RevampLaminasCodingStandardRector]]></code>
-      <code><![CDATA[RevampLaminasCodingStandardRector]]></code>
-      <code><![CDATA[RevampLaminasCodingStandardRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasComponentInstaller/RevampLaminasComponentInstallerRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasComponentInstallerRector]]></code>
-      <code><![CDATA[RevampLaminasComponentInstallerRector]]></code>
-      <code><![CDATA[RevampLaminasComponentInstallerRector]]></code>
-      <code><![CDATA[RevampLaminasComponentInstallerRector]]></code>
-      <code><![CDATA[RevampLaminasComponentInstallerRector]]></code>
-      <code><![CDATA[RevampLaminasComponentInstallerRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasComposerAutoloading/RevampLaminasComposerAutoloadingRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasComposerAutoloadingRector]]></code>
-      <code><![CDATA[RevampLaminasComposerAutoloadingRector]]></code>
-      <code><![CDATA[RevampLaminasComposerAutoloadingRector]]></code>
-      <code><![CDATA[RevampLaminasComposerAutoloadingRector]]></code>
-      <code><![CDATA[RevampLaminasComposerAutoloadingRector]]></code>
-      <code><![CDATA[RevampLaminasComposerAutoloadingRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasConfig/RevampLaminasConfigRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasConfigRector]]></code>
-      <code><![CDATA[RevampLaminasConfigRector]]></code>
-      <code><![CDATA[RevampLaminasConfigRector]]></code>
-      <code><![CDATA[RevampLaminasConfigRector]]></code>
-      <code><![CDATA[RevampLaminasConfigRector]]></code>
-      <code><![CDATA[RevampLaminasConfigRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasConfigAggregator/RevampLaminasConfigAggregatorRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasConfigAggregatorRector]]></code>
-      <code><![CDATA[RevampLaminasConfigAggregatorRector]]></code>
-      <code><![CDATA[RevampLaminasConfigAggregatorRector]]></code>
-      <code><![CDATA[RevampLaminasConfigAggregatorRector]]></code>
-      <code><![CDATA[RevampLaminasConfigAggregatorRector]]></code>
-      <code><![CDATA[RevampLaminasConfigAggregatorRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasConfigAggregatorParameters/RevampLaminasConfigAggregatorParametersRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasConfigAggregatorParametersRector]]></code>
-      <code><![CDATA[RevampLaminasConfigAggregatorParametersRector]]></code>
-      <code><![CDATA[RevampLaminasConfigAggregatorParametersRector]]></code>
-      <code><![CDATA[RevampLaminasConfigAggregatorParametersRector]]></code>
-      <code><![CDATA[RevampLaminasConfigAggregatorParametersRector]]></code>
-      <code><![CDATA[RevampLaminasConfigAggregatorParametersRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasContainerConfigTest/RevampLaminasContainerConfigTestRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasContainerConfigTestRector]]></code>
-      <code><![CDATA[RevampLaminasContainerConfigTestRector]]></code>
-      <code><![CDATA[RevampLaminasContainerConfigTestRector]]></code>
-      <code><![CDATA[RevampLaminasContainerConfigTestRector]]></code>
-      <code><![CDATA[RevampLaminasContainerConfigTestRector]]></code>
-      <code><![CDATA[RevampLaminasContainerConfigTestRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasDb/RevampLaminasDbRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasDbRector]]></code>
-      <code><![CDATA[RevampLaminasDbRector]]></code>
-      <code><![CDATA[RevampLaminasDbRector]]></code>
-      <code><![CDATA[RevampLaminasDbRector]]></code>
-      <code><![CDATA[RevampLaminasDbRector]]></code>
-      <code><![CDATA[RevampLaminasDbRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasDependencyPlugin/RevampLaminasDependencyPluginRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasDependencyPluginRector]]></code>
-      <code><![CDATA[RevampLaminasDependencyPluginRector]]></code>
-      <code><![CDATA[RevampLaminasDependencyPluginRector]]></code>
-      <code><![CDATA[RevampLaminasDependencyPluginRector]]></code>
-      <code><![CDATA[RevampLaminasDependencyPluginRector]]></code>
-      <code><![CDATA[RevampLaminasDependencyPluginRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasDeveloperTools/RevampLaminasDeveloperToolsRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasDeveloperToolsRector]]></code>
-      <code><![CDATA[RevampLaminasDeveloperToolsRector]]></code>
-      <code><![CDATA[RevampLaminasDeveloperToolsRector]]></code>
-      <code><![CDATA[RevampLaminasDeveloperToolsRector]]></code>
-      <code><![CDATA[RevampLaminasDeveloperToolsRector]]></code>
-      <code><![CDATA[RevampLaminasDeveloperToolsRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasDevelopmentMode/RevampLaminasDevelopmentModeRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasDevelopmentModeRector]]></code>
-      <code><![CDATA[RevampLaminasDevelopmentModeRector]]></code>
-      <code><![CDATA[RevampLaminasDevelopmentModeRector]]></code>
-      <code><![CDATA[RevampLaminasDevelopmentModeRector]]></code>
-      <code><![CDATA[RevampLaminasDevelopmentModeRector]]></code>
-      <code><![CDATA[RevampLaminasDevelopmentModeRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasDi/RevampLaminasDiRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasDiRector]]></code>
-      <code><![CDATA[RevampLaminasDiRector]]></code>
-      <code><![CDATA[RevampLaminasDiRector]]></code>
-      <code><![CDATA[RevampLaminasDiRector]]></code>
-      <code><![CDATA[RevampLaminasDiRector]]></code>
-      <code><![CDATA[RevampLaminasDiRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasDiactoros/RevampLaminasDiactorosRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasDiactorosRector]]></code>
-      <code><![CDATA[RevampLaminasDiactorosRector]]></code>
-      <code><![CDATA[RevampLaminasDiactorosRector]]></code>
-      <code><![CDATA[RevampLaminasDiactorosRector]]></code>
-      <code><![CDATA[RevampLaminasDiactorosRector]]></code>
-      <code><![CDATA[RevampLaminasDiactorosRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasDiagnostics/RevampLaminasDiagnosticsRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasDiagnosticsRector]]></code>
-      <code><![CDATA[RevampLaminasDiagnosticsRector]]></code>
-      <code><![CDATA[RevampLaminasDiagnosticsRector]]></code>
-      <code><![CDATA[RevampLaminasDiagnosticsRector]]></code>
-      <code><![CDATA[RevampLaminasDiagnosticsRector]]></code>
-      <code><![CDATA[RevampLaminasDiagnosticsRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasEscaper/RevampLaminasEscaperRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasEscaperRector]]></code>
-      <code><![CDATA[RevampLaminasEscaperRector]]></code>
-      <code><![CDATA[RevampLaminasEscaperRector]]></code>
-      <code><![CDATA[RevampLaminasEscaperRector]]></code>
-      <code><![CDATA[RevampLaminasEscaperRector]]></code>
-      <code><![CDATA[RevampLaminasEscaperRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasEventmanager/RevampLaminasEventmanagerRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasEventmanagerRector]]></code>
-      <code><![CDATA[RevampLaminasEventmanagerRector]]></code>
-      <code><![CDATA[RevampLaminasEventmanagerRector]]></code>
-      <code><![CDATA[RevampLaminasEventmanagerRector]]></code>
-      <code><![CDATA[RevampLaminasEventmanagerRector]]></code>
-      <code><![CDATA[RevampLaminasEventmanagerRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasFeed/RevampLaminasFeedRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasFeedRector]]></code>
-      <code><![CDATA[RevampLaminasFeedRector]]></code>
-      <code><![CDATA[RevampLaminasFeedRector]]></code>
-      <code><![CDATA[RevampLaminasFeedRector]]></code>
-      <code><![CDATA[RevampLaminasFeedRector]]></code>
-      <code><![CDATA[RevampLaminasFeedRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasFilter/RevampLaminasFilterRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasFilterRector]]></code>
-      <code><![CDATA[RevampLaminasFilterRector]]></code>
-      <code><![CDATA[RevampLaminasFilterRector]]></code>
-      <code><![CDATA[RevampLaminasFilterRector]]></code>
-      <code><![CDATA[RevampLaminasFilterRector]]></code>
-      <code><![CDATA[RevampLaminasFilterRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasForm/RevampLaminasFormRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasFormRector]]></code>
-      <code><![CDATA[RevampLaminasFormRector]]></code>
-      <code><![CDATA[RevampLaminasFormRector]]></code>
-      <code><![CDATA[RevampLaminasFormRector]]></code>
-      <code><![CDATA[RevampLaminasFormRector]]></code>
-      <code><![CDATA[RevampLaminasFormRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasHttp/RevampLaminasHttpRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasHttpRector]]></code>
-      <code><![CDATA[RevampLaminasHttpRector]]></code>
-      <code><![CDATA[RevampLaminasHttpRector]]></code>
-      <code><![CDATA[RevampLaminasHttpRector]]></code>
-      <code><![CDATA[RevampLaminasHttpRector]]></code>
-      <code><![CDATA[RevampLaminasHttpRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasHttphandlerrunner/RevampLaminasHttphandlerrunnerRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasHttphandlerrunnerRector]]></code>
-      <code><![CDATA[RevampLaminasHttphandlerrunnerRector]]></code>
-      <code><![CDATA[RevampLaminasHttphandlerrunnerRector]]></code>
-      <code><![CDATA[RevampLaminasHttphandlerrunnerRector]]></code>
-      <code><![CDATA[RevampLaminasHttphandlerrunnerRector]]></code>
-      <code><![CDATA[RevampLaminasHttphandlerrunnerRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasHydrator/RevampLaminasHydratorRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasHydratorRector]]></code>
-      <code><![CDATA[RevampLaminasHydratorRector]]></code>
-      <code><![CDATA[RevampLaminasHydratorRector]]></code>
-      <code><![CDATA[RevampLaminasHydratorRector]]></code>
-      <code><![CDATA[RevampLaminasHydratorRector]]></code>
-      <code><![CDATA[RevampLaminasHydratorRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasI18N/RevampLaminasI18NRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasI18NRector]]></code>
-      <code><![CDATA[RevampLaminasI18NRector]]></code>
-      <code><![CDATA[RevampLaminasI18NRector]]></code>
-      <code><![CDATA[RevampLaminasI18NRector]]></code>
-      <code><![CDATA[RevampLaminasI18NRector]]></code>
-      <code><![CDATA[RevampLaminasI18NRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasI18NPhoneNumber/RevampLaminasI18NPhoneNumberRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasI18NPhoneNumberRector]]></code>
-      <code><![CDATA[RevampLaminasI18NPhoneNumberRector]]></code>
-      <code><![CDATA[RevampLaminasI18NPhoneNumberRector]]></code>
-      <code><![CDATA[RevampLaminasI18NPhoneNumberRector]]></code>
-      <code><![CDATA[RevampLaminasI18NPhoneNumberRector]]></code>
-      <code><![CDATA[RevampLaminasI18NPhoneNumberRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasI18NResources/RevampLaminasI18NResourcesRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasI18NResourcesRector]]></code>
-      <code><![CDATA[RevampLaminasI18NResourcesRector]]></code>
-      <code><![CDATA[RevampLaminasI18NResourcesRector]]></code>
-      <code><![CDATA[RevampLaminasI18NResourcesRector]]></code>
-      <code><![CDATA[RevampLaminasI18NResourcesRector]]></code>
-      <code><![CDATA[RevampLaminasI18NResourcesRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasInputfilter/RevampLaminasInputfilterRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasInputfilterRector]]></code>
-      <code><![CDATA[RevampLaminasInputfilterRector]]></code>
-      <code><![CDATA[RevampLaminasInputfilterRector]]></code>
-      <code><![CDATA[RevampLaminasInputfilterRector]]></code>
-      <code><![CDATA[RevampLaminasInputfilterRector]]></code>
-      <code><![CDATA[RevampLaminasInputfilterRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasJsonServer/RevampLaminasJsonServerRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasJsonServerRector]]></code>
-      <code><![CDATA[RevampLaminasJsonServerRector]]></code>
-      <code><![CDATA[RevampLaminasJsonServerRector]]></code>
-      <code><![CDATA[RevampLaminasJsonServerRector]]></code>
-      <code><![CDATA[RevampLaminasJsonServerRector]]></code>
-      <code><![CDATA[RevampLaminasJsonServerRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasLdap/RevampLaminasLdapRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasLdapRector]]></code>
-      <code><![CDATA[RevampLaminasLdapRector]]></code>
-      <code><![CDATA[RevampLaminasLdapRector]]></code>
-      <code><![CDATA[RevampLaminasLdapRector]]></code>
-      <code><![CDATA[RevampLaminasLdapRector]]></code>
-      <code><![CDATA[RevampLaminasLdapRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasLog/RevampLaminasLogRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasLogRector]]></code>
-      <code><![CDATA[RevampLaminasLogRector]]></code>
-      <code><![CDATA[RevampLaminasLogRector]]></code>
-      <code><![CDATA[RevampLaminasLogRector]]></code>
-      <code><![CDATA[RevampLaminasLogRector]]></code>
-      <code><![CDATA[RevampLaminasLogRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasMath/RevampLaminasMathRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasMathRector]]></code>
-      <code><![CDATA[RevampLaminasMathRector]]></code>
-      <code><![CDATA[RevampLaminasMathRector]]></code>
-      <code><![CDATA[RevampLaminasMathRector]]></code>
-      <code><![CDATA[RevampLaminasMathRector]]></code>
-      <code><![CDATA[RevampLaminasMathRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasMemory/RevampLaminasMemoryRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasMemoryRector]]></code>
-      <code><![CDATA[RevampLaminasMemoryRector]]></code>
-      <code><![CDATA[RevampLaminasMemoryRector]]></code>
-      <code><![CDATA[RevampLaminasMemoryRector]]></code>
-      <code><![CDATA[RevampLaminasMemoryRector]]></code>
-      <code><![CDATA[RevampLaminasMemoryRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasMigration/RevampLaminasMigrationRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasMigrationRector]]></code>
-      <code><![CDATA[RevampLaminasMigrationRector]]></code>
-      <code><![CDATA[RevampLaminasMigrationRector]]></code>
-      <code><![CDATA[RevampLaminasMigrationRector]]></code>
-      <code><![CDATA[RevampLaminasMigrationRector]]></code>
-      <code><![CDATA[RevampLaminasMigrationRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasModulemanager/RevampLaminasModulemanagerRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasModulemanagerRector]]></code>
-      <code><![CDATA[RevampLaminasModulemanagerRector]]></code>
-      <code><![CDATA[RevampLaminasModulemanagerRector]]></code>
-      <code><![CDATA[RevampLaminasModulemanagerRector]]></code>
-      <code><![CDATA[RevampLaminasModulemanagerRector]]></code>
-      <code><![CDATA[RevampLaminasModulemanagerRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasMvc/RevampLaminasMvcRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasMvcRector]]></code>
-      <code><![CDATA[RevampLaminasMvcRector]]></code>
-      <code><![CDATA[RevampLaminasMvcRector]]></code>
-      <code><![CDATA[RevampLaminasMvcRector]]></code>
-      <code><![CDATA[RevampLaminasMvcRector]]></code>
-      <code><![CDATA[RevampLaminasMvcRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasMvcForm/RevampLaminasMvcFormRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasMvcFormRector]]></code>
-      <code><![CDATA[RevampLaminasMvcFormRector]]></code>
-      <code><![CDATA[RevampLaminasMvcFormRector]]></code>
-      <code><![CDATA[RevampLaminasMvcFormRector]]></code>
-      <code><![CDATA[RevampLaminasMvcFormRector]]></code>
-      <code><![CDATA[RevampLaminasMvcFormRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasMvcI18N/RevampLaminasMvcI18NRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasMvcI18NRector]]></code>
-      <code><![CDATA[RevampLaminasMvcI18NRector]]></code>
-      <code><![CDATA[RevampLaminasMvcI18NRector]]></code>
-      <code><![CDATA[RevampLaminasMvcI18NRector]]></code>
-      <code><![CDATA[RevampLaminasMvcI18NRector]]></code>
-      <code><![CDATA[RevampLaminasMvcI18NRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasMvcMiddleware/RevampLaminasMvcMiddlewareRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasMvcMiddlewareRector]]></code>
-      <code><![CDATA[RevampLaminasMvcMiddlewareRector]]></code>
-      <code><![CDATA[RevampLaminasMvcMiddlewareRector]]></code>
-      <code><![CDATA[RevampLaminasMvcMiddlewareRector]]></code>
-      <code><![CDATA[RevampLaminasMvcMiddlewareRector]]></code>
-      <code><![CDATA[RevampLaminasMvcMiddlewareRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasMvcPluginFileprg/RevampLaminasMvcPluginFileprgRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasMvcPluginFileprgRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginFileprgRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginFileprgRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginFileprgRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginFileprgRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginFileprgRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasMvcPluginFlashmessenger/RevampLaminasMvcPluginFlashmessengerRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasMvcPluginFlashmessengerRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginFlashmessengerRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginFlashmessengerRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginFlashmessengerRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginFlashmessengerRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginFlashmessengerRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasMvcPluginIdentity/RevampLaminasMvcPluginIdentityRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasMvcPluginIdentityRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginIdentityRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginIdentityRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginIdentityRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginIdentityRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginIdentityRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasMvcPluginPrg/RevampLaminasMvcPluginPrgRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasMvcPluginPrgRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginPrgRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginPrgRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginPrgRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginPrgRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginPrgRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasMvcPlugins/RevampLaminasMvcPluginsRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasMvcPluginsRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginsRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginsRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginsRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginsRector]]></code>
-      <code><![CDATA[RevampLaminasMvcPluginsRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasMvcSkeleton/RevampLaminasMvcSkeletonRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasMvcSkeletonRector]]></code>
-      <code><![CDATA[RevampLaminasMvcSkeletonRector]]></code>
-      <code><![CDATA[RevampLaminasMvcSkeletonRector]]></code>
-      <code><![CDATA[RevampLaminasMvcSkeletonRector]]></code>
-      <code><![CDATA[RevampLaminasMvcSkeletonRector]]></code>
-      <code><![CDATA[RevampLaminasMvcSkeletonRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasNavigation/RevampLaminasNavigationRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasNavigationRector]]></code>
-      <code><![CDATA[RevampLaminasNavigationRector]]></code>
-      <code><![CDATA[RevampLaminasNavigationRector]]></code>
-      <code><![CDATA[RevampLaminasNavigationRector]]></code>
-      <code><![CDATA[RevampLaminasNavigationRector]]></code>
-      <code><![CDATA[RevampLaminasNavigationRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasPaginator/RevampLaminasPaginatorRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasPaginatorRector]]></code>
-      <code><![CDATA[RevampLaminasPaginatorRector]]></code>
-      <code><![CDATA[RevampLaminasPaginatorRector]]></code>
-      <code><![CDATA[RevampLaminasPaginatorRector]]></code>
-      <code><![CDATA[RevampLaminasPaginatorRector]]></code>
-      <code><![CDATA[RevampLaminasPaginatorRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasPaginatorAdapterLaminasdb/RevampLaminasPaginatorAdapterLaminasdbRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasPaginatorAdapterLaminasdbRector]]></code>
-      <code><![CDATA[RevampLaminasPaginatorAdapterLaminasdbRector]]></code>
-      <code><![CDATA[RevampLaminasPaginatorAdapterLaminasdbRector]]></code>
-      <code><![CDATA[RevampLaminasPaginatorAdapterLaminasdbRector]]></code>
-      <code><![CDATA[RevampLaminasPaginatorAdapterLaminasdbRector]]></code>
-      <code><![CDATA[RevampLaminasPaginatorAdapterLaminasdbRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasPermissionsAcl/RevampLaminasPermissionsAclRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasPermissionsAclRector]]></code>
-      <code><![CDATA[RevampLaminasPermissionsAclRector]]></code>
-      <code><![CDATA[RevampLaminasPermissionsAclRector]]></code>
-      <code><![CDATA[RevampLaminasPermissionsAclRector]]></code>
-      <code><![CDATA[RevampLaminasPermissionsAclRector]]></code>
-      <code><![CDATA[RevampLaminasPermissionsAclRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasPermissionsRbac/RevampLaminasPermissionsRbacRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasPermissionsRbacRector]]></code>
-      <code><![CDATA[RevampLaminasPermissionsRbacRector]]></code>
-      <code><![CDATA[RevampLaminasPermissionsRbacRector]]></code>
-      <code><![CDATA[RevampLaminasPermissionsRbacRector]]></code>
-      <code><![CDATA[RevampLaminasPermissionsRbacRector]]></code>
-      <code><![CDATA[RevampLaminasPermissionsRbacRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasProgressbar/RevampLaminasProgressbarRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasProgressbarRector]]></code>
-      <code><![CDATA[RevampLaminasProgressbarRector]]></code>
-      <code><![CDATA[RevampLaminasProgressbarRector]]></code>
-      <code><![CDATA[RevampLaminasProgressbarRector]]></code>
-      <code><![CDATA[RevampLaminasProgressbarRector]]></code>
-      <code><![CDATA[RevampLaminasProgressbarRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasPsr7Bridge/RevampLaminasPsr7BridgeRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasPsr7BridgeRector]]></code>
-      <code><![CDATA[RevampLaminasPsr7BridgeRector]]></code>
-      <code><![CDATA[RevampLaminasPsr7BridgeRector]]></code>
-      <code><![CDATA[RevampLaminasPsr7BridgeRector]]></code>
-      <code><![CDATA[RevampLaminasPsr7BridgeRector]]></code>
-      <code><![CDATA[RevampLaminasPsr7BridgeRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasRecaptcha/RevampLaminasRecaptchaRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasRecaptchaRector]]></code>
-      <code><![CDATA[RevampLaminasRecaptchaRector]]></code>
-      <code><![CDATA[RevampLaminasRecaptchaRector]]></code>
-      <code><![CDATA[RevampLaminasRecaptchaRector]]></code>
-      <code><![CDATA[RevampLaminasRecaptchaRector]]></code>
-      <code><![CDATA[RevampLaminasRecaptchaRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasRouter/RevampLaminasRouterRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasRouterRector]]></code>
-      <code><![CDATA[RevampLaminasRouterRector]]></code>
-      <code><![CDATA[RevampLaminasRouterRector]]></code>
-      <code><![CDATA[RevampLaminasRouterRector]]></code>
-      <code><![CDATA[RevampLaminasRouterRector]]></code>
-      <code><![CDATA[RevampLaminasRouterRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasSerializer/RevampLaminasSerializerRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasSerializerRector]]></code>
-      <code><![CDATA[RevampLaminasSerializerRector]]></code>
-      <code><![CDATA[RevampLaminasSerializerRector]]></code>
-      <code><![CDATA[RevampLaminasSerializerRector]]></code>
-      <code><![CDATA[RevampLaminasSerializerRector]]></code>
-      <code><![CDATA[RevampLaminasSerializerRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasServer/RevampLaminasServerRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasServerRector]]></code>
-      <code><![CDATA[RevampLaminasServerRector]]></code>
-      <code><![CDATA[RevampLaminasServerRector]]></code>
-      <code><![CDATA[RevampLaminasServerRector]]></code>
-      <code><![CDATA[RevampLaminasServerRector]]></code>
-      <code><![CDATA[RevampLaminasServerRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasServicemanager/RevampLaminasServicemanagerRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasServicemanagerRector]]></code>
-      <code><![CDATA[RevampLaminasServicemanagerRector]]></code>
-      <code><![CDATA[RevampLaminasServicemanagerRector]]></code>
-      <code><![CDATA[RevampLaminasServicemanagerRector]]></code>
-      <code><![CDATA[RevampLaminasServicemanagerRector]]></code>
-      <code><![CDATA[RevampLaminasServicemanagerRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasServicemanagerInspector/RevampLaminasServicemanagerInspectorRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasServicemanagerInspectorRector]]></code>
-      <code><![CDATA[RevampLaminasServicemanagerInspectorRector]]></code>
-      <code><![CDATA[RevampLaminasServicemanagerInspectorRector]]></code>
-      <code><![CDATA[RevampLaminasServicemanagerInspectorRector]]></code>
-      <code><![CDATA[RevampLaminasServicemanagerInspectorRector]]></code>
-      <code><![CDATA[RevampLaminasServicemanagerInspectorRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasServicemanagerMigration/RevampLaminasServicemanagerMigrationRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasServicemanagerMigrationRector]]></code>
-      <code><![CDATA[RevampLaminasServicemanagerMigrationRector]]></code>
-      <code><![CDATA[RevampLaminasServicemanagerMigrationRector]]></code>
-      <code><![CDATA[RevampLaminasServicemanagerMigrationRector]]></code>
-      <code><![CDATA[RevampLaminasServicemanagerMigrationRector]]></code>
-      <code><![CDATA[RevampLaminasServicemanagerMigrationRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasSession/RevampLaminasSessionRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasSessionRector]]></code>
-      <code><![CDATA[RevampLaminasSessionRector]]></code>
-      <code><![CDATA[RevampLaminasSessionRector]]></code>
-      <code><![CDATA[RevampLaminasSessionRector]]></code>
-      <code><![CDATA[RevampLaminasSessionRector]]></code>
-      <code><![CDATA[RevampLaminasSessionRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasSkeletonInstaller/RevampLaminasSkeletonInstallerRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasSkeletonInstallerRector]]></code>
-      <code><![CDATA[RevampLaminasSkeletonInstallerRector]]></code>
-      <code><![CDATA[RevampLaminasSkeletonInstallerRector]]></code>
-      <code><![CDATA[RevampLaminasSkeletonInstallerRector]]></code>
-      <code><![CDATA[RevampLaminasSkeletonInstallerRector]]></code>
-      <code><![CDATA[RevampLaminasSkeletonInstallerRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasSoap/RevampLaminasSoapRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasSoapRector]]></code>
-      <code><![CDATA[RevampLaminasSoapRector]]></code>
-      <code><![CDATA[RevampLaminasSoapRector]]></code>
-      <code><![CDATA[RevampLaminasSoapRector]]></code>
-      <code><![CDATA[RevampLaminasSoapRector]]></code>
-      <code><![CDATA[RevampLaminasSoapRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasStdlib/RevampLaminasStdlibRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasStdlibRector]]></code>
-      <code><![CDATA[RevampLaminasStdlibRector]]></code>
-      <code><![CDATA[RevampLaminasStdlibRector]]></code>
-      <code><![CDATA[RevampLaminasStdlibRector]]></code>
-      <code><![CDATA[RevampLaminasStdlibRector]]></code>
-      <code><![CDATA[RevampLaminasStdlibRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasStratigility/RevampLaminasStratigilityRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasStratigilityRector]]></code>
-      <code><![CDATA[RevampLaminasStratigilityRector]]></code>
-      <code><![CDATA[RevampLaminasStratigilityRector]]></code>
-      <code><![CDATA[RevampLaminasStratigilityRector]]></code>
-      <code><![CDATA[RevampLaminasStratigilityRector]]></code>
-      <code><![CDATA[RevampLaminasStratigilityRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasTag/RevampLaminasTagRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasTagRector]]></code>
-      <code><![CDATA[RevampLaminasTagRector]]></code>
-      <code><![CDATA[RevampLaminasTagRector]]></code>
-      <code><![CDATA[RevampLaminasTagRector]]></code>
-      <code><![CDATA[RevampLaminasTagRector]]></code>
-      <code><![CDATA[RevampLaminasTagRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasTest/RevampLaminasTestRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasTestRector]]></code>
-      <code><![CDATA[RevampLaminasTestRector]]></code>
-      <code><![CDATA[RevampLaminasTestRector]]></code>
-      <code><![CDATA[RevampLaminasTestRector]]></code>
-      <code><![CDATA[RevampLaminasTestRector]]></code>
-      <code><![CDATA[RevampLaminasTestRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasText/RevampLaminasTextRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasTextRector]]></code>
-      <code><![CDATA[RevampLaminasTextRector]]></code>
-      <code><![CDATA[RevampLaminasTextRector]]></code>
-      <code><![CDATA[RevampLaminasTextRector]]></code>
-      <code><![CDATA[RevampLaminasTextRector]]></code>
-      <code><![CDATA[RevampLaminasTextRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasTranslator/RevampLaminasTranslatorRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasTranslatorRector]]></code>
-      <code><![CDATA[RevampLaminasTranslatorRector]]></code>
-      <code><![CDATA[RevampLaminasTranslatorRector]]></code>
-      <code><![CDATA[RevampLaminasTranslatorRector]]></code>
-      <code><![CDATA[RevampLaminasTranslatorRector]]></code>
-      <code><![CDATA[RevampLaminasTranslatorRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasUri/RevampLaminasUriRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasUriRector]]></code>
-      <code><![CDATA[RevampLaminasUriRector]]></code>
-      <code><![CDATA[RevampLaminasUriRector]]></code>
-      <code><![CDATA[RevampLaminasUriRector]]></code>
-      <code><![CDATA[RevampLaminasUriRector]]></code>
-      <code><![CDATA[RevampLaminasUriRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasValidator/RevampLaminasValidatorRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasValidatorRector]]></code>
-      <code><![CDATA[RevampLaminasValidatorRector]]></code>
-      <code><![CDATA[RevampLaminasValidatorRector]]></code>
-      <code><![CDATA[RevampLaminasValidatorRector]]></code>
-      <code><![CDATA[RevampLaminasValidatorRector]]></code>
-      <code><![CDATA[RevampLaminasValidatorRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasView/RevampLaminasViewRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasViewRector]]></code>
-      <code><![CDATA[RevampLaminasViewRector]]></code>
-      <code><![CDATA[RevampLaminasViewRector]]></code>
-      <code><![CDATA[RevampLaminasViewRector]]></code>
-      <code><![CDATA[RevampLaminasViewRector]]></code>
-      <code><![CDATA[RevampLaminasViewRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasXml/RevampLaminasXmlRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasXmlRector]]></code>
-      <code><![CDATA[RevampLaminasXmlRector]]></code>
-      <code><![CDATA[RevampLaminasXmlRector]]></code>
-      <code><![CDATA[RevampLaminasXmlRector]]></code>
-      <code><![CDATA[RevampLaminasXmlRector]]></code>
-      <code><![CDATA[RevampLaminasXmlRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasXml2Json/RevampLaminasXml2JsonRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasXml2JsonRector]]></code>
-      <code><![CDATA[RevampLaminasXml2JsonRector]]></code>
-      <code><![CDATA[RevampLaminasXml2JsonRector]]></code>
-      <code><![CDATA[RevampLaminasXml2JsonRector]]></code>
-      <code><![CDATA[RevampLaminasXml2JsonRector]]></code>
-      <code><![CDATA[RevampLaminasXml2JsonRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Laminas/LaminasXmlrpc/RevampLaminasXmlrpcRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLaminasXmlrpcRector]]></code>
-      <code><![CDATA[RevampLaminasXmlrpcRector]]></code>
-      <code><![CDATA[RevampLaminasXmlrpcRector]]></code>
-      <code><![CDATA[RevampLaminasXmlrpcRector]]></code>
-      <code><![CDATA[RevampLaminasXmlrpcRector]]></code>
-      <code><![CDATA[RevampLaminasXmlrpcRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/Mezzio/RevampMezzioRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioRector]]></code>
-      <code><![CDATA[RevampMezzioRector]]></code>
-      <code><![CDATA[RevampMezzioRector]]></code>
-      <code><![CDATA[RevampMezzioRector]]></code>
-      <code><![CDATA[RevampMezzioRector]]></code>
-      <code><![CDATA[RevampMezzioRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioAuthentication/RevampMezzioAuthenticationRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioAuthenticationRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioAuthenticationBasic/RevampMezzioAuthenticationBasicRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioAuthenticationBasicRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationBasicRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationBasicRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationBasicRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationBasicRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationBasicRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioAuthenticationLaminasauthentication/RevampMezzioAuthenticationLaminasauthenticationRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioAuthenticationLaminasauthenticationRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationLaminasauthenticationRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationLaminasauthenticationRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationLaminasauthenticationRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationLaminasauthenticationRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationLaminasauthenticationRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioAuthenticationOauth2/RevampMezzioAuthenticationOauth2Rector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioAuthenticationOauth2Rector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationOauth2Rector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationOauth2Rector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationOauth2Rector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationOauth2Rector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationOauth2Rector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioAuthenticationSession/RevampMezzioAuthenticationSessionRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioAuthenticationSessionRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationSessionRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationSessionRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationSessionRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationSessionRector]]></code>
-      <code><![CDATA[RevampMezzioAuthenticationSessionRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioAuthorization/RevampMezzioAuthorizationRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioAuthorizationRector]]></code>
-      <code><![CDATA[RevampMezzioAuthorizationRector]]></code>
-      <code><![CDATA[RevampMezzioAuthorizationRector]]></code>
-      <code><![CDATA[RevampMezzioAuthorizationRector]]></code>
-      <code><![CDATA[RevampMezzioAuthorizationRector]]></code>
-      <code><![CDATA[RevampMezzioAuthorizationRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioAuthorizationAcl/RevampMezzioAuthorizationAclRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioAuthorizationAclRector]]></code>
-      <code><![CDATA[RevampMezzioAuthorizationAclRector]]></code>
-      <code><![CDATA[RevampMezzioAuthorizationAclRector]]></code>
-      <code><![CDATA[RevampMezzioAuthorizationAclRector]]></code>
-      <code><![CDATA[RevampMezzioAuthorizationAclRector]]></code>
-      <code><![CDATA[RevampMezzioAuthorizationAclRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioAuthorizationRbac/RevampMezzioAuthorizationRbacRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioAuthorizationRbacRector]]></code>
-      <code><![CDATA[RevampMezzioAuthorizationRbacRector]]></code>
-      <code><![CDATA[RevampMezzioAuthorizationRbacRector]]></code>
-      <code><![CDATA[RevampMezzioAuthorizationRbacRector]]></code>
-      <code><![CDATA[RevampMezzioAuthorizationRbacRector]]></code>
-      <code><![CDATA[RevampMezzioAuthorizationRbacRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioCors/RevampMezzioCorsRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioCorsRector]]></code>
-      <code><![CDATA[RevampMezzioCorsRector]]></code>
-      <code><![CDATA[RevampMezzioCorsRector]]></code>
-      <code><![CDATA[RevampMezzioCorsRector]]></code>
-      <code><![CDATA[RevampMezzioCorsRector]]></code>
-      <code><![CDATA[RevampMezzioCorsRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioCsrf/RevampMezzioCsrfRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioCsrfRector]]></code>
-      <code><![CDATA[RevampMezzioCsrfRector]]></code>
-      <code><![CDATA[RevampMezzioCsrfRector]]></code>
-      <code><![CDATA[RevampMezzioCsrfRector]]></code>
-      <code><![CDATA[RevampMezzioCsrfRector]]></code>
-      <code><![CDATA[RevampMezzioCsrfRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioFastroute/RevampMezzioFastrouteRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioFastrouteRector]]></code>
-      <code><![CDATA[RevampMezzioFastrouteRector]]></code>
-      <code><![CDATA[RevampMezzioFastrouteRector]]></code>
-      <code><![CDATA[RevampMezzioFastrouteRector]]></code>
-      <code><![CDATA[RevampMezzioFastrouteRector]]></code>
-      <code><![CDATA[RevampMezzioFastrouteRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioFlash/RevampMezzioFlashRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioFlashRector]]></code>
-      <code><![CDATA[RevampMezzioFlashRector]]></code>
-      <code><![CDATA[RevampMezzioFlashRector]]></code>
-      <code><![CDATA[RevampMezzioFlashRector]]></code>
-      <code><![CDATA[RevampMezzioFlashRector]]></code>
-      <code><![CDATA[RevampMezzioFlashRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioHal/RevampMezzioHalRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioHalRector]]></code>
-      <code><![CDATA[RevampMezzioHalRector]]></code>
-      <code><![CDATA[RevampMezzioHalRector]]></code>
-      <code><![CDATA[RevampMezzioHalRector]]></code>
-      <code><![CDATA[RevampMezzioHalRector]]></code>
-      <code><![CDATA[RevampMezzioHalRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioHelpers/RevampMezzioHelpersRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioHelpersRector]]></code>
-      <code><![CDATA[RevampMezzioHelpersRector]]></code>
-      <code><![CDATA[RevampMezzioHelpersRector]]></code>
-      <code><![CDATA[RevampMezzioHelpersRector]]></code>
-      <code><![CDATA[RevampMezzioHelpersRector]]></code>
-      <code><![CDATA[RevampMezzioHelpersRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioLaminasrouter/RevampMezzioLaminasrouterRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioLaminasrouterRector]]></code>
-      <code><![CDATA[RevampMezzioLaminasrouterRector]]></code>
-      <code><![CDATA[RevampMezzioLaminasrouterRector]]></code>
-      <code><![CDATA[RevampMezzioLaminasrouterRector]]></code>
-      <code><![CDATA[RevampMezzioLaminasrouterRector]]></code>
-      <code><![CDATA[RevampMezzioLaminasrouterRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioLaminasviewrenderer/RevampMezzioLaminasviewrendererRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioLaminasviewrendererRector]]></code>
-      <code><![CDATA[RevampMezzioLaminasviewrendererRector]]></code>
-      <code><![CDATA[RevampMezzioLaminasviewrendererRector]]></code>
-      <code><![CDATA[RevampMezzioLaminasviewrendererRector]]></code>
-      <code><![CDATA[RevampMezzioLaminasviewrendererRector]]></code>
-      <code><![CDATA[RevampMezzioLaminasviewrendererRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioMigration/RevampMezzioMigrationRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioMigrationRector]]></code>
-      <code><![CDATA[RevampMezzioMigrationRector]]></code>
-      <code><![CDATA[RevampMezzioMigrationRector]]></code>
-      <code><![CDATA[RevampMezzioMigrationRector]]></code>
-      <code><![CDATA[RevampMezzioMigrationRector]]></code>
-      <code><![CDATA[RevampMezzioMigrationRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioPlatesrenderer/RevampMezzioPlatesrendererRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioPlatesrendererRector]]></code>
-      <code><![CDATA[RevampMezzioPlatesrendererRector]]></code>
-      <code><![CDATA[RevampMezzioPlatesrendererRector]]></code>
-      <code><![CDATA[RevampMezzioPlatesrendererRector]]></code>
-      <code><![CDATA[RevampMezzioPlatesrendererRector]]></code>
-      <code><![CDATA[RevampMezzioPlatesrendererRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioProblemDetails/RevampMezzioProblemDetailsRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioProblemDetailsRector]]></code>
-      <code><![CDATA[RevampMezzioProblemDetailsRector]]></code>
-      <code><![CDATA[RevampMezzioProblemDetailsRector]]></code>
-      <code><![CDATA[RevampMezzioProblemDetailsRector]]></code>
-      <code><![CDATA[RevampMezzioProblemDetailsRector]]></code>
-      <code><![CDATA[RevampMezzioProblemDetailsRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioRouter/RevampMezzioRouterRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioRouterRector]]></code>
-      <code><![CDATA[RevampMezzioRouterRector]]></code>
-      <code><![CDATA[RevampMezzioRouterRector]]></code>
-      <code><![CDATA[RevampMezzioRouterRector]]></code>
-      <code><![CDATA[RevampMezzioRouterRector]]></code>
-      <code><![CDATA[RevampMezzioRouterRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioSession/RevampMezzioSessionRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioSessionRector]]></code>
-      <code><![CDATA[RevampMezzioSessionRector]]></code>
-      <code><![CDATA[RevampMezzioSessionRector]]></code>
-      <code><![CDATA[RevampMezzioSessionRector]]></code>
-      <code><![CDATA[RevampMezzioSessionRector]]></code>
-      <code><![CDATA[RevampMezzioSessionRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioSessionCache/RevampMezzioSessionCacheRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioSessionCacheRector]]></code>
-      <code><![CDATA[RevampMezzioSessionCacheRector]]></code>
-      <code><![CDATA[RevampMezzioSessionCacheRector]]></code>
-      <code><![CDATA[RevampMezzioSessionCacheRector]]></code>
-      <code><![CDATA[RevampMezzioSessionCacheRector]]></code>
-      <code><![CDATA[RevampMezzioSessionCacheRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioSessionExt/RevampMezzioSessionExtRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioSessionExtRector]]></code>
-      <code><![CDATA[RevampMezzioSessionExtRector]]></code>
-      <code><![CDATA[RevampMezzioSessionExtRector]]></code>
-      <code><![CDATA[RevampMezzioSessionExtRector]]></code>
-      <code><![CDATA[RevampMezzioSessionExtRector]]></code>
-      <code><![CDATA[RevampMezzioSessionExtRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioSkeleton/RevampMezzioSkeletonRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioSkeletonRector]]></code>
-      <code><![CDATA[RevampMezzioSkeletonRector]]></code>
-      <code><![CDATA[RevampMezzioSkeletonRector]]></code>
-      <code><![CDATA[RevampMezzioSkeletonRector]]></code>
-      <code><![CDATA[RevampMezzioSkeletonRector]]></code>
-      <code><![CDATA[RevampMezzioSkeletonRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioSwoole/RevampMezzioSwooleRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioSwooleRector]]></code>
-      <code><![CDATA[RevampMezzioSwooleRector]]></code>
-      <code><![CDATA[RevampMezzioSwooleRector]]></code>
-      <code><![CDATA[RevampMezzioSwooleRector]]></code>
-      <code><![CDATA[RevampMezzioSwooleRector]]></code>
-      <code><![CDATA[RevampMezzioSwooleRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioTemplate/RevampMezzioTemplateRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioTemplateRector]]></code>
-      <code><![CDATA[RevampMezzioTemplateRector]]></code>
-      <code><![CDATA[RevampMezzioTemplateRector]]></code>
-      <code><![CDATA[RevampMezzioTemplateRector]]></code>
-      <code><![CDATA[RevampMezzioTemplateRector]]></code>
-      <code><![CDATA[RevampMezzioTemplateRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioTooling/RevampMezzioToolingRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioToolingRector]]></code>
-      <code><![CDATA[RevampMezzioToolingRector]]></code>
-      <code><![CDATA[RevampMezzioToolingRector]]></code>
-      <code><![CDATA[RevampMezzioToolingRector]]></code>
-      <code><![CDATA[RevampMezzioToolingRector]]></code>
-      <code><![CDATA[RevampMezzioToolingRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mezzio/MezzioTwigrenderer/RevampMezzioTwigrendererRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMezzioTwigrendererRector]]></code>
-      <code><![CDATA[RevampMezzioTwigrendererRector]]></code>
-      <code><![CDATA[RevampMezzioTwigrendererRector]]></code>
-      <code><![CDATA[RevampMezzioTwigrendererRector]]></code>
-      <code><![CDATA[RevampMezzioTwigrendererRector]]></code>
-      <code><![CDATA[RevampMezzioTwigrendererRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Mockery/ExtendMockeryTestCaseRector.php">
+  <file src="src/Package/Mockery/Mockery/ExtendMockeryTestCaseRector.php">
     <InvalidReturnStatement>
       <code><![CDATA[[Class_::class, Namespace_::class, FileWithoutNamespace::class]]]></code>
     </InvalidReturnStatement>
@@ -1597,8 +392,11 @@
       <code><![CDATA[ExtendMockeryTestCaseRector]]></code>
       <code><![CDATA[ExtendMockeryTestCaseRector]]></code>
     </PropertyNotSetInConstructor>
+    <UnusedClass>
+      <code><![CDATA[ExtendMockeryTestCaseRector]]></code>
+    </UnusedClass>
   </file>
-  <file src="src/Rule/Mockery/HamcrestToPHPUnitRector.php">
+  <file src="src/Package/Mockery/Mockery/HamcrestToPHPUnitRector.php">
     <DocblockTypeContradiction>
       <code><![CDATA[$node instanceof CallLike => $this->refactorCallLike($node)]]></code>
     </DocblockTypeContradiction>
@@ -1638,7 +436,7 @@
       <code><![CDATA[$secondArgFunctionName]]></code>
     </PossiblyNullArgument>
     <PossiblyNullArrayOffset>
-      <code><![CDATA[self::HAMCREST_FUNCTIONS_TO_PHPUNIT_CONSTRAINT]]></code>
+      <code><![CDATA[self::HAMCREST_FUNCTIONS_TO_PHPUnit_CONSTRAINT]]></code>
     </PossiblyNullArrayOffset>
     <PossiblyUndefinedIntArrayOffset>
       <code><![CDATA[$args[0]]]></code>
@@ -1659,27 +457,26 @@
     <UndefinedPropertyFetch>
       <code><![CDATA[$args[1]->value]]></code>
     </UndefinedPropertyFetch>
-    <UnusedMethod>
-      <code><![CDATA[addNodeBeforeNode]]></code>
-      <code><![CDATA[createMethodCall]]></code>
-    </UnusedMethod>
+    <UnusedClass>
+      <code><![CDATA[HamcrestToPHPUnitRector]]></code>
+    </UnusedClass>
     <UnusedParam>
       <code><![CDATA[$attributes]]></code>
       <code><![CDATA[$funcCall]]></code>
       <code><![CDATA[$methodCall]]></code>
     </UnusedParam>
   </file>
-  <file src="src/Rule/Mockery/Mockery/RevampMockeryRector.php">
+  <file src="src/Package/Mockery/Mockery/MockeryRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampMockeryRector]]></code>
-      <code><![CDATA[RevampMockeryRector]]></code>
-      <code><![CDATA[RevampMockeryRector]]></code>
-      <code><![CDATA[RevampMockeryRector]]></code>
-      <code><![CDATA[RevampMockeryRector]]></code>
-      <code><![CDATA[RevampMockeryRector]]></code>
+      <code><![CDATA[MockeryRector]]></code>
+      <code><![CDATA[MockeryRector]]></code>
+      <code><![CDATA[MockeryRector]]></code>
+      <code><![CDATA[MockeryRector]]></code>
+      <code><![CDATA[MockeryRector]]></code>
+      <code><![CDATA[MockeryRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Mockery/PHPUnitToMockeryRector.php">
+  <file src="src/Package/Mockery/Mockery/PHPUnitToMockeryRector.php">
     <MoreSpecificImplementedParamType>
       <code><![CDATA[$node]]></code>
       <code><![CDATA[$node]]></code>
@@ -1693,7 +490,7 @@
       <code><![CDATA[PHPUnitToMockeryRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Mockery/ProphecyToMockeryRector.php">
+  <file src="src/Package/Mockery/Mockery/ProphecyToMockeryRector.php">
     <MoreSpecificImplementedParamType>
       <code><![CDATA[$node]]></code>
       <code><![CDATA[$node]]></code>
@@ -1707,7 +504,7 @@
       <code><![CDATA[ProphecyToMockeryRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Mockery/ShouldReceiveToAllowsRector.php">
+  <file src="src/Package/Mockery/Mockery/ShouldReceiveToAllowsRector.php">
     <PropertyNotSetInConstructor>
       <code><![CDATA[ShouldReceiveToAllowsRector]]></code>
       <code><![CDATA[ShouldReceiveToAllowsRector]]></code>
@@ -1717,7 +514,7 @@
       <code><![CDATA[ShouldReceiveToAllowsRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Mockery/ShouldReceiveToExpectsRector.php">
+  <file src="src/Package/Mockery/Mockery/ShouldReceiveToExpectsRector.php">
     <PropertyNotSetInConstructor>
       <code><![CDATA[ShouldReceiveToExpectsRector]]></code>
       <code><![CDATA[ShouldReceiveToExpectsRector]]></code>
@@ -1727,7 +524,7 @@
       <code><![CDATA[ShouldReceiveToExpectsRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Mockery/UseMockeryPHPUnitIntegrationTraitRector.php">
+  <file src="src/Package/Mockery/Mockery/UseMockeryPHPUnitIntegrationTraitRector.php">
     <PropertyNotSetInConstructor>
       <code><![CDATA[UseMockeryPHPUnitIntegrationTraitRector]]></code>
       <code><![CDATA[UseMockeryPHPUnitIntegrationTraitRector]]></code>
@@ -1737,304 +534,27 @@
       <code><![CDATA[UseMockeryPHPUnitIntegrationTraitRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/PHP/PHP53/RevampPHP53Rector.php">
+  <file src="src/Package/Nikic/PhpParser/PhpParserRector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPHP53Rector]]></code>
-      <code><![CDATA[RevampPHP53Rector]]></code>
-      <code><![CDATA[RevampPHP53Rector]]></code>
-      <code><![CDATA[RevampPHP53Rector]]></code>
-      <code><![CDATA[RevampPHP53Rector]]></code>
-      <code><![CDATA[RevampPHP53Rector]]></code>
+      <code><![CDATA[PhpParserRector]]></code>
+      <code><![CDATA[PhpParserRector]]></code>
+      <code><![CDATA[PhpParserRector]]></code>
+      <code><![CDATA[PhpParserRector]]></code>
+      <code><![CDATA[PhpParserRector]]></code>
+      <code><![CDATA[PhpParserRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/PHP/PHP54/RevampPHP54Rector.php">
+  <file src="src/Package/Php/Php53/Php53Rector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPHP54Rector]]></code>
-      <code><![CDATA[RevampPHP54Rector]]></code>
-      <code><![CDATA[RevampPHP54Rector]]></code>
-      <code><![CDATA[RevampPHP54Rector]]></code>
-      <code><![CDATA[RevampPHP54Rector]]></code>
-      <code><![CDATA[RevampPHP54Rector]]></code>
+      <code><![CDATA[Php53Rector]]></code>
+      <code><![CDATA[Php53Rector]]></code>
+      <code><![CDATA[Php53Rector]]></code>
+      <code><![CDATA[Php53Rector]]></code>
+      <code><![CDATA[Php53Rector]]></code>
+      <code><![CDATA[Php53Rector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/PHP/PHP56/RevampPHP56Rector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPHP56Rector]]></code>
-      <code><![CDATA[RevampPHP56Rector]]></code>
-      <code><![CDATA[RevampPHP56Rector]]></code>
-      <code><![CDATA[RevampPHP56Rector]]></code>
-      <code><![CDATA[RevampPHP56Rector]]></code>
-      <code><![CDATA[RevampPHP56Rector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/PHP/PHP70/RevampPHP70Rector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPHP70Rector]]></code>
-      <code><![CDATA[RevampPHP70Rector]]></code>
-      <code><![CDATA[RevampPHP70Rector]]></code>
-      <code><![CDATA[RevampPHP70Rector]]></code>
-      <code><![CDATA[RevampPHP70Rector]]></code>
-      <code><![CDATA[RevampPHP70Rector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/PHP/PHP71/RevampPHP71Rector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPHP71Rector]]></code>
-      <code><![CDATA[RevampPHP71Rector]]></code>
-      <code><![CDATA[RevampPHP71Rector]]></code>
-      <code><![CDATA[RevampPHP71Rector]]></code>
-      <code><![CDATA[RevampPHP71Rector]]></code>
-      <code><![CDATA[RevampPHP71Rector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/PHP/PHP72/RevampPHP72Rector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPHP72Rector]]></code>
-      <code><![CDATA[RevampPHP72Rector]]></code>
-      <code><![CDATA[RevampPHP72Rector]]></code>
-      <code><![CDATA[RevampPHP72Rector]]></code>
-      <code><![CDATA[RevampPHP72Rector]]></code>
-      <code><![CDATA[RevampPHP72Rector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/PHP/PHP73/RevampPHP73Rector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPHP73Rector]]></code>
-      <code><![CDATA[RevampPHP73Rector]]></code>
-      <code><![CDATA[RevampPHP73Rector]]></code>
-      <code><![CDATA[RevampPHP73Rector]]></code>
-      <code><![CDATA[RevampPHP73Rector]]></code>
-      <code><![CDATA[RevampPHP73Rector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/PHP/PHP74/RevampPHP74Rector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPHP74Rector]]></code>
-      <code><![CDATA[RevampPHP74Rector]]></code>
-      <code><![CDATA[RevampPHP74Rector]]></code>
-      <code><![CDATA[RevampPHP74Rector]]></code>
-      <code><![CDATA[RevampPHP74Rector]]></code>
-      <code><![CDATA[RevampPHP74Rector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/PHP/PHP80/RevampPHP80Rector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPHP80Rector]]></code>
-      <code><![CDATA[RevampPHP80Rector]]></code>
-      <code><![CDATA[RevampPHP80Rector]]></code>
-      <code><![CDATA[RevampPHP80Rector]]></code>
-      <code><![CDATA[RevampPHP80Rector]]></code>
-      <code><![CDATA[RevampPHP80Rector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/PHP/PHP81/RevampPHP81Rector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPHP81Rector]]></code>
-      <code><![CDATA[RevampPHP81Rector]]></code>
-      <code><![CDATA[RevampPHP81Rector]]></code>
-      <code><![CDATA[RevampPHP81Rector]]></code>
-      <code><![CDATA[RevampPHP81Rector]]></code>
-      <code><![CDATA[RevampPHP81Rector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/PHP/PHP82/RevampPHP82Rector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPHP82Rector]]></code>
-      <code><![CDATA[RevampPHP82Rector]]></code>
-      <code><![CDATA[RevampPHP82Rector]]></code>
-      <code><![CDATA[RevampPHP82Rector]]></code>
-      <code><![CDATA[RevampPHP82Rector]]></code>
-      <code><![CDATA[RevampPHP82Rector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/PHP/PHP83/RevampPHP83Rector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPHP83Rector]]></code>
-      <code><![CDATA[RevampPHP83Rector]]></code>
-      <code><![CDATA[RevampPHP83Rector]]></code>
-      <code><![CDATA[RevampPHP83Rector]]></code>
-      <code><![CDATA[RevampPHP83Rector]]></code>
-      <code><![CDATA[RevampPHP83Rector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/PHP/PHP84/RevampPHP84Rector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPHP84Rector]]></code>
-      <code><![CDATA[RevampPHP84Rector]]></code>
-      <code><![CDATA[RevampPHP84Rector]]></code>
-      <code><![CDATA[RevampPHP84Rector]]></code>
-      <code><![CDATA[RevampPHP84Rector]]></code>
-      <code><![CDATA[RevampPHP84Rector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/PHP/PHP85/RevampPHP85Rector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPHP85Rector]]></code>
-      <code><![CDATA[RevampPHP85Rector]]></code>
-      <code><![CDATA[RevampPHP85Rector]]></code>
-      <code><![CDATA[RevampPHP85Rector]]></code>
-      <code><![CDATA[RevampPHP85Rector]]></code>
-      <code><![CDATA[RevampPHP85Rector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/PHPUnit/Phpunit/RevampPHPUnitRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPHPUnitRector]]></code>
-      <code><![CDATA[RevampPHPUnitRector]]></code>
-      <code><![CDATA[RevampPHPUnitRector]]></code>
-      <code><![CDATA[RevampPHPUnitRector]]></code>
-      <code><![CDATA[RevampPHPUnitRector]]></code>
-      <code><![CDATA[RevampPHPUnitRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/PHPUnit/TestThrowsThrowableDocCommentRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[TestThrowsThrowableDocCommentRector]]></code>
-      <code><![CDATA[TestThrowsThrowableDocCommentRector]]></code>
-      <code><![CDATA[TestThrowsThrowableDocCommentRector]]></code>
-      <code><![CDATA[TestThrowsThrowableDocCommentRector]]></code>
-      <code><![CDATA[TestThrowsThrowableDocCommentRector]]></code>
-      <code><![CDATA[TestThrowsThrowableDocCommentRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Psr/Cache/RevampCacheRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampCacheRector]]></code>
-      <code><![CDATA[RevampCacheRector]]></code>
-      <code><![CDATA[RevampCacheRector]]></code>
-      <code><![CDATA[RevampCacheRector]]></code>
-      <code><![CDATA[RevampCacheRector]]></code>
-      <code><![CDATA[RevampCacheRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Psr/Clock/RevampClockRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampClockRector]]></code>
-      <code><![CDATA[RevampClockRector]]></code>
-      <code><![CDATA[RevampClockRector]]></code>
-      <code><![CDATA[RevampClockRector]]></code>
-      <code><![CDATA[RevampClockRector]]></code>
-      <code><![CDATA[RevampClockRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Psr/Container/RevampContainerRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampContainerRector]]></code>
-      <code><![CDATA[RevampContainerRector]]></code>
-      <code><![CDATA[RevampContainerRector]]></code>
-      <code><![CDATA[RevampContainerRector]]></code>
-      <code><![CDATA[RevampContainerRector]]></code>
-      <code><![CDATA[RevampContainerRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Psr/EventDispatcher/RevampEventDispatcherRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampEventDispatcherRector]]></code>
-      <code><![CDATA[RevampEventDispatcherRector]]></code>
-      <code><![CDATA[RevampEventDispatcherRector]]></code>
-      <code><![CDATA[RevampEventDispatcherRector]]></code>
-      <code><![CDATA[RevampEventDispatcherRector]]></code>
-      <code><![CDATA[RevampEventDispatcherRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Psr/HttpClient/RevampHttpClientRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampHttpClientRector]]></code>
-      <code><![CDATA[RevampHttpClientRector]]></code>
-      <code><![CDATA[RevampHttpClientRector]]></code>
-      <code><![CDATA[RevampHttpClientRector]]></code>
-      <code><![CDATA[RevampHttpClientRector]]></code>
-      <code><![CDATA[RevampHttpClientRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Psr/HttpFactory/RevampHttpFactoryRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampHttpFactoryRector]]></code>
-      <code><![CDATA[RevampHttpFactoryRector]]></code>
-      <code><![CDATA[RevampHttpFactoryRector]]></code>
-      <code><![CDATA[RevampHttpFactoryRector]]></code>
-      <code><![CDATA[RevampHttpFactoryRector]]></code>
-      <code><![CDATA[RevampHttpFactoryRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Psr/HttpMessage/RevampHttpMessageRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampHttpMessageRector]]></code>
-      <code><![CDATA[RevampHttpMessageRector]]></code>
-      <code><![CDATA[RevampHttpMessageRector]]></code>
-      <code><![CDATA[RevampHttpMessageRector]]></code>
-      <code><![CDATA[RevampHttpMessageRector]]></code>
-      <code><![CDATA[RevampHttpMessageRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Psr/HttpServerHandler/RevampHttpServerHandlerRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampHttpServerHandlerRector]]></code>
-      <code><![CDATA[RevampHttpServerHandlerRector]]></code>
-      <code><![CDATA[RevampHttpServerHandlerRector]]></code>
-      <code><![CDATA[RevampHttpServerHandlerRector]]></code>
-      <code><![CDATA[RevampHttpServerHandlerRector]]></code>
-      <code><![CDATA[RevampHttpServerHandlerRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Psr/HttpServerMiddleware/RevampHttpServerMiddlewareRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampHttpServerMiddlewareRector]]></code>
-      <code><![CDATA[RevampHttpServerMiddlewareRector]]></code>
-      <code><![CDATA[RevampHttpServerMiddlewareRector]]></code>
-      <code><![CDATA[RevampHttpServerMiddlewareRector]]></code>
-      <code><![CDATA[RevampHttpServerMiddlewareRector]]></code>
-      <code><![CDATA[RevampHttpServerMiddlewareRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Psr/Link/RevampLinkRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLinkRector]]></code>
-      <code><![CDATA[RevampLinkRector]]></code>
-      <code><![CDATA[RevampLinkRector]]></code>
-      <code><![CDATA[RevampLinkRector]]></code>
-      <code><![CDATA[RevampLinkRector]]></code>
-      <code><![CDATA[RevampLinkRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Psr/Log/RevampLogRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampLogRector]]></code>
-      <code><![CDATA[RevampLogRector]]></code>
-      <code><![CDATA[RevampLogRector]]></code>
-      <code><![CDATA[RevampLogRector]]></code>
-      <code><![CDATA[RevampLogRector]]></code>
-      <code><![CDATA[RevampLogRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Psr/SimpleCache/RevampSimpleCacheRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampSimpleCacheRector]]></code>
-      <code><![CDATA[RevampSimpleCacheRector]]></code>
-      <code><![CDATA[RevampSimpleCacheRector]]></code>
-      <code><![CDATA[RevampSimpleCacheRector]]></code>
-      <code><![CDATA[RevampSimpleCacheRector]]></code>
-      <code><![CDATA[RevampSimpleCacheRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/RemoveDuplicateAttributesRector.php">
-    <MoreSpecificImplementedParamType>
-      <code><![CDATA[$node]]></code>
-      <code><![CDATA[$node]]></code>
-    </MoreSpecificImplementedParamType>
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RemoveDuplicateAttributesRector]]></code>
-      <code><![CDATA[RemoveDuplicateAttributesRector]]></code>
-      <code><![CDATA[RemoveDuplicateAttributesRector]]></code>
-      <code><![CDATA[RemoveDuplicateAttributesRector]]></code>
-      <code><![CDATA[RemoveDuplicateAttributesRector]]></code>
-      <code><![CDATA[RemoveDuplicateAttributesRector]]></code>
-    </PropertyNotSetInConstructor>
-    <UnusedVariable>
-      <code><![CDATA[$i]]></code>
-    </UnusedVariable>
-  </file>
-  <file src="src/Rule/ReplaceUnnecessaryDoubleQuotesRector.php">
+  <file src="src/Package/Php/Php53/ReplaceUnnecessaryDoubleQuotesRector.php">
     <PropertyNotSetInConstructor>
       <code><![CDATA[ReplaceUnnecessaryDoubleQuotesRector]]></code>
       <code><![CDATA[ReplaceUnnecessaryDoubleQuotesRector]]></code>
@@ -2044,37 +564,7 @@
       <code><![CDATA[ReplaceUnnecessaryDoubleQuotesRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Sebastian/Comparator/RevampComparatorRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampComparatorRector]]></code>
-      <code><![CDATA[RevampComparatorRector]]></code>
-      <code><![CDATA[RevampComparatorRector]]></code>
-      <code><![CDATA[RevampComparatorRector]]></code>
-      <code><![CDATA[RevampComparatorRector]]></code>
-      <code><![CDATA[RevampComparatorRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Sebastian/Diff/RevampDiffRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampDiffRector]]></code>
-      <code><![CDATA[RevampDiffRector]]></code>
-      <code><![CDATA[RevampDiffRector]]></code>
-      <code><![CDATA[RevampDiffRector]]></code>
-      <code><![CDATA[RevampDiffRector]]></code>
-      <code><![CDATA[RevampDiffRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/Sebastian/Exporter/RevampExporterRector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampExporterRector]]></code>
-      <code><![CDATA[RevampExporterRector]]></code>
-      <code><![CDATA[RevampExporterRector]]></code>
-      <code><![CDATA[RevampExporterRector]]></code>
-      <code><![CDATA[RevampExporterRector]]></code>
-      <code><![CDATA[RevampExporterRector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Rule/SortClassLikeStatementsAlphabeticallyRector.php">
+  <file src="src/Package/Php/Php53/SortClassLikeStatementsAlphabeticallyRector.php">
     <LessSpecificReturnType>
       <code><![CDATA[int]]></code>
     </LessSpecificReturnType>
@@ -2094,7 +584,7 @@
       <code><![CDATA[$node instanceof Namespace_]]></code>
     </RedundantConditionGivenDocblockType>
   </file>
-  <file src="src/Rule/SortUseStatementsAlphabeticallyRector.php">
+  <file src="src/Package/Php/Php53/SortUseStatementsAlphabeticallyRector.php">
     <LessSpecificReturnType>
       <code><![CDATA[int]]></code>
     </LessSpecificReturnType>
@@ -2118,43 +608,187 @@
       <code><![CDATA[$node instanceof Namespace_]]></code>
     </RedundantConditionGivenDocblockType>
   </file>
-  <file src="src/Rule/Vimeo/Psalm/RevampPsalmRector.php">
+  <file src="src/Package/Php/Php54/Php54Rector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampPsalmRector]]></code>
-      <code><![CDATA[RevampPsalmRector]]></code>
-      <code><![CDATA[RevampPsalmRector]]></code>
-      <code><![CDATA[RevampPsalmRector]]></code>
-      <code><![CDATA[RevampPsalmRector]]></code>
-      <code><![CDATA[RevampPsalmRector]]></code>
+      <code><![CDATA[Php54Rector]]></code>
+      <code><![CDATA[Php54Rector]]></code>
+      <code><![CDATA[Php54Rector]]></code>
+      <code><![CDATA[Php54Rector]]></code>
+      <code><![CDATA[Php54Rector]]></code>
+      <code><![CDATA[Php54Rector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Rule/Webmozart/Assert/RevampAssertRector.php">
+  <file src="src/Package/Php/Php56/Php56Rector.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[RevampAssertRector]]></code>
-      <code><![CDATA[RevampAssertRector]]></code>
-      <code><![CDATA[RevampAssertRector]]></code>
-      <code><![CDATA[RevampAssertRector]]></code>
-      <code><![CDATA[RevampAssertRector]]></code>
-      <code><![CDATA[RevampAssertRector]]></code>
+      <code><![CDATA[Php56Rector]]></code>
+      <code><![CDATA[Php56Rector]]></code>
+      <code><![CDATA[Php56Rector]]></code>
+      <code><![CDATA[Php56Rector]]></code>
+      <code><![CDATA[Php56Rector]]></code>
+      <code><![CDATA[Php56Rector]]></code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Package/Php/Php70/Php70Rector.php">
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[Php70Rector]]></code>
+      <code><![CDATA[Php70Rector]]></code>
+      <code><![CDATA[Php70Rector]]></code>
+      <code><![CDATA[Php70Rector]]></code>
+      <code><![CDATA[Php70Rector]]></code>
+      <code><![CDATA[Php70Rector]]></code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Package/Php/Php71/Php71Rector.php">
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[Php71Rector]]></code>
+      <code><![CDATA[Php71Rector]]></code>
+      <code><![CDATA[Php71Rector]]></code>
+      <code><![CDATA[Php71Rector]]></code>
+      <code><![CDATA[Php71Rector]]></code>
+      <code><![CDATA[Php71Rector]]></code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Package/Php/Php72/Php72Rector.php">
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[Php72Rector]]></code>
+      <code><![CDATA[Php72Rector]]></code>
+      <code><![CDATA[Php72Rector]]></code>
+      <code><![CDATA[Php72Rector]]></code>
+      <code><![CDATA[Php72Rector]]></code>
+      <code><![CDATA[Php72Rector]]></code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Package/Php/Php73/Php73Rector.php">
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[Php73Rector]]></code>
+      <code><![CDATA[Php73Rector]]></code>
+      <code><![CDATA[Php73Rector]]></code>
+      <code><![CDATA[Php73Rector]]></code>
+      <code><![CDATA[Php73Rector]]></code>
+      <code><![CDATA[Php73Rector]]></code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Package/Php/Php74/Php74Rector.php">
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[Php74Rector]]></code>
+      <code><![CDATA[Php74Rector]]></code>
+      <code><![CDATA[Php74Rector]]></code>
+      <code><![CDATA[Php74Rector]]></code>
+      <code><![CDATA[Php74Rector]]></code>
+      <code><![CDATA[Php74Rector]]></code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Package/Php/Php80/Php80Rector.php">
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[Php80Rector]]></code>
+      <code><![CDATA[Php80Rector]]></code>
+      <code><![CDATA[Php80Rector]]></code>
+      <code><![CDATA[Php80Rector]]></code>
+      <code><![CDATA[Php80Rector]]></code>
+      <code><![CDATA[Php80Rector]]></code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Package/Php/Php80/RemoveDuplicateAttributesRector.php">
+    <MoreSpecificImplementedParamType>
+      <code><![CDATA[$node]]></code>
+      <code><![CDATA[$node]]></code>
+    </MoreSpecificImplementedParamType>
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[RemoveDuplicateAttributesRector]]></code>
+      <code><![CDATA[RemoveDuplicateAttributesRector]]></code>
+      <code><![CDATA[RemoveDuplicateAttributesRector]]></code>
+      <code><![CDATA[RemoveDuplicateAttributesRector]]></code>
+      <code><![CDATA[RemoveDuplicateAttributesRector]]></code>
+      <code><![CDATA[RemoveDuplicateAttributesRector]]></code>
+    </PropertyNotSetInConstructor>
+    <UnusedClass>
+      <code><![CDATA[RemoveDuplicateAttributesRector]]></code>
+    </UnusedClass>
+    <UnusedVariable>
+      <code><![CDATA[$i]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="src/Package/Php/Php81/Php81Rector.php">
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[Php81Rector]]></code>
+      <code><![CDATA[Php81Rector]]></code>
+      <code><![CDATA[Php81Rector]]></code>
+      <code><![CDATA[Php81Rector]]></code>
+      <code><![CDATA[Php81Rector]]></code>
+      <code><![CDATA[Php81Rector]]></code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Package/Php/Php82/Php82Rector.php">
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[Php82Rector]]></code>
+      <code><![CDATA[Php82Rector]]></code>
+      <code><![CDATA[Php82Rector]]></code>
+      <code><![CDATA[Php82Rector]]></code>
+      <code><![CDATA[Php82Rector]]></code>
+      <code><![CDATA[Php82Rector]]></code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Package/Php/Php83/Php83Rector.php">
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[Php83Rector]]></code>
+      <code><![CDATA[Php83Rector]]></code>
+      <code><![CDATA[Php83Rector]]></code>
+      <code><![CDATA[Php83Rector]]></code>
+      <code><![CDATA[Php83Rector]]></code>
+      <code><![CDATA[Php83Rector]]></code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Package/Php/Php84/Php84Rector.php">
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[Php84Rector]]></code>
+      <code><![CDATA[Php84Rector]]></code>
+      <code><![CDATA[Php84Rector]]></code>
+      <code><![CDATA[Php84Rector]]></code>
+      <code><![CDATA[Php84Rector]]></code>
+      <code><![CDATA[Php84Rector]]></code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Package/Php/Php85/Php85Rector.php">
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[Php85Rector]]></code>
+      <code><![CDATA[Php85Rector]]></code>
+      <code><![CDATA[Php85Rector]]></code>
+      <code><![CDATA[Php85Rector]]></code>
+      <code><![CDATA[Php85Rector]]></code>
+      <code><![CDATA[Php85Rector]]></code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Package/Phpunit/Phpunit/TestThrowsThrowableDocCommentRector.php">
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[TestThrowsThrowableDocCommentRector]]></code>
+      <code><![CDATA[TestThrowsThrowableDocCommentRector]]></code>
+      <code><![CDATA[TestThrowsThrowableDocCommentRector]]></code>
+      <code><![CDATA[TestThrowsThrowableDocCommentRector]]></code>
+      <code><![CDATA[TestThrowsThrowableDocCommentRector]]></code>
+      <code><![CDATA[TestThrowsThrowableDocCommentRector]]></code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Package/Vimeo/Psalm/PsalmRector.php">
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[PsalmRector]]></code>
+      <code><![CDATA[PsalmRector]]></code>
+      <code><![CDATA[PsalmRector]]></code>
+      <code><![CDATA[PsalmRector]]></code>
+      <code><![CDATA[PsalmRector]]></code>
+      <code><![CDATA[PsalmRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/SetProvider.php">
     <MixedArrayAssignment>
       <code><![CDATA[$composerTriggeredSets[]]]></code>
       <code><![CDATA[$composerTriggeredSets[]]]></code>
-      <code><![CDATA[$composerTriggeredSets[]]]></code>
     </MixedArrayAssignment>
     <MixedAssignment>
-      <code><![CDATA[$composerTriggeredSets[]]]></code>
       <code><![CDATA[$provider]]></code>
-      <code><![CDATA[$set]]></code>
     </MixedAssignment>
     <MixedInferredReturnType>
       <code><![CDATA[list<SetInterface>]]></code>
     </MixedInferredReturnType>
-    <MixedMethodCall>
-      <code><![CDATA[provide]]></code>
-    </MixedMethodCall>
     <MixedReturnStatement>
       <code><![CDATA[$composerTriggeredSets]]></code>
       <code><![CDATA[$composerTriggeredSets]]></code>
@@ -2162,15 +796,6 @@
     </MixedReturnStatement>
     <UnusedClass>
       <code><![CDATA[SetProvider]]></code>
-    </UnusedClass>
-    <UnusedVariable>
-      <code><![CDATA[$packageName]]></code>
-      <code><![CDATA[$vendor]]></code>
-    </UnusedVariable>
-  </file>
-  <file src="src/SetProvider/Laminas/LaminasPsr7Bridge/LaminasPsr7BridgeSetProvider.php">
-    <UnusedClass>
-      <code><![CDATA[LaminasPsr7BridgeSetProvider]]></code>
     </UnusedClass>
   </file>
   <file src="src/UseStatement.php">
