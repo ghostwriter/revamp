@@ -2,14 +2,11 @@
 
 declare(strict_types=1);
 
+use Ghostwriter\Revamp\Package\Ghostwriter\Uuid\UuidRector;
+use Ghostwriter\Revamp\Package\Ghostwriter\Uuid\UuidSetProvider;
 use Rector\Config\RectorConfig;
 
 return RectorConfig::configure()
-    ->withRules([\Ghostwriter\Revamp\Rule\Ghostwriter\Uuid\RevampUuidRector::class])
-//    ->withSetProviders(
-//      // once this method is accepted, uncomment this line
-//        \Ghostwriter\Revamp\SetProvider\Ghostwriter\Uuid\UuidSetProvider::class,
-//    )
-    ->withSets([
-        // your sets here
-    ]);
+    ->withRules([UuidRector::class])
+    // ->withSetProviders(UuidSetProvider::class)
+;
