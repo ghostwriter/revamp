@@ -2,14 +2,11 @@
 
 declare(strict_types=1);
 
+use Ghostwriter\Revamp\Package\Ghostwriter\Plex\PlexRector;
+use Ghostwriter\Revamp\Package\Ghostwriter\Plex\PlexSetProvider;
 use Rector\Config\RectorConfig;
 
 return RectorConfig::configure()
-    ->withRules([\Ghostwriter\Revamp\Rule\Ghostwriter\Plex\RevampPlexRector::class])
-//    ->withSetProviders(
-//      // once this method is accepted, uncomment this line
-//        \Ghostwriter\Revamp\SetProvider\Ghostwriter\Plex\PlexSetProvider::class,
-//    )
-    ->withSets([
-        // your sets here
-    ]);
+    ->withRules([PlexRector::class])
+    // ->withSetProviders(PlexSetProvider::class)
+;
