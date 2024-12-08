@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Revamp\SetProvider\Ghostwriter\Result;
+namespace Ghostwriter\Revamp\Package\Ghostwriter\Result;
 
+use Override;
 use Rector\Set\Contract\SetInterface;
 use Rector\Set\Contract\SetProviderInterface;
 use Rector\Set\ValueObject\ComposerTriggeredSet;
@@ -14,12 +15,12 @@ final readonly class ResultSetProvider implements SetProviderInterface
     /**
      * @return SetInterface[]
      */
-    #[\Override]
+    #[Override]
     public function provide(): array
     {
         return [
-            new ComposerTriggeredSet('group_name', 'package_name', '1.0', __DIR__ . 'set_file_path.php'),
-            new Set('group_name', 'set_name', __DIR__ . 'set_file_path.php'),
+            new ComposerTriggeredSet('Result', 'Result', '0', 'config/ghostwriter/result.php'),
+            new Set('Result', 'GhostwriterResultResultRector', 'config/ghostwriter/result.php'),
         ];
     }
 }
