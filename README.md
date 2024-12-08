@@ -9,7 +9,13 @@
 [![Latest Version on Packagist](https://badgen.net/packagist/v/ghostwriter/revamp)](https://packagist.org/packages/ghostwriter/revamp)
 [![Downloads](https://badgen.net/packagist/dt/ghostwriter/revamp?color=blue)](https://packagist.org/packages/ghostwriter/revamp)
 
-Rector upgrade rules for PHP frameworks, libraries, and tools.
+This package makes upgrading PHP frameworks, libraries, and tools easier.
+
+When you update a package with Composer, the matching upgrade rules are automatically applied that Revamp will provide.
+
+This ensures your code is updated to work with the latest package version.
+
+No manual setup needed, just upgrade and let Revamp handle the rest!
 
 > [!NOTE]
 >
@@ -34,61 +40,27 @@ composer require ghostwriter/revamp --dev
 
 To add a rule or set to your config, with package version constants:
 
-- `Ghostwriter\Revamp\Rule\Vendor\Package\Rector`
-- `Ghostwriter\Revamp\SetList\Vendor\Package\SetList`
+- `Ghostwriter\Revamp\Rule\Vendor\Package\PackageRector`
+- `Ghostwriter\Revamp\SetProvider\Vendor\Package\PackageSetProvider`
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-use Ghostwriter\Revamp\Rule\Vendor\Package\LaminasRector;
-use Ghostwriter\Revamp\Rule\Vendor\Package\MezzioRector;
-use Ghostwriter\Revamp\Rule\Vendor\Package\MockeryRector;
-use Ghostwriter\Revamp\Rule\Vendor\Package\PHPUnitRector;
-use Ghostwriter\Revamp\Rule\Vendor\Package\PsalmRector;
-use Ghostwriter\Revamp\Rule\Vendor\Package\PsrRector;
-use Ghostwriter\Revamp\Rule\Vendor\Package\RectorRector;
-use Ghostwriter\Revamp\SetList\Vendor\Package\MezzioSetList;
-use Ghostwriter\Revamp\SetList\Vendor\Package\MockerySetList;
-use Ghostwriter\Revamp\SetList\Vendor\Package\PHPUnitSetList;
-use Ghostwriter\Revamp\SetList\Vendor\Package\PsalmSetList;
-use Ghostwriter\Revamp\SetList\Vendor\Package\PsrSetList;
-use Ghostwriter\Revamp\SetList\Vendor\Package\SetList;
+use Ghostwriter\Revamp\SetProvider;
+use Ghostwriter\Revamp\Vendor\Package\PackageSetProvider;
 use Rector\Config\RectorConfig;
 
-return RectorConfig::configure()
-    ->withRules([
-        LaminasRector::class,
-        MezzioRector::class,
-        MockeryRector::class,
-        PHPUnitRector::class,
-        PsalmRector::class,
-        PsrRector::class,
-        RectorRector::class,
-    ])
-    ->withSets([
-        /**
-         * `*SetList::version(int $major, int $minor): string` method
-         *
-         * - To upgrade to a specific installed version of a package, use the version() method 
-         *   with the major and minor version numbers.
-         *
-         * - To use the latest installed version, use the version() method without arguments. 
-         */
-        LaminasSetList::version(), // Laminas (latest)
-        MezzioSetList::version(3, 20), // Mezzio 3.20
-        MockerySetList::version(), // Mockery (latest)
-        PHPUnitSetList::version(11, 4), // PHPUnit 11.4
-        PsalmSetList::version(5, 21), // Psalm 5.21
-        PsrSetList::version(), // Psr (latest)
-        RectorSetList::version(), // Rector (latest)
-    ]);
+// once accepted; https://github.com/rectorphp/rector-src/pull/6515
+
+return RectorConfig::configure()->withSetProviders(SetProvider::class);
 ```
 
 ### Credits
 
 - [Nathanael Esayeas](https://github.com/ghostwriter)
+- [Nikita Popov `nikic/php-parser`](https://github.com/nikic/php-parser)
 - [Rector - Maintainers & Contributors](https://github.com/rectorphp/rector/contributors)
 - [All Contributors](https://github.com/ghostwriter/revamp/contributors)
 
