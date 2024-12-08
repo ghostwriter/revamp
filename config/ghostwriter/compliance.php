@@ -2,14 +2,11 @@
 
 declare(strict_types=1);
 
+use Ghostwriter\Revamp\Package\Ghostwriter\Compliance\ComplianceRector;
+use Ghostwriter\Revamp\Package\Ghostwriter\Compliance\ComplianceSetProvider;
 use Rector\Config\RectorConfig;
 
 return RectorConfig::configure()
-    ->withRules([\Ghostwriter\Revamp\Rule\Ghostwriter\Compliance\RevampComplianceRector::class])
-//    ->withSetProviders(
-//      // once this method is accepted, uncomment this line
-//        \Ghostwriter\Revamp\SetProvider\Ghostwriter\Compliance\ComplianceSetProvider::class,
-//    )
-    ->withSets([
-        // your sets here
-    ]);
+    ->withRules([ComplianceRector::class])
+    // ->withSetProviders(ComplianceSetProvider::class)
+;
