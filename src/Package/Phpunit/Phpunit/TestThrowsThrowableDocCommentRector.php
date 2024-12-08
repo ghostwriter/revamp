@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Revamp\Rule\PHPUnit\Phpunit;
+namespace Ghostwriter\Revamp\Package\Phpunit\Phpunit;
 
 use Ghostwriter\Revamp\AbstractRevampRector;
-use Ghostwriter\RevampTests\Rule\PHPUnit\PHPUnit\TestThrowsThrowableDocCommentRectorTest;
+use Override;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
+use Tests\Unit\Package\Phpunit\Phpunit\TestThrowsThrowableDocCommentRectorTest;
+use Throwable;
 
 /**
  * @see TestThrowsThrowableDocCommentRectorTest
@@ -17,16 +19,16 @@ final class TestThrowsThrowableDocCommentRector extends AbstractRevampRector
     /**
      * @return array<class-string<ClassMethod>>
      */
-    #[\Override]
+    #[Override]
     public function getNodeTypes(): array
     {
         return [ClassMethod::class];
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
-    #[\Override]
+    #[Override]
     public function refactor(Node $node): ?Node
     {
         return match (true) {
@@ -36,7 +38,7 @@ final class TestThrowsThrowableDocCommentRector extends AbstractRevampRector
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     private function refactorClassMethod(ClassMethod $classMethod): ?ClassMethod
     {
