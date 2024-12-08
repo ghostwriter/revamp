@@ -2,14 +2,11 @@
 
 declare(strict_types=1);
 
+use Ghostwriter\Revamp\Package\Ghostwriter\CodingStandard\CodingStandardRector;
+use Ghostwriter\Revamp\Package\Ghostwriter\CodingStandard\CodingStandardSetProvider;
 use Rector\Config\RectorConfig;
 
 return RectorConfig::configure()
-    ->withRules([\Ghostwriter\Revamp\Rule\Ghostwriter\CodingStandard\RevampCodingStandardRector::class])
-//    ->withSetProviders(
-//      // once this method is accepted, uncomment this line
-//        \Ghostwriter\Revamp\SetProvider\Ghostwriter\CodingStandard\CodingStandardSetProvider::class,
-//    )
-    ->withSets([
-        // your sets here
-    ]);
+    ->withRules([CodingStandardRector::class])
+    // ->withSetProviders(CodingStandardSetProvider::class)
+;
