@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\RevampTests\Rule\PHP\Core;
+namespace Tests\Unit\Package\Php\Php53;
 
-use Ghostwriter\Revamp\Rule\PHP\Core\SortClassLikeStatementsAlphabeticallyRector;
-use Ghostwriter\RevampTests\AbstractTestCase;
+use Ghostwriter\Revamp\Package\Php\Php53\SortClassLikeStatementsAlphabeticallyRector;
 use PHPUnit\Framework\Attributes\CoversClass;
+use Tests\Unit\AbstractTestCase;
 
 #[CoversClass(SortClassLikeStatementsAlphabeticallyRector::class)]
 final class SortClassLikeStatementsAlphabeticallyRectorTest extends AbstractTestCase
