@@ -2,17 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Revamp\Rule\Mockery;
+namespace Ghostwriter\Revamp\Package\Mockery\Mockery;
 
 use Ghostwriter\Revamp\AbstractRevampRector;
-use Ghostwriter\RevampTests\Rule\Mockery\ExtendMockeryTestCaseRectorTest;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
+use Override;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Use_;
 use PHPUnit\Framework\TestCase;
 use Rector\PhpParser\Node\CustomNode\FileWithoutNamespace;
+use Tests\Unit\Rule\Mockery\ExtendMockeryTestCaseRectorTest;
+use Throwable;
 
 /**
  * @see ExtendMockeryTestCaseRectorTest
@@ -22,16 +24,16 @@ final class ExtendMockeryTestCaseRector extends AbstractRevampRector
     /**
      * @return array<class-string<Class_>>
      */
-    #[\Override]
+    #[Override]
     public function getNodeTypes(): array
     {
         return [Class_::class, Namespace_::class, FileWithoutNamespace::class];
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
-    #[\Override]
+    #[Override]
     public function refactor(Node $node): ?Node
     {
         return match (true) {
@@ -43,7 +45,7 @@ final class ExtendMockeryTestCaseRector extends AbstractRevampRector
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     private function refactorClass(Class_ $class): ?Class_
     {
@@ -53,7 +55,7 @@ final class ExtendMockeryTestCaseRector extends AbstractRevampRector
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     private function refactorFileWithoutNamespace(FileWithoutNamespace $fileWithoutNamespace): FileWithoutNamespace
     {
@@ -67,7 +69,7 @@ final class ExtendMockeryTestCaseRector extends AbstractRevampRector
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     private function refactorNamespace(Namespace_ $namespace): ?Namespace_
     {
@@ -83,7 +85,7 @@ final class ExtendMockeryTestCaseRector extends AbstractRevampRector
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     private function refactorUse(Use_ $use, FileWithoutNamespace|Namespace_ $parent, int $key): void
     {
