@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Revamp\Rule\Mockery;
+namespace Ghostwriter\Revamp\Package\Mockery\Mockery;
 
 use Ghostwriter\Revamp\AbstractRevampRector;
-use Ghostwriter\RevampTests\Rule\Mockery\ShouldReceiveToExpectsRectorTest;
+use Tests\Unit\Rule\Mockery\ShouldReceiveToExpectsRectorTest;
 
 /**
  * @see ShouldReceiveToExpectsRectorTest
