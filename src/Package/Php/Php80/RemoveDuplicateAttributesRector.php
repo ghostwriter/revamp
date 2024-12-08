@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Revamp\Rule\PHP\PHP80;
+namespace Ghostwriter\Revamp\Package\Php\Php80;
 
 use Ghostwriter\Revamp\AbstractRevampRector;
-use Ghostwriter\RevampTests\Rule\PHP\PHP80\RemoveDuplicateAttributesRectorTest;
+use Override;
 use PhpParser\Node;
 use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\Class_;
@@ -13,6 +13,7 @@ use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Property;
 use Rector\Exception\ShouldNotHappenException;
+use Tests\Unit\Rule\PHP\PHP80\RemoveDuplicateAttributesRectorTest;
 
 /**
  * @see RemoveDuplicateAttributesRectorTest
@@ -22,7 +23,7 @@ final class RemoveDuplicateAttributesRector extends AbstractRevampRector
     /**
      * @return array<class-string<Node>>
      */
-    #[\Override]
+    #[Override]
     public function getNodeTypes(): array
     {
         return [ClassLike::class, ClassMethod::class, Class_::class, Param::class, Property::class];
@@ -33,7 +34,7 @@ final class RemoveDuplicateAttributesRector extends AbstractRevampRector
      *
      * @throws ShouldNotHappenException
      */
-    #[\Override]
+    #[Override]
     public function refactor(Node $node): ?Node
     {
         $uniqueAttributes = [];
