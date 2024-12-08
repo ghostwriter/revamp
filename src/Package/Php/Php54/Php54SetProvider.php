@@ -2,24 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Revamp\SetProvider\PHP\PHP53;
+namespace Ghostwriter\Revamp\Package\Php\Php54;
 
+use Override;
 use Rector\Set\Contract\SetInterface;
 use Rector\Set\Contract\SetProviderInterface;
 use Rector\Set\ValueObject\ComposerTriggeredSet;
 use Rector\Set\ValueObject\Set;
 
-final readonly class PHP53SetProvider implements SetProviderInterface
+final readonly class Php54SetProvider implements SetProviderInterface
 {
     /**
      * @return SetInterface[]
      */
-    #[\Override]
+    #[Override]
     public function provide(): array
     {
         return [
-            new ComposerTriggeredSet('group_name', 'package_name', '1.0', __DIR__ . 'set_file_path.php'),
-            new Set('group_name', 'set_name', __DIR__ . 'set_file_path.php'),
+            new ComposerTriggeredSet('Php54', 'Php54', '0', 'config/php/php54.php'),
+            new Set('Php54', 'PhpPhp54Php54Rector', 'config/php/php54.php'),
         ];
     }
 }
