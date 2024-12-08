@@ -6,14 +6,22 @@ namespace Ghostwriter\Revamp;
 
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
+use Override;
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
+use PhpParser\Node\Arg;
+use PhpParser\Node\ArrayItem;
+use PhpParser\Node\Expr;
+use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\FuncCall;
+use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\FunctionLike;
+use PhpParser\Node\InterpolatedStringPart;
 use PhpParser\Node\Name;
 use PhpParser\Node\Name\FullyQualified;
 use PhpParser\Node\Param;
+use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassLike;
@@ -22,13 +30,17 @@ use PhpParser\Node\Stmt\GroupUse;
 use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\TraitUse;
 use PhpParser\Node\Stmt\Use_;
-use PhpParser\NodeTraverser;
+use PhpParser\NodeVisitor;
 use PhpParser\PrettyPrinter\Standard;
 use PHPStan\BetterReflection\Reflection\Adapter\ReflectionEnum;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Type\ObjectType;
+use PHPStan\Type\Type;
+use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Rector\Application\ChangedNodeScopeRefresher;
+use Rector\Application\Provider\CurrentFileProvider;
 use Rector\BetterPhpDocParser\PhpDocInfo\PhpDocInfoFactory;
 use Rector\CodingStyle\Application\UseImportsAdder;
 use Rector\CodingStyle\ClassNameImport\ClassNameImportSkipper;
@@ -36,15 +48,20 @@ use Rector\CodingStyle\Node\NameImporter;
 use Rector\Comments\NodeDocBlock\DocBlockUpdater;
 use Rector\Naming\Naming\AliasNameResolver;
 use Rector\Naming\Naming\UseImportsResolver;
+use Rector\NodeNameResolver\NodeNameResolver;
+use Rector\NodeTypeResolver\NodeTypeResolver;
 use Rector\NodeTypeResolver\PhpDoc\NodeAnalyzer\DocBlockNameImporter;
 use Rector\Php80\NodeAnalyzer\PhpAttributeAnalyzer;
 use Rector\Php80\NodeFactory\NestedAttrGroupsFactory;
 use Rector\PhpDocParser\NodeTraverser\SimpleCallableNodeTraverser;
+use Rector\PhpParser\Comparing\NodeComparator;
 use Rector\PhpParser\Node\BetterNodeFinder;
-use Rector\PHPUnit\NodeAnalyzer\TestsNodeAnalyzer;
+use Rector\PhpParser\Node\NodeFactory;
+use Rector\PhpParser\Node\Value\ValueResolver;
 use Rector\PostRector\Collector\UseNodesToAddCollector;
 use Rector\Rector\AbstractRector;
 use Rector\Reflection\ReflectionResolver;
+use Rector\Skipper\Skipper\Skipper;
 use Rector\ValueObject\Application\File;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
@@ -53,19 +70,33 @@ use Throwable;
 abstract class AbstractRevampRector extends AbstractRector
 {
     /**
-     * Remove a node that occurs in an array.
+     * Remove the current node.
      */
-    final public const REMOVE_NODE = NodeTraverser::REMOVE_NODE;
+    final public const int REMOVE_NODE = NodeVisitor::REMOVE_NODE;
 
     /**
      * Stop traversing the current node.
      */
-    final public const STOP_TRAVERSAL = NodeTraverser::STOP_TRAVERSAL;
+    final public const int STOP_TRAVERSAL = NodeVisitor::STOP_TRAVERSAL;
+
+    protected File $file;
+
+    protected NodeComparator $nodeComparator;
+
+    protected NodeFactory $nodeFactory;
+
+    protected NodeNameResolver $nodeNameResolver;
+
+    protected NodeTypeResolver $nodeTypeResolver;
+
+    protected Skipper $skipper;
 
     final public function __construct(
         public readonly AliasNameResolver $aliasNameResolver,
         public readonly BetterNodeFinder $betterNodeFinder,
         public readonly ClassNameImportSkipper $classNameImportSkipper,
+        public readonly CurrentFileProvider $currentFileProvider,
+        public readonly ChangedNodeScopeRefresher $changedNodeScopeRefresher,
         public readonly DocBlockNameImporter $docBlockNameImporter,
         public readonly DocBlockUpdater $docBlockUpdater,
         public readonly NameImporter $nameImporter,
@@ -75,16 +106,36 @@ abstract class AbstractRevampRector extends AbstractRector
         public readonly ReflectionResolver $reflectionResolver,
         public readonly SimpleCallableNodeTraverser $simpleCallableNodeTraverser,
         public readonly Standard $standard,
-        public readonly TestsNodeAnalyzer $testsNodeAnalyzer,
         public readonly UseImportsAdder $useImportsAdder,
         public readonly UseImportsResolver $useImportsResolver,
         public readonly UseNodesToAddCollector $useNodesToAddCollector,
         public readonly UseStatements $useStatements,
+        public readonly ValueResolver $valueResolver,
     ) {
     }
 
+    final public function addArrayItemByKey(Array_ $array, ArrayItem $newArrayItem, string $key): void
+    {
+        foreach ($array->items as $item) {
+            if (! $item instanceof ArrayItem) {
+                continue;
+            }
+
+            if ($this->hasKeyName($item, $key)) {
+                if (! $item->value instanceof Array_) {
+                    continue;
+                }
+
+                $item->value->items[] = $newArrayItem;
+                return;
+            }
+        }
+
+        $array->items[] = new ArrayItem(new Array_([$newArrayItem]), new String_($key));
+    }
+
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     final public function addMockeryPHPUnitIntegrationTrait(Class_ $class): Class_
     {
@@ -163,11 +214,11 @@ abstract class AbstractRevampRector extends AbstractRector
 
     public function addThrowsThrowableDocComment(ClassMethod $classMethod): ?ClassMethod
     {
-        return $this->addThrowsDocComment($classMethod, \Throwable::class);
+        return $this->addThrowsDocComment($classMethod, Throwable::class);
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     final public function addTraitUse(Class_ $node, string $class): void
     {
@@ -175,7 +226,7 @@ abstract class AbstractRevampRector extends AbstractRector
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     final public function addTraitUseToClass(Class_ $class, string $fullyQualifiedClassName): void
     {
@@ -183,7 +234,7 @@ abstract class AbstractRevampRector extends AbstractRector
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     final public function currentFile(): File
     {
@@ -208,7 +259,7 @@ abstract class AbstractRevampRector extends AbstractRector
     /**
      * @return array<class-string<Node>>
      */
-    #[\Override]
+    #[Override]
     public function getNodeTypes(): array
     {
         return [];
@@ -229,6 +280,16 @@ abstract class AbstractRevampRector extends AbstractRector
         ]);
     }
 
+    /**
+     * @param Arg|Expr|InterpolatedStringPart $node
+     *
+     * @throws Throwable
+     */
+    final public function getValue(Node $node): mixed
+    {
+        return $this->valueResolver->getValue($node);
+    }
+
     final public function hasAttribute(Class_|ClassLike|ClassMethod|Param|Property $node, string $attributeName): bool
     {
         foreach ($node->attrGroups as $attrGroup) {
@@ -247,6 +308,7 @@ abstract class AbstractRevampRector extends AbstractRector
     final public function hasClassParentClassMethod(Class_ $class, string $methodName): bool
     {
         $classReflection = $this->reflectionResolver->resolveClassReflection($class);
+
         if (! $classReflection instanceof ClassReflection) {
             return false;
         }
@@ -273,17 +335,24 @@ abstract class AbstractRevampRector extends AbstractRector
         return false;
     }
 
-    final public function hasInterface(Class_ $class, string $interfaceName): bool
+    final public function hasImplements(Class_ $class, string ...$interfaceFQNS): bool
     {
-        foreach ($class->implements as $interface) {
-            if (! $this->nodeNameResolver->isName($interface, $interfaceName)) {
-                continue;
+        foreach ($class->implements as $implement) {
+            if ($this->nodeNameResolver->isNames($implement, $interfaceFQNS)) {
+                return true;
             }
-
-            return true;
         }
 
         return false;
+    }
+
+    final public function hasKeyName(ArrayItem $arrayItem, string $name): bool
+    {
+        if (! $arrayItem->key instanceof String_) {
+            return false;
+        }
+
+        return $arrayItem->key->value === $name;
     }
 
     final public function hasMethod(Class_ $class, string $methodName): bool
@@ -471,8 +540,7 @@ abstract class AbstractRevampRector extends AbstractRector
      * @param class-string<T>|list<string>|Name|string $fullyQualifiedClassName
      * @param array<GroupUse|Use_>                     $currentUses
      *
-     * @throws \Throwable
-     *
+     * @throws Throwable
      */
     final public function importName(array|Name|string $fullyQualifiedClassName, array $currentUses = []): ?Name
     {
@@ -498,6 +566,27 @@ abstract class AbstractRevampRector extends AbstractRector
         return $classReflection->isAbstract();
     }
 
+    /**
+     * @throws Throwable
+     */
+    public function isAssertCallLikeName(Node $node, string $name): bool
+    {
+        if ($node instanceof StaticCall) {
+            $callerType = $this->nodeTypeResolver->getType($node->class);
+        } elseif ($node instanceof MethodCall) {
+            $callerType = $this->nodeTypeResolver->getType($node->var);
+        } else {
+            return false;
+        }
+
+        if (! $this->isObjectTypeSuperTypeOf($callerType, Assert::class)) {
+            return false;
+        }
+
+        /** @var MethodCall|StaticCall $node */
+        return $this->nodeNameResolver->isName($node->name, $name);
+    }
+
     final public function isFinalByKeyword(Class_ $class): bool
     {
         $classReflection = $this->reflectionResolver->resolveClassReflection($class);
@@ -508,9 +597,39 @@ abstract class AbstractRevampRector extends AbstractRector
         return $classReflection->isFinalByKeyword();
     }
 
+    /**
+     * @throws Throwable
+     */
+    public function isObjectTypeSuperTypeOf(Type $type, string $className): bool
+    {
+        return (new ObjectType($className))
+            ->isSuperTypeOf($type)
+            ->yes();
+    }
+
+    /**
+     * @param string[] $names
+     */
+    public function isPHPUnitMethodCallNames(Node $node, array $names): bool
+    {
+        if (! $this->isPHPUnitTestCaseCall($node)) {
+            return false;
+        }
+        /** @var MethodCall|StaticCall $node */
+        return $this->nodeNameResolver->isNames($node->name, $names);
+    }
+
     final public function isPHPUnitTestCase(Class_ $class): bool
     {
         return $this->isObjectType($class, new ObjectType(TestCase::class));
+    }
+
+    public function isPHPUnitTestCaseCall(Node $node): bool
+    {
+        if (! $this->isSubclassOf($node, TestCase::class)) {
+            return false;
+        }
+        return $node instanceof MethodCall || $node instanceof StaticCall;
     }
 
     final public function isPHPUnitTestClassMethod(ClassMethod $classMethod): bool
@@ -524,13 +643,13 @@ abstract class AbstractRevampRector extends AbstractRector
             $this->nameStartsWith($classMethod, 'test'),
             // has @test annotation
             $this->hasPhpAnnotations($classMethod, 'test'),
-            // has #[\PHPUnit\Framework\Attributes\Test] attribute
+            // has #[\PhpUnit\Framework\Attributes\Test] attribute
             $this->hasPhpAttributes($classMethod, Test::class) => true,
             default => false,
         };
     }
 
-    final public function isSubclassOf(Class_ $node, string $class): bool
+    final public function isSubclassOf(Node $node, string $class): bool
     {
         $classReflection = $this->reflectionResolver->resolveClassReflection($node);
 
@@ -541,14 +660,28 @@ abstract class AbstractRevampRector extends AbstractRector
         return $classReflection->isSubclassOf($class);
     }
 
-    final public function isSubclassOfMockeryPHPUnitTestCase(Class_ $class): bool
+    final public function isSubclassOfMockeryTestCase(Node $class): bool
     {
         return $this->isSubclassOf($class, MockeryTestCase::class);
     }
 
-    final public function isSubclassOfPHPUnitTestCase(Class_ $class): bool
+    final public function isSubclassOfPHPUnitTestCase(Node $class): bool
     {
         return $this->isSubclassOf($class, TestCase::class);
+    }
+
+    public function isTestClassMethod(ClassMethod $classMethod): bool
+    {
+        if (! $classMethod->isPublic()) {
+            return false;
+        }
+
+        if (\str_starts_with($classMethod->name->toString(), 'test')) {
+            return true;
+        }
+
+        return $this->phpDocInfoFactory->createFromNodeOrEmpty($classMethod)
+            ->hasByName('test');
     }
 
     final public function nameEndsWith(Node $node, string ...$suffixes): bool
@@ -578,7 +711,7 @@ abstract class AbstractRevampRector extends AbstractRector
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     final public function needsMockeryPHPUnitIntegrationTrait(Class_ $class): bool
     {
@@ -600,7 +733,7 @@ abstract class AbstractRevampRector extends AbstractRector
         };
     }
 
-    #[\Override]
+    #[Override]
     public function refactor(Node $node): ?Node
     {
         return null;
@@ -630,13 +763,33 @@ abstract class AbstractRevampRector extends AbstractRector
         $this->removeClassMethod($class, 'tearDown');
     }
 
+    final public function removeImplements(Class_ $class, string ...$interfaceFQNS): void
+    {
+        $modified = false;
+
+        foreach ($class->implements as $key => $implement) {
+            if (! $this->nodeNameResolver->isNames($implement, $interfaceFQNS)) {
+                continue;
+            }
+
+            unset($class->implements[$key]);
+
+            $modified = true;
+        }
+
+        if (! $modified) {
+            return;
+        }
+
+        $class->implements = \array_values($class->implements);
+    }
+
     /**
      * @param Stmt[] $stmts
      *
-     * @throws \Throwable
+     * @throws Throwable
      *
      * @return Stmt[]
-     *
      */
     final public function removeStmts(ClassMethod $classMethod, array &$stmts): array
     {
@@ -702,6 +855,17 @@ abstract class AbstractRevampRector extends AbstractRector
         return $nativeReflection->getParentClassName();
     }
 
+    final public function sortImplements(Class_ $class): void
+    {
+        \usort(
+            $class->implements,
+            fn (Name $left, Name $right): int =>
+                $this->nodeNameResolver->getName($left) <=> $this->nodeNameResolver->getName($right)
+        );
+
+        $class->implements = \array_values($class->implements);
+    }
+
     /**
      * @param callable(Node):(null|int|list<Node>|Node) $callback
      */
@@ -723,6 +887,39 @@ abstract class AbstractRevampRector extends AbstractRector
 
         $this->simpleCallableNodeTraverser
             ->traverseNodesWithCallable($nodes, $callback);
+    }
+
+    final public function unsetArrayItemByKey(Array_ $array, string $keyName): ?ArrayItem
+    {
+        foreach ($array->items as $i => $arrayItem) {
+            if (! $arrayItem instanceof ArrayItem) {
+                continue;
+            }
+
+            //            if (! $arrayItem->key instanceof String_) {
+            //                continue;
+            //            }
+            //
+            //            if ($arrayItem->key->value !== $keyName) {
+            //                continue;
+            //            }
+
+            if (! $this->hasKeyName($arrayItem, $keyName)) {
+                continue;
+            }
+
+            $removedArrayItem = $array->items[$i];
+            if (! $removedArrayItem instanceof ArrayItem) {
+                continue;
+            }
+
+            // remove + recount for the printer
+            unset($array->items[$i]);
+
+            return $arrayItem;
+        }
+
+        return null;
     }
 
     final public function usesClass(): array
