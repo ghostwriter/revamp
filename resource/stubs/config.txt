@@ -2,14 +2,11 @@
 
 declare(strict_types=1);
 
+use Ghostwriter\Revamp\Package\{{ $vendor }}\{{ $package }}\{{ $rule }};
+use Ghostwriter\Revamp\Package\{{ $vendor }}\{{ $package }}\{{ $setProvider }};
 use Rector\Config\RectorConfig;
 
 return RectorConfig::configure()
-    ->withRules([\Ghostwriter\Revamp\Rule\{{ $vendor }}\{{ $package }}\{{ $rule }}::class])
-//    ->withSetProviders(
-//      // once this method is accepted, uncomment this line
-//        \Ghostwriter\Revamp\SetProvider\{{ $vendor }}\{{ $package }}\{{ $setProvider }}::class,
-//    )
-    ->withSets([
-        // your sets here
-    ]);
+    ->withRules([{{ $rule }}::class])
+    // ->withSetProviders({{ $setProvider }}::class)
+;
