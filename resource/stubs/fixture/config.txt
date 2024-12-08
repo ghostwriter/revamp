@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Ghostwriter\Revamp\Package\{{ $vendor }}\{{ $package }}\{{ $rule }};
 use Rector\Config\RectorConfig;
 
-return RectorConfig::configure()->withRules([\Ghostwriter\Revamp\Rule\{{ $vendor }}\{{ $package }}\{{ $rule }}::class]);
+return RectorConfig::configure()->withRules([{{ $rule }}::class]);
