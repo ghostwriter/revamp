@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Revamp\Rule\PHP\Core;
+namespace Ghostwriter\Revamp\Package\Php\Php53;
 
 use Ghostwriter\Revamp\AbstractRevampRector;
-use Ghostwriter\RevampTests\Rule\PHP\Core\SortClassLikeStatementsAlphabeticallyRectorTest;
+use Override;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\Namespace_;
 use Rector\Exception\ShouldNotHappenException;
+use Tests\Unit\Rule\PHP\Core\SortClassLikeStatementsAlphabeticallyRectorTest;
 
 /**
  * @see SortClassLikeStatementsAlphabeticallyRectorTest
@@ -20,7 +21,7 @@ final class SortClassLikeStatementsAlphabeticallyRector extends AbstractRevampRe
     /**
      * @return array<class-string<Node>>
      */
-    #[\Override]
+    #[Override]
     public function getNodeTypes(): array
     {
         return [Namespace_::class];
@@ -31,7 +32,7 @@ final class SortClassLikeStatementsAlphabeticallyRector extends AbstractRevampRe
      *
      * @throws ShouldNotHappenException
      */
-    #[\Override]
+    #[Override]
     public function refactor(Node $node): ?Node
     {
         if (! $node instanceof Namespace_) {
