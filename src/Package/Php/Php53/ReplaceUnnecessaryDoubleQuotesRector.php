@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Revamp\Rule\PHP\Core;
+namespace Ghostwriter\Revamp\Package\Php\Php53;
 
 use Ghostwriter\Revamp\AbstractRevampRector;
-use Ghostwriter\RevampTests\Rule\PHP\Core\ReplaceUnnecessaryDoubleQuotesRectorTest;
+use Override;
 use PhpParser\Node;
 use PhpParser\Node\Scalar\String_;
+use Tests\Unit\Rule\PHP\Core\ReplaceUnnecessaryDoubleQuotesRectorTest;
+use Throwable;
 
 /**
  * @see ReplaceUnnecessaryDoubleQuotesRectorTest
@@ -17,16 +19,16 @@ final class ReplaceUnnecessaryDoubleQuotesRector extends AbstractRevampRector
     /**
      * @return array<class-string<Node>>
      */
-    #[\Override]
+    #[Override]
     public function getNodeTypes(): array
     {
         return [String_::class];
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
-    #[\Override]
+    #[Override]
     public function refactor(Node $node): ?Node
     {
         if (! $node instanceof String_) {
