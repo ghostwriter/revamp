@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Revamp\SetProvider\Ghostwriter\Uuid;
+namespace Ghostwriter\Revamp\Package\Ghostwriter\Uuid;
 
+use Override;
 use Rector\Set\Contract\SetInterface;
 use Rector\Set\Contract\SetProviderInterface;
 use Rector\Set\ValueObject\ComposerTriggeredSet;
@@ -14,12 +15,12 @@ final readonly class UuidSetProvider implements SetProviderInterface
     /**
      * @return SetInterface[]
      */
-    #[\Override]
+    #[Override]
     public function provide(): array
     {
         return [
-            new ComposerTriggeredSet('group_name', 'package_name', '1.0', __DIR__ . 'set_file_path.php'),
-            new Set('group_name', 'set_name', __DIR__ . 'set_file_path.php'),
+            new ComposerTriggeredSet('Uuid', 'Uuid', '0', 'config/ghostwriter/uuid.php'),
+            new Set('Uuid', 'GhostwriterUuidUuidRector', 'config/ghostwriter/uuid.php'),
         ];
     }
 }
