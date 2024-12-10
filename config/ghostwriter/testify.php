@@ -2,11 +2,19 @@
 
 declare(strict_types=1);
 
+use Composer\InstalledVersions;
+use Composer\Semver\VersionParser;
 use Ghostwriter\Revamp\Package\Ghostwriter\Testify\TestifyRector;
-use Ghostwriter\Revamp\Package\Ghostwriter\Testify\TestifySetProvider;
 use Rector\Config\RectorConfig;
 
-return RectorConfig::configure()
-    ->withRules([TestifyRector::class])
-    // ->withSetProviders(TestifySetProvider::class)
-;
+return static function (RectorConfig $rectorConfig): void {
+    if (! InstalledVersions::isInstalled('ghostwriter/testify')) {
+        return;
+    }
+
+    if (! InstalledVersions::satisfies(new VersionParser(), 'ghostwriter/testify', '*')) {
+        return;
+    }
+
+    $rectorConfig->rule(TestifyRector::class);
+};
