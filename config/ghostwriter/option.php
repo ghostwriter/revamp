@@ -2,11 +2,19 @@
 
 declare(strict_types=1);
 
+use Composer\InstalledVersions;
+use Composer\Semver\VersionParser;
 use Ghostwriter\Revamp\Package\Ghostwriter\Option\OptionRector;
-use Ghostwriter\Revamp\Package\Ghostwriter\Option\OptionSetProvider;
 use Rector\Config\RectorConfig;
 
-return RectorConfig::configure()
-    ->withRules([OptionRector::class])
-    // ->withSetProviders(OptionSetProvider::class)
-;
+return static function (RectorConfig $rectorConfig): void {
+    if (! InstalledVersions::isInstalled('ghostwriter/option')) {
+        return;
+    }
+
+    if (! InstalledVersions::satisfies(new VersionParser(), 'ghostwriter/option', '*')) {
+        return;
+    }
+
+    $rectorConfig->rule(OptionRector::class);
+};
