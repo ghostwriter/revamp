@@ -9,6 +9,11 @@
 [![Latest Version on Packagist](https://badgen.net/packagist/v/ghostwriter/revamp)](https://packagist.org/packages/ghostwriter/revamp)
 [![Downloads](https://badgen.net/packagist/dt/ghostwriter/revamp?color=blue)](https://packagist.org/packages/ghostwriter/revamp)
 
+> [!NOTE]
+>
+> Star ⭐ this repo if you find it useful.
+>
+
 This package makes upgrading PHP frameworks, libraries, and tools easier.
 
 When you update a package with Composer, the matching upgrade rules are automatically applied that Revamp will provide.
@@ -16,11 +21,6 @@ When you update a package with Composer, the matching upgrade rules are automati
 This ensures your code is updated to work with the latest package version.
 
 No manual setup needed, just upgrade and let Revamp handle the rest!
-
-> [!NOTE]
->
-> Star ⭐ this repo if you find it useful.
->
 
 > [!WARNING]
 >
