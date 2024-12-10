@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
   <file src="src/AbstractRevampRector.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$this->file->getNewStmts()]]></code>
+    </ArgumentTypeCoercion>
     <ImplicitToStringCast>
       <code><![CDATA[$throwable]]></code>
       <code><![CDATA[$throwable]]></code>
     </ImplicitToStringCast>
+    <InaccessibleProperty>
+      <code><![CDATA[$self->nodesToReturn]]></code>
+    </InaccessibleProperty>
+    <InternalMethod>
+      <code><![CDATA[getFile]]></code>
+      <code><![CDATA[getFile]]></code>
+    </InternalMethod>
     <InvalidArgument>
       <code><![CDATA[[$this->importName($fullyQualifiedClassName)]]]></code>
     </InvalidArgument>
+    <InvalidPropertyAssignmentValue>
+      <code><![CDATA[$self->nodesToReturn]]></code>
+    </InvalidPropertyAssignmentValue>
     <LessSpecificReturnStatement>
       <code><![CDATA[$this->addThrowsDocComment($classMethod, Throwable::class)]]></code>
     </LessSpecificReturnStatement>
     <LessSpecificReturnType>
-      <code><![CDATA[?int]]></code>
       <code><![CDATA[?int]]></code>
       <code><![CDATA[int]]></code>
     </LessSpecificReturnType>
@@ -20,6 +32,29 @@
       <code><![CDATA[importName]]></code>
       <code><![CDATA[importName]]></code>
     </MissingThrowsDocblock>
+    <MixedArgument>
+      <code><![CDATA[$originalNode]]></code>
+    </MixedArgument>
+    <MixedArrayAccess>
+      <code><![CDATA[$newArray->items[0]]]></code>
+    </MixedArrayAccess>
+    <MixedArrayAssignment>
+      <code><![CDATA[$existingArray->items[]]]></code>
+      <code><![CDATA[$value[$nodeId]]]></code>
+    </MixedArrayAssignment>
+    <MixedAssignment>
+      <code><![CDATA[$existingArray]]></code>
+      <code><![CDATA[$newArray]]></code>
+      <code><![CDATA[$originalNode]]></code>
+      <code><![CDATA[$value]]></code>
+    </MixedAssignment>
+    <MixedPropertyAssignment>
+      <code><![CDATA[$existingArray]]></code>
+    </MixedPropertyAssignment>
+    <MixedPropertyFetch>
+      <code><![CDATA[$existingArray->items]]></code>
+      <code><![CDATA[$newArray->items]]></code>
+    </MixedPropertyFetch>
     <MoreSpecificReturnType>
       <code><![CDATA[?ClassMethod]]></code>
     </MoreSpecificReturnType>
@@ -39,15 +74,24 @@
     <PossiblyNullArgument>
       <code><![CDATA[$classMethod->stmts]]></code>
     </PossiblyNullArgument>
+    <PossiblyNullFunctionCall>
+      <code><![CDATA[$closure($this)]]></code>
+    </PossiblyNullFunctionCall>
     <PossiblyNullOperand>
       <code><![CDATA[$throwable]]></code>
       <code><![CDATA[$throwable]]></code>
     </PossiblyNullOperand>
+    <PossiblyNullReference>
+      <code><![CDATA[changeFileContent]]></code>
+    </PossiblyNullReference>
     <PossiblyUndefinedIntArrayOffset>
+      <code><![CDATA[$existingStmts[0]]]></code>
+      <code><![CDATA[$newStmts[0]]]></code>
       <code><![CDATA[$property->props[0]]]></code>
     </PossiblyUndefinedIntArrayOffset>
     <PossiblyUnusedMethod>
       <code><![CDATA[addArrayItemByKey]]></code>
+      <code><![CDATA[changeFileContent]]></code>
       <code><![CDATA[currentFile]]></code>
       <code><![CDATA[extend]]></code>
       <code><![CDATA[extendsClass]]></code>
@@ -61,19 +105,24 @@
       <code><![CDATA[hasMethodParameter]]></code>
       <code><![CDATA[hasProperty]]></code>
       <code><![CDATA[hasTestCaseTearDownMockeryCloseWithOptionalParentTearDown]]></code>
+      <code><![CDATA[is]]></code>
       <code><![CDATA[isAbstract]]></code>
       <code><![CDATA[isAssertCallLikeName]]></code>
       <code><![CDATA[isFinalByKeyword]]></code>
+      <code><![CDATA[isMethodStaticCallOrClassMethodObjectType]]></code>
       <code><![CDATA[isPHPUnitMethodCallNames]]></code>
-      <code><![CDATA[isSubclassOfMockeryTestCase]]></code>
       <code><![CDATA[isSubclassOfPHPUnitTestCase]]></code>
       <code><![CDATA[isTestClassMethod]]></code>
+      <code><![CDATA[mergeFiles]]></code>
       <code><![CDATA[nameEndsWith]]></code>
       <code><![CDATA[removeClassMethodTeardown]]></code>
       <code><![CDATA[removeImplements]]></code>
+      <code><![CDATA[removeNode]]></code>
       <code><![CDATA[removeStmts]]></code>
       <code><![CDATA[removeUseStatements]]></code>
+      <code><![CDATA[replaceUseStatement]]></code>
       <code><![CDATA[resolveParentClassName]]></code>
+      <code><![CDATA[resolveUses]]></code>
       <code><![CDATA[sortImplements]]></code>
       <code><![CDATA[unsetArrayItemByKey]]></code>
       <code><![CDATA[usesClass]]></code>
@@ -83,12 +132,12 @@
     <PossiblyUnusedProperty>
       <code><![CDATA[$aliasNameResolver]]></code>
       <code><![CDATA[$changedNodeScopeRefresher]]></code>
-      <code><![CDATA[$currentFileProvider]]></code>
       <code><![CDATA[$docBlockNameImporter]]></code>
       <code><![CDATA[$docBlockUpdater]]></code>
       <code><![CDATA[$nestedAttrGroupsFactory]]></code>
       <code><![CDATA[$phpAttributeAnalyzer]]></code>
       <code><![CDATA[$useImportsAdder]]></code>
+      <code><![CDATA[$useImportsRemover]]></code>
       <code><![CDATA[$useStatements]]></code>
     </PossiblyUnusedProperty>
     <PossiblyUnusedReturnValue>
@@ -102,13 +151,26 @@
       <code><![CDATA[$nodeTypeResolver]]></code>
       <code><![CDATA[$skipper]]></code>
     </PropertyNotSetInConstructor>
+    <PropertyTypeCoercion>
+      <code><![CDATA[$this->removeImportsFromStmts($node->stmts, $removedUseStatements)]]></code>
+    </PropertyTypeCoercion>
     <RedundantFunctionCall>
       <code><![CDATA[\array_values]]></code>
     </RedundantFunctionCall>
     <UndefinedFunction>
-      <code><![CDATA[\dump([$node::class, \count($node->uses)])]]></code>
-      <code><![CDATA[\dump([$usesKey, $this->getName($useUse)])]]></code>
+      <code><![CDATA[\dump_node($node)]]></code>
     </UndefinedFunction>
+    <UndefinedMethod>
+      <code><![CDATA[getNodeArray]]></code>
+      <code><![CDATA[getNodeArray]]></code>
+    </UndefinedMethod>
+    <UnnecessaryVarAnnotation>
+      <code><![CDATA[FileWithoutNamespace[]|Namespace_[]]]></code>
+      <code><![CDATA[null|File]]></code>
+    </UnnecessaryVarAnnotation>
+    <UnusedParam>
+      <code><![CDATA[$node]]></code>
+    </UnusedParam>
   </file>
   <file src="src/Package/Ghostwriter/Arm/ArmRector.php">
     <PropertyNotSetInConstructor>
@@ -371,23 +433,27 @@
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/Package/Mockery/Mockery/ExtendMockeryTestCaseRector.php">
-    <InvalidPropertyAssignmentValue>
-      <code><![CDATA[$fileWithoutNamespace->stmts]]></code>
-      <code><![CDATA[$namespace->stmts]]></code>
-    </InvalidPropertyAssignmentValue>
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$node]]></code>
+    </ArgumentTypeCoercion>
+    <InvalidArgument>
+      <code><![CDATA[$stmt]]></code>
+    </InvalidArgument>
     <InvalidReturnStatement>
-      <code><![CDATA[[Class_::class, Namespace_::class, FileWithoutNamespace::class]]]></code>
+      <code><![CDATA[[Use_::class, Class_::class, Namespace_::class, FileWithoutNamespace::class]]]></code>
     </InvalidReturnStatement>
     <InvalidReturnType>
       <code><![CDATA[array<class-string<Class_>>]]></code>
     </InvalidReturnType>
     <LessSpecificReturnType>
-      <code><![CDATA[?Class_]]></code>
       <code><![CDATA[?Namespace_]]></code>
     </LessSpecificReturnType>
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[$stmtKey]]></code>
-    </MixedArgumentTypeCoercion>
+    <MixedInferredReturnType>
+      <code><![CDATA[null|array|int|Node]]></code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->refactorResult[$id]]]></code>
+    </MixedReturnStatement>
     <PropertyNotSetInConstructor>
       <code><![CDATA[ExtendMockeryTestCaseRector]]></code>
       <code><![CDATA[ExtendMockeryTestCaseRector]]></code>
@@ -396,22 +462,12 @@
       <code><![CDATA[ExtendMockeryTestCaseRector]]></code>
       <code><![CDATA[ExtendMockeryTestCaseRector]]></code>
     </PropertyNotSetInConstructor>
-    <UnevaluatedCode>
-      <code><![CDATA[return match (true) {
-            $this->isSubclassOfMockeryTestCase($node) &&
-            $this->isPHPUnitTestCase($node)
-            => match (true) {
-                //                $node instanceof Class_ => $this->refactorClass($node),
-                $node instanceof FileWithoutNamespace => $this->refactorFileWithoutNamespace($node),
-                $node instanceof Namespace_ => $this->refactorNamespace($node),
-                default => null,
-            },
-            default => null,
-        };]]></code>
-    </UnevaluatedCode>
-    <UnusedClass>
-      <code><![CDATA[ExtendMockeryTestCaseRector]]></code>
-    </UnusedClass>
+    <UnusedForeachValue>
+      <code><![CDATA[$stmt]]></code>
+    </UnusedForeachValue>
+    <UnusedMethod>
+      <code><![CDATA[refactorNamespace1]]></code>
+    </UnusedMethod>
   </file>
   <file src="src/Package/Mockery/Mockery/HamcrestToPHPUnitRector.php">
     <DocblockTypeContradiction>
@@ -474,9 +530,10 @@
     <UndefinedPropertyFetch>
       <code><![CDATA[$args[1]->value]]></code>
     </UndefinedPropertyFetch>
-    <UnusedClass>
-      <code><![CDATA[HamcrestToPHPUnitRector]]></code>
-    </UnusedClass>
+    <UnusedMethod>
+      <code><![CDATA[addNodeBeforeNode]]></code>
+      <code><![CDATA[createMethodCall]]></code>
+    </UnusedMethod>
     <UnusedParam>
       <code><![CDATA[$attributes]]></code>
       <code><![CDATA[$funcCall]]></code>
@@ -506,9 +563,6 @@
       <code><![CDATA[PHPUnitToMockeryRector]]></code>
       <code><![CDATA[PHPUnitToMockeryRector]]></code>
     </PropertyNotSetInConstructor>
-    <UnusedClass>
-      <code><![CDATA[PHPUnitToMockeryRector]]></code>
-    </UnusedClass>
   </file>
   <file src="src/Package/Mockery/Mockery/ProphecyToMockeryRector.php">
     <MoreSpecificImplementedParamType>
@@ -523,9 +577,6 @@
       <code><![CDATA[ProphecyToMockeryRector]]></code>
       <code><![CDATA[ProphecyToMockeryRector]]></code>
     </PropertyNotSetInConstructor>
-    <UnusedClass>
-      <code><![CDATA[ProphecyToMockeryRector]]></code>
-    </UnusedClass>
   </file>
   <file src="src/Package/Mockery/Mockery/ShouldReceiveToAllowsRector.php">
     <PropertyNotSetInConstructor>
@@ -536,9 +587,6 @@
       <code><![CDATA[ShouldReceiveToAllowsRector]]></code>
       <code><![CDATA[ShouldReceiveToAllowsRector]]></code>
     </PropertyNotSetInConstructor>
-    <UnusedClass>
-      <code><![CDATA[ShouldReceiveToAllowsRector]]></code>
-    </UnusedClass>
   </file>
   <file src="src/Package/Mockery/Mockery/ShouldReceiveToExpectsRector.php">
     <PropertyNotSetInConstructor>
@@ -549,9 +597,6 @@
       <code><![CDATA[ShouldReceiveToExpectsRector]]></code>
       <code><![CDATA[ShouldReceiveToExpectsRector]]></code>
     </PropertyNotSetInConstructor>
-    <UnusedClass>
-      <code><![CDATA[ShouldReceiveToExpectsRector]]></code>
-    </UnusedClass>
   </file>
   <file src="src/Package/Mockery/Mockery/UseMockeryPHPUnitIntegrationTraitRector.php">
     <PropertyNotSetInConstructor>
@@ -562,9 +607,6 @@
       <code><![CDATA[UseMockeryPHPUnitIntegrationTraitRector]]></code>
       <code><![CDATA[UseMockeryPHPUnitIntegrationTraitRector]]></code>
     </PropertyNotSetInConstructor>
-    <UnusedClass>
-      <code><![CDATA[UseMockeryPHPUnitIntegrationTraitRector]]></code>
-    </UnusedClass>
   </file>
   <file src="src/Package/Nikic/PhpParser/ParserFactoryCreateMethodRector.php">
     <MixedAssignment>
@@ -879,5 +921,25 @@
     <MixedOperand>
       <code><![CDATA[$fixtureDirectory]]></code>
     </MixedOperand>
+  </file>
+  <file src="tests/unit/Package/Mockery/Mockery/ExtendMockeryTestcaseRectorTest.php">
+    <InvalidClass>
+      <code><![CDATA[ExtendMockeryTestcaseRector]]></code>
+    </InvalidClass>
+  </file>
+  <file src="tests/unit/Package/Mockery/Mockery/HamcrestToPhpunitRectorTest.php">
+    <InvalidClass>
+      <code><![CDATA[HamcrestToPhpunitRector]]></code>
+    </InvalidClass>
+  </file>
+  <file src="tests/unit/Package/Mockery/Mockery/PhpunitToMockeryRectorTest.php">
+    <InvalidClass>
+      <code><![CDATA[PhpunitToMockeryRector]]></code>
+    </InvalidClass>
+  </file>
+  <file src="tests/unit/Package/Mockery/Mockery/UseMockeryPhpunitIntegrationTraitRectorTest.php">
+    <InvalidClass>
+      <code><![CDATA[UseMockeryPhpunitIntegrationTraitRector]]></code>
+    </InvalidClass>
   </file>
 </files>
