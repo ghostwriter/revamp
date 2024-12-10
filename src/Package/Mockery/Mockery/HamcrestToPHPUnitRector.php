@@ -156,7 +156,8 @@ final class HamcrestToPHPUnitRector extends AbstractRevampRector
 
         return match ($functionName) {
             'assertThat' => $this->refactorAssertThatFuncCall($funcCall),
-            'anObject', 'objectValue' => $this->refactorAnObjectFuncCall($funcCall),
+            'anObject' => $this->refactorAnObjectFuncCall($funcCall),
+            'objectValue' => $this->refactorObjectValueFuncCall($funcCall),
             'equalTo' => $this->refactorEqualToFuncCall($funcCall),
             'numericValue' => $this->refactorNumericValueFuncCall($funcCall),
             default => throw new ShouldNotHappenException($functionName),
@@ -292,5 +293,10 @@ final class HamcrestToPHPUnitRector extends AbstractRevampRector
             $name,
             [new Arg(new ClassConstFetch($name, self::HAMCREST_FUNCTIONS_TO_PHPUnit_CONSTRAINT[$functionName]))]
         );
+    }
+
+    private function refactorObjectValueFuncCall(FuncCall $funcCall): ?New_
+    {
+        return $this->refactorAnObjectFuncCall($funcCall);
     }
 }
