@@ -20,7 +20,9 @@ When you update a package with Composer, the matching upgrade rules are automati
 
 This ensures your code is updated to work with the latest package version.
 
-No manual setup needed, just upgrade and let Revamp handle the rest!
+Run `composer update` then `rector process`
+
+**Revamp** handle the rest!
 
 > [!WARNING]
 >
