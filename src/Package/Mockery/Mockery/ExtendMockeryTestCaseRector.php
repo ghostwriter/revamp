@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Revamp\Package\Mockery\Mockery;
 
 use Ghostwriter\Revamp\AbstractRevampRector;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Override;
 use PhpParser\Node;
@@ -21,24 +22,39 @@ use Throwable;
  */
 final class ExtendMockeryTestCaseRector extends AbstractRevampRector
 {
+    private array $refactorResult = [];
+
     /**
      * @return array<class-string<Class_>>
      */
     #[Override]
     public function getNodeTypes(): array
     {
-        return [Class_::class, Namespace_::class, FileWithoutNamespace::class];
+        return [Use_::class, Class_::class, Namespace_::class, FileWithoutNamespace::class];
+    }
+
+    /**
+     * @param Class_ $node
+     */
+    public function nodeId(Node $node): string
+    {
+        return \spl_object_hash($node);
     }
 
     /**
      * @throws Throwable
      */
     #[Override]
-    public function refactor(Node $node): ?Node
+    public function refactor(Node $node): null|array|int|Node
     {
+        $id = $this->nodeId($node);
+
+        if (\array_key_exists($id, $this->refactorResult)) {
+            return $this->refactorResult[$id];
+        }
+
         return match (true) {
-            $node instanceof Class_ => $this->isPHPUnitTestCase($node) ? $this->refactorClass($node) : null,
-            $node instanceof FileWithoutNamespace => $this->refactorFileWithoutNamespace($node),
+            $node instanceof FileWithoutNamespace,
             $node instanceof Namespace_ => $this->refactorNamespace($node),
             default => null,
         };
@@ -49,7 +65,17 @@ final class ExtendMockeryTestCaseRector extends AbstractRevampRector
      */
     private function refactorClass(Class_ $class): ?Class_
     {
+        if ($this->isSubclassOfMockeryTestCase($class)) {
+            return null;
+        }
+
+        if (! $this->isPHPUnitTestCase($class)) {
+            return null;
+        }
+
         $class->extends = $this->importName(MockeryTestCase::class);
+
+        //        $this->refactorResult[$this->nodeId($class)] = $class;
 
         return $class;
     }
@@ -57,28 +83,89 @@ final class ExtendMockeryTestCaseRector extends AbstractRevampRector
     /**
      * @throws Throwable
      */
-    private function refactorFileWithoutNamespace(FileWithoutNamespace $fileWithoutNamespace): FileWithoutNamespace
+    private function refactorNamespace(FileWithoutNamespace|Namespace_ $node): FileWithoutNamespace|Namespace_
     {
-        foreach ($fileWithoutNamespace->stmts as $stmtKey => $stmt) {
+        $useTestCaseStatement = [];
+
+        $classStatement = [];
+
+        foreach ($node->stmts as $stmt) {
             if ($stmt instanceof Use_) {
-                $this->refactorUse($stmt, $fileWithoutNamespace, $stmtKey);
+                if (! $this->isName($stmt, TestCase::class)) {
+                    continue;
+                }
+                $useTestCaseStatement[$this->nodeId($stmt)] = $stmt;
             }
+
+            if (! $stmt instanceof Class_) {
+                continue;
+            }
+
+            $extends = $stmt->extends;
+
+            if ($extends === null) {
+                continue;
+            }
+
+            if (! $this->nodeNameResolver->isName($extends, TestCase::class)) {
+                continue;
+            }
+
+            if ($this->hasTrait($stmt, MockeryPHPUnitIntegration::class)) {
+                continue;
+            }
+
+            if ($this->nodeNameResolver->isName($extends, MockeryTestCase::class)) {
+                continue;
+            }
+
+            //            if ($this->isSubclassOfMockeryTestCase($stmt)) {
+            //                continue;
+            //            }
+
+            if (! $this->isPHPUnitTestCase($stmt)) {
+                continue;
+            }
+            if (
+                ! $this->hasMockeryMockStaticCall($stmt)
+                && ! $this->hasMockeryGlobalMockFunctionCall($stmt)
+            ) {
+                continue;
+            }
+
+            $classStatement[$this->nodeId($stmt)] = $stmt;
         }
 
-        return $fileWithoutNamespace;
+        if ($classStatement === []) {
+            return $node;
+        }
+
+        foreach ($classStatement as $id => $stmt) {
+            $this->refactorResult[$id] = $this->refactorClass($stmt);
+        }
+
+        foreach ($useTestCaseStatement as $id => $stmt) {
+            $this->refactorResult[$id] = self::REMOVE_NODE;
+        }
+
+        return $node;
     }
 
     /**
      * @throws Throwable
      */
-    private function refactorNamespace(Namespace_ $namespace): ?Namespace_
+    private function refactorNamespace1(Namespace_ $namespace): ?Namespace_
     {
         foreach ($namespace->stmts as $stmtKey => $stmt) {
-            if (! $stmt instanceof Use_) {
+            if ($stmt instanceof Use_) {
+                $this->refactorUse($stmt, $namespace, $stmtKey);
+            }
+
+            if (! $stmt instanceof Class_) {
                 continue;
             }
 
-            $this->refactorUse($stmt, $namespace, $stmtKey);
+            //            $namespace->stmts[$stmtKey] = $this->refactorClass($stmt);
         }
 
         return $namespace;
