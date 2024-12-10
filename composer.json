@@ -60,7 +60,8 @@
         "ghostwriter/shell": "^0.1.0",
         "ghostwriter/uuid": "^1.0.1",
         "mockery/mockery": "^1.6.12",
-        "phpunit/phpunit": "^11.5.0"
+        "phpunit/phpunit": "^11.5.0",
+        "symfony/var-dumper": "^7.2.0"
     },
     "conflict": {
         "rector/rector": "<2.0"
@@ -96,56 +97,6 @@
         "process-timeout": 5000,
         "sort-packages": true,
         "use-parent-dir": false
-    },
-    "extra": {
-        "rector2": {
-            "includes": [
-                "config/ghostwriter/arm.php",
-                "config/ghostwriter/case-converter.php",
-                "config/ghostwriter/cli.php",
-                "config/ghostwriter/clock.php",
-                "config/ghostwriter/coding-standard.php",
-                "config/ghostwriter/collection.php",
-                "config/ghostwriter/compliance.php",
-                "config/ghostwriter/config.php",
-                "config/ghostwriter/container.php",
-                "config/ghostwriter/environment.php",
-                "config/ghostwriter/event-dispatcher.php",
-                "config/ghostwriter/filesystem.php",
-                "config/ghostwriter/gfm.php",
-                "config/ghostwriter/handrail.php",
-                "config/ghostwriter/http.php",
-                "config/ghostwriter/json.php",
-                "config/ghostwriter/option.php",
-                "config/ghostwriter/phormat.php",
-                "config/ghostwriter/phpt.php",
-                "config/ghostwriter/plex.php",
-                "config/ghostwriter/psalm-plugin.php",
-                "config/ghostwriter/result.php",
-                "config/ghostwriter/revamp.php",
-                "config/ghostwriter/shell.php",
-                "config/ghostwriter/testify.php",
-                "config/ghostwriter/uuid.php",
-                "config/mockery/mockery.php",
-                "config/nikic/php-parser.php",
-                "config/php/php53.php",
-                "config/php/php54.php",
-                "config/php/php56.php",
-                "config/php/php70.php",
-                "config/php/php71.php",
-                "config/php/php72.php",
-                "config/php/php73.php",
-                "config/php/php74.php",
-                "config/php/php80.php",
-                "config/php/php81.php",
-                "config/php/php82.php",
-                "config/php/php83.php",
-                "config/php/php84.php",
-                "config/php/php85.php",
-                "config/phpunit/phpunit.php",
-                "config/vimeo/psalm.php"
-            ]
-        }
     },
     "scripts": {
         "bin_ecs": "ecs check --clear-cache --no-interaction",
