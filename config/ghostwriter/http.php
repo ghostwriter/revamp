@@ -2,11 +2,19 @@
 
 declare(strict_types=1);
 
+use Composer\InstalledVersions;
+use Composer\Semver\VersionParser;
 use Ghostwriter\Revamp\Package\Ghostwriter\Http\HttpRector;
-use Ghostwriter\Revamp\Package\Ghostwriter\Http\HttpSetProvider;
 use Rector\Config\RectorConfig;
 
-return RectorConfig::configure()
-    ->withRules([HttpRector::class])
-    // ->withSetProviders(HttpSetProvider::class)
-;
+return static function (RectorConfig $rectorConfig): void {
+    if (! InstalledVersions::isInstalled('ghostwriter/http')) {
+        return;
+    }
+
+    if (! InstalledVersions::satisfies(new VersionParser(), 'ghostwriter/http', '*')) {
+        return;
+    }
+
+    $rectorConfig->rule(HttpRector::class);
+};
