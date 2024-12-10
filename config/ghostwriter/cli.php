@@ -2,11 +2,19 @@
 
 declare(strict_types=1);
 
+use Composer\InstalledVersions;
+use Composer\Semver\VersionParser;
 use Ghostwriter\Revamp\Package\Ghostwriter\Cli\CliRector;
-use Ghostwriter\Revamp\Package\Ghostwriter\Cli\CliSetProvider;
 use Rector\Config\RectorConfig;
 
-return RectorConfig::configure()
-    ->withRules([CliRector::class])
-    // ->withSetProviders(CliSetProvider::class)
-;
+return static function (RectorConfig $rectorConfig): void {
+    if (! InstalledVersions::isInstalled('ghostwriter/cli')) {
+        return;
+    }
+
+    if (! InstalledVersions::satisfies(new VersionParser(), 'ghostwriter/cli', '*')) {
+        return;
+    }
+
+    $rectorConfig->rule(CliRector::class);
+};
