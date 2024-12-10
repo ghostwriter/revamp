@@ -27,13 +27,13 @@ final class ExampleTest extends TestCase
 
 namespace Vendor\Package;
 
+use Mockery\Adapter\Phpunit\MockeryTestCase;
 use PHPUnit\Framework\Constraint\IsType;
 use Mockery;
-use PHPUnit\Framework\TestCase;
 use Throwable;
 use stdClass;
 
-final class ExampleTest extends TestCase
+final class ExampleTest extends MockeryTestCase
 {
     /**
      * @throws Throwable
@@ -45,6 +45,6 @@ final class ExampleTest extends TestCase
         $mock->expects('foo')
              ->with(new IsType(IsType::TYPE_NUMERIC));
 
-        self::assertIsNumeric("123");
+        self::assertIsNumeric('123');
     }
 }
