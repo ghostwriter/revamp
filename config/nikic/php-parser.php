@@ -2,11 +2,19 @@
 
 declare(strict_types=1);
 
-use Ghostwriter\Revamp\Package\Nikic\PhpParser\PhpParserRector;
-use Ghostwriter\Revamp\Package\Nikic\PhpParser\PhpParserSetProvider;
+use Composer\InstalledVersions;
+use Composer\Semver\VersionParser;
+use Ghostwriter\Revamp\Package\Nikic\PhpParser\ParserFactoryCreateMethodRector;
 use Rector\Config\RectorConfig;
 
-return RectorConfig::configure()
-    ->withRules([PhpParserRector::class])
-    // ->withSetProviders(PhpParserSetProvider::class)
-;
+return static function (RectorConfig $rectorConfig): void {
+    if (! InstalledVersions::isInstalled('nikic/php-parser')) {
+        return;
+    }
+
+    if (! InstalledVersions::satisfies(new VersionParser(), 'nikic/php-parser', '*')) {
+        return;
+    }
+
+    $rectorConfig->rule(ParserFactoryCreateMethodRector::class);
+};
