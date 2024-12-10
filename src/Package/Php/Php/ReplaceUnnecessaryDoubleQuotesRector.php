@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Revamp\Package\Php\Php53;
+namespace Ghostwriter\Revamp\Package\Php\Php;
 
 use Ghostwriter\Revamp\AbstractRevampRector;
 use Override;
 use PhpParser\Node;
 use PhpParser\Node\Scalar\String_;
-use Tests\Unit\Rule\PHP\Core\ReplaceUnnecessaryDoubleQuotesRectorTest;
+use Tests\Unit\Package\Php\Php\ReplaceUnnecessaryDoubleQuotesRectorTest;
 use Throwable;
 
 /**
