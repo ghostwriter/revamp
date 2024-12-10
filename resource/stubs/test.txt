@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Tests\Unit\Package\{{ $vendor }}\{{ $package }};
 
 use Ghostwriter\Revamp\Package\{{ $vendor }}\{{ $package }}\{{ $rule }};
-use Ghostwriter\Revamp\Package\{{ $vendor }}\{{ $package }}\{{ $setProvider }};
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\Unit\AbstractTestCase;
 
 #[CoversClass({{ $rule }}::class)]
-#[CoversClass({{ $setProvider }}::class)]
 final class {{ $test }} extends AbstractTestCase
 {
 }
