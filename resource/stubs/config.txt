@@ -2,11 +2,15 @@
 
 declare(strict_types=1);
 
+use Composer\InstalledVersions;
+use Composer\Semver\VersionParser;
 use Ghostwriter\Revamp\Package\{{ $vendor }}\{{ $package }}\{{ $rule }};
-use Ghostwriter\Revamp\Package\{{ $vendor }}\{{ $package }}\{{ $setProvider }};
 use Rector\Config\RectorConfig;
 
-return RectorConfig::configure()
-    ->withRules([{{ $rule }}::class])
-    // ->withSetProviders({{ $setProvider }}::class)
-;
+return static function (RectorConfig $rectorConfig): void {
+    if (! InstalledVersions::satisfies(new VersionParser(), 'ghostwriter/revamp', '*')) {
+        return;
+    }
+
+    $rectorConfig->rule({{ $rule }}::class);
+};
