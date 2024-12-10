@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Revamp\Package\Php\Php53;
+namespace Ghostwriter\Revamp\Package\Php\Php;
 
 use Ghostwriter\Revamp\AbstractRevampRector;
 use Override;
