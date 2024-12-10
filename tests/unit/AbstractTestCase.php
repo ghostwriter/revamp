@@ -6,10 +6,10 @@ namespace Tests\Unit;
 
 use Generator;
 use Ghostwriter\Revamp\Exception\FixtureDirectoryDoesNotExistException;
+use Ghostwriter\Revamp\Rector;
 use Override;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
-use ReflectionClass;
 use Throwable;
 
 use const DIRECTORY_SEPARATOR;
@@ -24,7 +24,7 @@ abstract class AbstractTestCase extends AbstractRectorTestCase
     #[Override]
     final public function provideConfigFilePath(): string
     {
-        return self::fixtureDirectory('config.php');
+        return Rector::REVAMP;
     }
 
     /**
@@ -52,10 +52,7 @@ abstract class AbstractTestCase extends AbstractRectorTestCase
     {
         static $fixtureDirectory = null;
 
-        $fixtureDirectory ??= \dirname(
-            (new ReflectionClass(self::class))->getFileName(),
-            2
-        ) . DIRECTORY_SEPARATOR . 'fixture';
+        $fixtureDirectory ??= \dirname(__DIR__) . DIRECTORY_SEPARATOR . 'fixture';
 
         if (! \array_key_exists(static::class, self::$fixturePaths)) {
             $fixtureFilePath = \implode(DIRECTORY_SEPARATOR, \explode('\\', self::currentRuleName()));
