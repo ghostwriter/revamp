@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Ghostwriter\Revamp\Package\Mockery\Mockery;
 
 use Ghostwriter\Revamp\AbstractRevampRector;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Override;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
@@ -42,6 +44,20 @@ final class UseMockeryPHPUnitIntegrationTraitRector extends AbstractRevampRector
      */
     private function refactorClass(Class_ $class): ?Class_
     {
+        $extends = $class->extends;
+
+        if ($extends === null) {
+            return null;
+        }
+
+        if ($this->nodeNameResolver->isName($extends, MockeryTestCase::class)) {
+            return null;
+        }
+
+        if ($this->hasTrait($class, MockeryPHPUnitIntegration::class)) {
+            return null;
+        }
+
         if (! $this->needsMockeryPHPUnitIntegrationTrait($class)) {
             return null;
         }
