@@ -38,24 +38,40 @@ composer require ghostwriter/revamp --dev
 
 ## Usage
 
-To add a rule or set to your config, with package version constants:
-
-- `Ghostwriter\Revamp\Rule\Vendor\Package\PackageRector`
-- `Ghostwriter\Revamp\SetProvider\Vendor\Package\PackageSetProvider`
+Add `\Ghostwriter\Revamp\Rector::REVAMP` set to your `rector.php` config file:
 
 ```php
-<?php
-
 declare(strict_types=1);
 
-use Ghostwriter\Revamp\SetProvider;
-use Ghostwriter\Revamp\Vendor\Package\PackageSetProvider;
 use Rector\Config\RectorConfig;
 
-// once accepted; https://github.com/rectorphp/rector-src/pull/6515
-
-return RectorConfig::configure()->withSetProviders(SetProvider::class);
+return RectorConfig::configure()->withSets([\Ghostwriter\Revamp\Rector::REVAMP]);
 ```
+
+## Features
+
+- [ ] Mockery
+- [x] Upgrade Mockery to 1.x
+- [ ] Upgrade Mockery to 2.x
+- [x] Extend Mockery TestCase
+- [x] Use Mockery PHPUnit Integration Trait
+- [ ] Hamcrest To PHPUnit
+- [ ] PHPUnit To Mockery
+- [ ] Prophecy To Mockery
+- [ ] Should Receive To Allows
+- [ ] Should Receive To Expects
+- [x] Upgrade PHP-Parser to 5.x
+- [x] Upgrade PHP-Parser to 6.x
+- [ ] Upgrade Psalm to 5.x
+- [ ] Upgrade PHPUnit to 9.x
+- [x] Upgrade PHPUnit to 10.x
+- [x] Upgrade PHPUnit to 11.x
+- [ ] Upgrade PHP to 8.0
+- [ ] Upgrade PHP to 8.1
+- [ ] Upgrade PHP to 8.2
+- [ ] Upgrade PHP to 8.3
+- [ ] Upgrade PHP to 8.4
+- [ ] Upgrade PHP to 8.5
 
 ### Credits
 
