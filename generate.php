@@ -17,6 +17,7 @@ function pascalCase(string $name): string
     return $caseConverter->pascalCase($name);
     //    return \str_replace(['Phpunit', 'Php'], ['PHPUnit', 'PHP'], $caseConverter->pascalCase($name));
 }
+
 function kebabCase(string $name): string
 {
     static $caseConverter;
@@ -36,16 +37,9 @@ $testDirectory = $rootDirectory . \DIRECTORY_SEPARATOR . 'tests';
 $stubDirectory = $resourceDirectory . \DIRECTORY_SEPARATOR . 'stubs';
 $fixtureDirectory = $testDirectory . \DIRECTORY_SEPARATOR . 'fixture';
 
-$configFixtureStub = $filesystem->read(
-    $stubDirectory . \DIRECTORY_SEPARATOR . 'fixture' . \DIRECTORY_SEPARATOR . 'config.txt'
-);
-$testcaseFixtureStub = $filesystem->read(
-    $stubDirectory . \DIRECTORY_SEPARATOR . 'fixture' . \DIRECTORY_SEPARATOR . 'testcase.txt'
-);
-
+$fixtureStub = $filesystem->read($stubDirectory . \DIRECTORY_SEPARATOR . 'fixture.txt');
 $configStub = $filesystem->read($stubDirectory . \DIRECTORY_SEPARATOR . 'config.txt');
 $ruleStub = $filesystem->read($stubDirectory . \DIRECTORY_SEPARATOR . 'rule.txt');
-$setProviderStub = $filesystem->read($stubDirectory . \DIRECTORY_SEPARATOR . 'setProvider.txt');
 $testStub = $filesystem->read($stubDirectory . \DIRECTORY_SEPARATOR . 'test.txt');
 
 $projects = [
@@ -78,7 +72,18 @@ $projects = [
         'uuid' => [],
     ],
     'mockery' => [
-        'mockery' => [],
+        'mockery' => [
+            '*' => [
+                \pascalCase('Extend Mockery TestCase'),
+                \pascalCase('Hamcrest To PHPUnit'),
+                \pascalCase('Mockery'),
+                \pascalCase('PHPUnit To Mockery'),
+                \pascalCase('Prophecy To Mockery'),
+                \pascalCase('Should Receive To Allows'),
+                \pascalCase('Should Receive To Expects'),
+                \pascalCase('Use Mockery PHPUnit Integration Trait'),
+            ],
+        ],
     ],
     //    'mezzio' => [
     //        'mezzio' => [],
@@ -112,17 +117,18 @@ $projects = [
     //        'mezzio-twigrenderer' => [],
     //    ],
     'nikic' => [
-        'php-parser' => [],
+        'php-parser' => [
+            '5.0' => [\pascalCase('Parser Factory create method')],
+        ],
     ],
     'php' => [
-        'php53' => [],
-        'php54' => [],
-        'php56' => [],
-        'php70' => [],
-        'php71' => [],
-        'php72' => [],
-        'php73' => [],
-        'php74' => [],
+        'php' => [
+            '*' => [
+                \pascalCase('Replace Unnecessary Double Quotes'),
+                \pascalCase('SortClassLikeStatementsAlphabetically'),
+                \pascalCase('SortUseStatementsAlphabetically'),
+            ],
+        ],
         'php80' => [],
         'php81' => [],
         'php82' => [],
@@ -153,6 +159,7 @@ $projects = [
         'psalm' => [],
     ],
 ];
+
 foreach ($projects as $vendor => $packages) {
     $vendorPascalCase = \pascalCase($vendor);
 
@@ -163,9 +170,9 @@ foreach ($projects as $vendor => $packages) {
             $rectors['dev-main'] = [$packagePascalCase];
         }
 
-        foreach ($rectors as $rules) {
+        foreach ($rectors as $rector) {
 
-            foreach ($rules as $version => $rule) {
+            foreach ($rector as $version => $rule) {
                 $rulePascalCase = \pascalCase($rule) . 'Rector';
                 $testPascalCase = $rulePascalCase . 'Test';
                 $setProviderPascalCase = $packagePascalCase . 'SetProvider';
@@ -174,102 +181,63 @@ foreach ($projects as $vendor => $packages) {
                 $configContent = \str_replace(
                     ['{{ $setProvider }}', '{{ $vendor }}', '{{ $package }}', '{{ $rule }}', '{{ $test }}'],
                     [$setProviderPascalCase, $vendorPascalCase, $packagePascalCase, $rulePascalCase, $testPascalCase],
-                    $configStub
+                    $configStub,
                 );
 
-                $filesystem->write($configFile, $configContent);
+                if (! $filesystem->exists($configFile)) {
+                    $filesystem->write($configFile, $configContent);
+                }
 
                 $ruleFile = \implode(
                     \DIRECTORY_SEPARATOR,
-                    [$sourceDirectory, 'Package', $vendorPascalCase, $packagePascalCase, $rulePascalCase]
+                    [$sourceDirectory, 'Package', $vendorPascalCase, $packagePascalCase, $rulePascalCase],
                 ) . '.php';
+
                 $ruleContent = \str_replace(
                     ['{{ $setProvider }}', '{{ $vendor }}', '{{ $package }}', '{{ $rule }}', '{{ $test }}'],
                     [$setProviderPascalCase, $vendorPascalCase, $packagePascalCase, $rulePascalCase, $testPascalCase],
-                    $ruleStub
+                    $ruleStub,
                 );
 
-                $filesystem->exists($ruleFile) || $filesystem->write($ruleFile, $ruleContent);
+                if (! $filesystem->exists($ruleFile)) {
+                    $filesystem->write($ruleFile, $ruleContent);
+                }
 
                 $testcaseFile = \implode(
                     \DIRECTORY_SEPARATOR,
-                    [$testDirectory, 'Unit', 'Package', $vendorPascalCase, $packagePascalCase, $testPascalCase]
+                    [$testDirectory, 'Unit', 'Package', $vendorPascalCase, $packagePascalCase, $testPascalCase],
                 ) . '.php';
+
                 $testcaseContent = \str_replace(
                     ['{{ $setProvider }}', '{{ $vendor }}', '{{ $package }}', '{{ $rule }}', '{{ $test }}'],
                     [$setProviderPascalCase, $vendorPascalCase, $packagePascalCase, $rulePascalCase, $testPascalCase],
-                    $testStub
+                    $testStub,
                 );
 
                 $filesystem->write($testcaseFile, $testcaseContent);
-
-                $setProviderFile = \implode(
-                    \DIRECTORY_SEPARATOR,
-                    [$sourceDirectory, 'Package', $vendorPascalCase, $packagePascalCase, $setProviderPascalCase]
-                ) . '.php';
 
                 $set = $vendorPascalCase . $packagePascalCase . $rulePascalCase;
                 $group = $packagePascalCase;
                 $setFilePath = \str_replace(__DIR__ . \DIRECTORY_SEPARATOR, '', $configFile);
 
-                $setProviderContent = \str_replace(
-                    [
-                        '{{ $setProvider }}',
-                        '{{ $vendor }}',
-                        '{{ $package }}',
-                        '{{ $rule }}',
-                        '{{ $set }}',
-                        '{{ $group }}',
-                        '{{ $package }}',
-                        '{{ $version }}',
-                        '{{ $setFilePath }}',
-                    ],
-                    [
-                        $setProviderPascalCase,
-                        $vendorPascalCase,
-                        $packagePascalCase,
-                        $rulePascalCase,
-                        $set,
-                        $group,
-                        $package,
-                        $version,
-                        $setFilePath,
-                    ],
-                    $setProviderStub
-                );
-                $filesystem->write($setProviderFile, $setProviderContent);
-
-                $fixtureConfigFile = \implode(
-                    \DIRECTORY_SEPARATOR,
-                    [$fixtureDirectory, 'Package', $vendorPascalCase, $packagePascalCase, $rulePascalCase, 'config']
-                ) . '.php';
-
-                $fixtureConfigContent = \str_replace(
-                    ['{{ $setProvider }}', '{{ $vendor }}', '{{ $package }}', '{{ $rule }}', '{{ $test }}'],
-                    [$setProviderPascalCase, $vendorPascalCase, $packagePascalCase, $rulePascalCase, $testPascalCase],
-                    $configFixtureStub
-                );
-
-                $filesystem->write($fixtureConfigFile, $fixtureConfigContent);
-
                 $testcaseFixtureFile = \implode(
                     \DIRECTORY_SEPARATOR,
-                    [$fixtureDirectory, 'Package', $vendorPascalCase, $packagePascalCase, $rulePascalCase, 'testcase']
+                    [$fixtureDirectory, 'Package', $vendorPascalCase, $packagePascalCase, $rulePascalCase, 'testcase'],
                 ) . '.php.inc';
 
                 $testcaseFixtureContent = \str_replace(
                     ['{{ $setProvider }}', '{{ $vendor }}', '{{ $package }}', '{{ $rule }}', '{{ $test }}'],
                     [$setProviderPascalCase, $vendorPascalCase, $packagePascalCase, $rulePascalCase, $testPascalCase],
-                    $testcaseFixtureStub
+                    $fixtureStub,
                 );
 
-                $filesystem->write($testcaseFixtureFile, $testcaseFixtureContent);
+                if (! $filesystem->exists($testcaseFixtureFile)) {
+                    $filesystem->write($testcaseFixtureFile, $testcaseFixtureContent);
+                }
 
                 echo $configFile . \PHP_EOL;
                 echo $ruleFile . \PHP_EOL;
                 echo $testcaseFile . \PHP_EOL;
-                echo $setProviderFile . \PHP_EOL;
-                echo $fixtureConfigFile . \PHP_EOL;
                 echo $testcaseFixtureFile . \PHP_EOL;
                 echo \str_repeat('--', 8) . \PHP_EOL;
             }
