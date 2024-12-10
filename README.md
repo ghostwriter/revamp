@@ -50,28 +50,41 @@ return RectorConfig::configure()->withSets([\Ghostwriter\Revamp\Rector::REVAMP])
 
 ## Features
 
+- [ ] PHPUnit
+    - [x] Add `@throws \Throwable` Annotation to Test Methods
+    - [ ] Upgrade PHPUnit to 9.x
+    - [ ] Upgrade PHPUnit to 10.x
+    - [ ] Upgrade PHPUnit to 11.x
+
+- [x] PHP-Parser
+    - [ ] Upgrade PHP-Parser to 5.x
+      - [x] Parser Factory create method
+
+- [ ] Psalm
+    - [ ] Upgrade Psalm to 5.x
+    - [ ] Upgrade Psalm to 6.x
+
 - [ ] Mockery
-- [x] Upgrade Mockery to 1.x
-- [ ] Upgrade Mockery to 2.x
-- [x] Extend Mockery TestCase
-- [x] Use Mockery PHPUnit Integration Trait
-- [ ] Hamcrest To PHPUnit
-- [ ] PHPUnit To Mockery
-- [ ] Prophecy To Mockery
-- [ ] Should Receive To Allows
-- [ ] Should Receive To Expects
-- [x] Upgrade PHP-Parser to 5.x
-- [x] Upgrade PHP-Parser to 6.x
-- [ ] Upgrade Psalm to 5.x
-- [ ] Upgrade PHPUnit to 9.x
-- [x] Upgrade PHPUnit to 10.x
-- [x] Upgrade PHPUnit to 11.x
-- [ ] Upgrade PHP to 8.0
-- [ ] Upgrade PHP to 8.1
-- [ ] Upgrade PHP to 8.2
-- [ ] Upgrade PHP to 8.3
-- [ ] Upgrade PHP to 8.4
-- [ ] Upgrade PHP to 8.5
+  - [ ] Hamcrest To PHPUnit
+  - [ ] PHPUnit To Mockery
+  - [ ] Prophecy To Mockery
+  - [x] Upgrade Mockery to 1.x
+    - [x] Extend Mockery TestCase
+    - [x] Use Mockery PHPUnit Integration Trait
+  - [ ] Upgrade Mockery to 2.x
+    - [ ] Should Receive To Allows
+    - [ ] Should Receive To Expects
+
+- [ ] PHP
+    - [x] Replace unnecessary double quotes with single quotes
+    - [x] Sort `use` statements alphabetically
+    - [x] Sort `ClassLike` statements alphabetically
+    - [ ] Upgrade PHP to 8.0
+    - [ ] Upgrade PHP to 8.1
+    - [ ] Upgrade PHP to 8.2
+    - [ ] Upgrade PHP to 8.3
+    - [ ] Upgrade PHP to 8.4
+    - [ ] Upgrade PHP to 8.5
 
 ### Credits
 
