@@ -2,11 +2,19 @@
 
 declare(strict_types=1);
 
+use Composer\InstalledVersions;
+use Composer\Semver\VersionParser;
 use Ghostwriter\Revamp\Package\Phpunit\Phpunit\TestThrowsThrowableDocCommentRector;
-use Ghostwriter\Revamp\Package\Phpunit\Phpunit\PhpunitSetProvider;
 use Rector\Config\RectorConfig;
 
-return RectorConfig::configure()
-    ->withRules([TestThrowsThrowableDocCommentRector::class])
-    // ->withSetProviders(PhpunitSetProvider::class)
-;
+return static function (RectorConfig $rectorConfig): void {
+    if (! InstalledVersions::isInstalled('phpunit/phpunit')) {
+        return;
+    }
+
+    if (! InstalledVersions::satisfies(new VersionParser(), 'phpunit/phpunit', '*')) {
+        return;
+    }
+
+    $rectorConfig->rule(TestThrowsThrowableDocCommentRector::class);
+};
