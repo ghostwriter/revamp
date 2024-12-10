@@ -3,10 +3,12 @@
 declare(strict_types=1);
 
 use Ghostwriter\Revamp\Package\Php\Php81\Php81Rector;
-use Ghostwriter\Revamp\Package\Php\Php81\Php81SetProvider;
 use Rector\Config\RectorConfig;
 
-return RectorConfig::configure()
-    ->withRules([Php81Rector::class])
-    // ->withSetProviders(Php81SetProvider::class)
-;
+return static function (RectorConfig $rectorConfig): void {
+    if (\PHP_VERSION_ID >= 80100) {
+        return;
+    }
+
+    $rectorConfig->rule(Php81Rector::class);
+};
