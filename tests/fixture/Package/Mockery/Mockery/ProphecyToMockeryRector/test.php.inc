@@ -23,10 +23,14 @@ declare(strict_types=1);
 
 namespace Vendor\Package\Tests;
 
+use Throwable;
 use PHPUnit\Framework\TestCase;
 
 final class ExampleTest extends TestCase
 {
+    /**
+     * @throws Throwable
+     */
     public function test()
     {
         $mock = $this->createMock(Example::class);
