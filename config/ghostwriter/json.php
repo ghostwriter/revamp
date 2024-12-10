@@ -2,11 +2,19 @@
 
 declare(strict_types=1);
 
+use Composer\InstalledVersions;
+use Composer\Semver\VersionParser;
 use Ghostwriter\Revamp\Package\Ghostwriter\Json\JsonRector;
-use Ghostwriter\Revamp\Package\Ghostwriter\Json\JsonSetProvider;
 use Rector\Config\RectorConfig;
 
-return RectorConfig::configure()
-    ->withRules([JsonRector::class])
-    // ->withSetProviders(JsonSetProvider::class)
-;
+return static function (RectorConfig $rectorConfig): void {
+    if (! InstalledVersions::isInstalled('ghostwriter/json')) {
+        return;
+    }
+
+    if (! InstalledVersions::satisfies(new VersionParser(), 'ghostwriter/json', '*')) {
+        return;
+    }
+
+    $rectorConfig->rule(JsonRector::class);
+};
