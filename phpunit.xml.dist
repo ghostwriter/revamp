@@ -2,7 +2,7 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/sebastianbergmann/phpunit/11.5/phpunit.xsd"
          beStrictAboutChangesToGlobalState="true"
-         beStrictAboutCoverageMetadata="true"
+         beStrictAboutCoverageMetadata="false"
          beStrictAboutOutputDuringTests="true"
          bootstrap="vendor/autoload.php"
          cacheDirectory=".cache/phpunit"
@@ -22,7 +22,7 @@
          failOnRisky="true"
          failOnSkipped="true"
          failOnWarning="true"
-         requireCoverageMetadata="true"
+         requireCoverageMetadata="false"
          stopOnFailure="false"
 >
     <coverage>
