@@ -2,11 +2,19 @@
 
 declare(strict_types=1);
 
+use Composer\InstalledVersions;
+use Composer\Semver\VersionParser;
 use Ghostwriter\Revamp\Package\Ghostwriter\Uuid\UuidRector;
-use Ghostwriter\Revamp\Package\Ghostwriter\Uuid\UuidSetProvider;
 use Rector\Config\RectorConfig;
 
-return RectorConfig::configure()
-    ->withRules([UuidRector::class])
-    // ->withSetProviders(UuidSetProvider::class)
-;
+return static function (RectorConfig $rectorConfig): void {
+    if (! InstalledVersions::isInstalled('ghostwriter/uuid')) {
+        return;
+    }
+
+    if (! InstalledVersions::satisfies(new VersionParser(), 'ghostwriter/uuid', '*')) {
+        return;
+    }
+
+    $rectorConfig->rule(UuidRector::class);
+};
