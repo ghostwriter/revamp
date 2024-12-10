@@ -25,12 +25,12 @@ final class ExampleTest extends TestCase
 
 namespace Vendor\Package;
 
+use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Mockery;
-use PHPUnit\Framework\TestCase;
 use Throwable;
 use stdClass;
 
-final class ExampleTest extends TestCase
+final class ExampleTest extends MockeryTestCase
 {
     /**
      * @throws Throwable
