@@ -2,11 +2,19 @@
 
 declare(strict_types=1);
 
+use Composer\InstalledVersions;
+use Composer\Semver\VersionParser;
 use Ghostwriter\Revamp\Package\Ghostwriter\Collection\CollectionRector;
-use Ghostwriter\Revamp\Package\Ghostwriter\Collection\CollectionSetProvider;
 use Rector\Config\RectorConfig;
 
-return RectorConfig::configure()
-    ->withRules([CollectionRector::class])
-    // ->withSetProviders(CollectionSetProvider::class)
-;
+return static function (RectorConfig $rectorConfig): void {
+    if (! InstalledVersions::isInstalled('ghostwriter/collection')) {
+        return;
+    }
+
+    if (! InstalledVersions::satisfies(new VersionParser(), 'ghostwriter/collection', '*')) {
+        return;
+    }
+
+    $rectorConfig->rule(CollectionRector::class);
+};
