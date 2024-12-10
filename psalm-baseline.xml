@@ -371,6 +371,10 @@
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/Package/Mockery/Mockery/ExtendMockeryTestCaseRector.php">
+    <InvalidPropertyAssignmentValue>
+      <code><![CDATA[$fileWithoutNamespace->stmts]]></code>
+      <code><![CDATA[$namespace->stmts]]></code>
+    </InvalidPropertyAssignmentValue>
     <InvalidReturnStatement>
       <code><![CDATA[[Class_::class, Namespace_::class, FileWithoutNamespace::class]]]></code>
     </InvalidReturnStatement>
@@ -392,6 +396,19 @@
       <code><![CDATA[ExtendMockeryTestCaseRector]]></code>
       <code><![CDATA[ExtendMockeryTestCaseRector]]></code>
     </PropertyNotSetInConstructor>
+    <UnevaluatedCode>
+      <code><![CDATA[return match (true) {
+            $this->isSubclassOfMockeryTestCase($node) &&
+            $this->isPHPUnitTestCase($node)
+            => match (true) {
+                //                $node instanceof Class_ => $this->refactorClass($node),
+                $node instanceof FileWithoutNamespace => $this->refactorFileWithoutNamespace($node),
+                $node instanceof Namespace_ => $this->refactorNamespace($node),
+                default => null,
+            },
+            default => null,
+        };]]></code>
+    </UnevaluatedCode>
     <UnusedClass>
       <code><![CDATA[ExtendMockeryTestCaseRector]]></code>
     </UnusedClass>
@@ -489,6 +506,9 @@
       <code><![CDATA[PHPUnitToMockeryRector]]></code>
       <code><![CDATA[PHPUnitToMockeryRector]]></code>
     </PropertyNotSetInConstructor>
+    <UnusedClass>
+      <code><![CDATA[PHPUnitToMockeryRector]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Package/Mockery/Mockery/ProphecyToMockeryRector.php">
     <MoreSpecificImplementedParamType>
@@ -503,6 +523,9 @@
       <code><![CDATA[ProphecyToMockeryRector]]></code>
       <code><![CDATA[ProphecyToMockeryRector]]></code>
     </PropertyNotSetInConstructor>
+    <UnusedClass>
+      <code><![CDATA[ProphecyToMockeryRector]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Package/Mockery/Mockery/ShouldReceiveToAllowsRector.php">
     <PropertyNotSetInConstructor>
@@ -513,6 +536,9 @@
       <code><![CDATA[ShouldReceiveToAllowsRector]]></code>
       <code><![CDATA[ShouldReceiveToAllowsRector]]></code>
     </PropertyNotSetInConstructor>
+    <UnusedClass>
+      <code><![CDATA[ShouldReceiveToAllowsRector]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Package/Mockery/Mockery/ShouldReceiveToExpectsRector.php">
     <PropertyNotSetInConstructor>
@@ -523,6 +549,9 @@
       <code><![CDATA[ShouldReceiveToExpectsRector]]></code>
       <code><![CDATA[ShouldReceiveToExpectsRector]]></code>
     </PropertyNotSetInConstructor>
+    <UnusedClass>
+      <code><![CDATA[ShouldReceiveToExpectsRector]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Package/Mockery/Mockery/UseMockeryPHPUnitIntegrationTraitRector.php">
     <PropertyNotSetInConstructor>
@@ -533,28 +562,27 @@
       <code><![CDATA[UseMockeryPHPUnitIntegrationTraitRector]]></code>
       <code><![CDATA[UseMockeryPHPUnitIntegrationTraitRector]]></code>
     </PropertyNotSetInConstructor>
+    <UnusedClass>
+      <code><![CDATA[UseMockeryPHPUnitIntegrationTraitRector]]></code>
+    </UnusedClass>
   </file>
-  <file src="src/Package/Nikic/PhpParser/PhpParserRector.php">
+  <file src="src/Package/Nikic/PhpParser/ParserFactoryCreateMethodRector.php">
+    <MixedAssignment>
+      <code><![CDATA[$value]]></code>
+    </MixedAssignment>
+    <PossiblyUndefinedIntArrayOffset>
+      <code><![CDATA[$args[0]]]></code>
+    </PossiblyUndefinedIntArrayOffset>
     <PropertyNotSetInConstructor>
-      <code><![CDATA[PhpParserRector]]></code>
-      <code><![CDATA[PhpParserRector]]></code>
-      <code><![CDATA[PhpParserRector]]></code>
-      <code><![CDATA[PhpParserRector]]></code>
-      <code><![CDATA[PhpParserRector]]></code>
-      <code><![CDATA[PhpParserRector]]></code>
+      <code><![CDATA[ParserFactoryCreateMethodRector]]></code>
+      <code><![CDATA[ParserFactoryCreateMethodRector]]></code>
+      <code><![CDATA[ParserFactoryCreateMethodRector]]></code>
+      <code><![CDATA[ParserFactoryCreateMethodRector]]></code>
+      <code><![CDATA[ParserFactoryCreateMethodRector]]></code>
+      <code><![CDATA[ParserFactoryCreateMethodRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Package/Php/Php53/Php53Rector.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[Php53Rector]]></code>
-      <code><![CDATA[Php53Rector]]></code>
-      <code><![CDATA[Php53Rector]]></code>
-      <code><![CDATA[Php53Rector]]></code>
-      <code><![CDATA[Php53Rector]]></code>
-      <code><![CDATA[Php53Rector]]></code>
-    </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/Package/Php/Php53/ReplaceUnnecessaryDoubleQuotesRector.php">
+  <file src="src/Package/Php/Php/ReplaceUnnecessaryDoubleQuotesRector.php">
     <PropertyNotSetInConstructor>
       <code><![CDATA[ReplaceUnnecessaryDoubleQuotesRector]]></code>
       <code><![CDATA[ReplaceUnnecessaryDoubleQuotesRector]]></code>
@@ -564,7 +592,7 @@
       <code><![CDATA[ReplaceUnnecessaryDoubleQuotesRector]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Package/Php/Php53/SortClassLikeStatementsAlphabeticallyRector.php">
+  <file src="src/Package/Php/Php/SortClassLikeStatementsAlphabeticallyRector.php">
     <LessSpecificReturnType>
       <code><![CDATA[int]]></code>
     </LessSpecificReturnType>
@@ -584,7 +612,7 @@
       <code><![CDATA[$node instanceof Namespace_]]></code>
     </RedundantConditionGivenDocblockType>
   </file>
-  <file src="src/Package/Php/Php53/SortUseStatementsAlphabeticallyRector.php">
+  <file src="src/Package/Php/Php/SortUseStatementsAlphabeticallyRector.php">
     <LessSpecificReturnType>
       <code><![CDATA[int]]></code>
     </LessSpecificReturnType>
@@ -608,6 +636,19 @@
       <code><![CDATA[$node instanceof Namespace_]]></code>
     </RedundantConditionGivenDocblockType>
   </file>
+  <file src="src/Package/Php/Php53/Php53Rector.php">
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[Php53Rector]]></code>
+      <code><![CDATA[Php53Rector]]></code>
+      <code><![CDATA[Php53Rector]]></code>
+      <code><![CDATA[Php53Rector]]></code>
+      <code><![CDATA[Php53Rector]]></code>
+      <code><![CDATA[Php53Rector]]></code>
+    </PropertyNotSetInConstructor>
+    <UnusedClass>
+      <code><![CDATA[Php53Rector]]></code>
+    </UnusedClass>
+  </file>
   <file src="src/Package/Php/Php54/Php54Rector.php">
     <PropertyNotSetInConstructor>
       <code><![CDATA[Php54Rector]]></code>
@@ -617,6 +658,9 @@
       <code><![CDATA[Php54Rector]]></code>
       <code><![CDATA[Php54Rector]]></code>
     </PropertyNotSetInConstructor>
+    <UnusedClass>
+      <code><![CDATA[Php54Rector]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Package/Php/Php56/Php56Rector.php">
     <PropertyNotSetInConstructor>
@@ -627,6 +671,9 @@
       <code><![CDATA[Php56Rector]]></code>
       <code><![CDATA[Php56Rector]]></code>
     </PropertyNotSetInConstructor>
+    <UnusedClass>
+      <code><![CDATA[Php56Rector]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Package/Php/Php70/Php70Rector.php">
     <PropertyNotSetInConstructor>
@@ -637,6 +684,9 @@
       <code><![CDATA[Php70Rector]]></code>
       <code><![CDATA[Php70Rector]]></code>
     </PropertyNotSetInConstructor>
+    <UnusedClass>
+      <code><![CDATA[Php70Rector]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Package/Php/Php71/Php71Rector.php">
     <PropertyNotSetInConstructor>
@@ -647,6 +697,9 @@
       <code><![CDATA[Php71Rector]]></code>
       <code><![CDATA[Php71Rector]]></code>
     </PropertyNotSetInConstructor>
+    <UnusedClass>
+      <code><![CDATA[Php71Rector]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Package/Php/Php72/Php72Rector.php">
     <PropertyNotSetInConstructor>
@@ -657,6 +710,9 @@
       <code><![CDATA[Php72Rector]]></code>
       <code><![CDATA[Php72Rector]]></code>
     </PropertyNotSetInConstructor>
+    <UnusedClass>
+      <code><![CDATA[Php72Rector]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Package/Php/Php73/Php73Rector.php">
     <PropertyNotSetInConstructor>
@@ -667,6 +723,9 @@
       <code><![CDATA[Php73Rector]]></code>
       <code><![CDATA[Php73Rector]]></code>
     </PropertyNotSetInConstructor>
+    <UnusedClass>
+      <code><![CDATA[Php73Rector]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Package/Php/Php74/Php74Rector.php">
     <PropertyNotSetInConstructor>
@@ -677,6 +736,9 @@
       <code><![CDATA[Php74Rector]]></code>
       <code><![CDATA[Php74Rector]]></code>
     </PropertyNotSetInConstructor>
+    <UnusedClass>
+      <code><![CDATA[Php74Rector]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Package/Php/Php80/Php80Rector.php">
     <PropertyNotSetInConstructor>
@@ -777,26 +839,6 @@
       <code><![CDATA[PsalmRector]]></code>
       <code><![CDATA[PsalmRector]]></code>
     </PropertyNotSetInConstructor>
-  </file>
-  <file src="src/SetProvider.php">
-    <MixedArrayAssignment>
-      <code><![CDATA[$composerTriggeredSets[]]]></code>
-      <code><![CDATA[$composerTriggeredSets[]]]></code>
-    </MixedArrayAssignment>
-    <MixedAssignment>
-      <code><![CDATA[$provider]]></code>
-    </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[list<SetInterface>]]></code>
-    </MixedInferredReturnType>
-    <MixedReturnStatement>
-      <code><![CDATA[$composerTriggeredSets]]></code>
-      <code><![CDATA[$composerTriggeredSets]]></code>
-      <code><![CDATA[$composerTriggeredSets]]></code>
-    </MixedReturnStatement>
-    <UnusedClass>
-      <code><![CDATA[SetProvider]]></code>
-    </UnusedClass>
   </file>
   <file src="src/UseStatement.php">
     <PossiblyUnusedMethod>
