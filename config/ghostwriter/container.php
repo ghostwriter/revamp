@@ -2,11 +2,19 @@
 
 declare(strict_types=1);
 
+use Composer\InstalledVersions;
+use Composer\Semver\VersionParser;
 use Ghostwriter\Revamp\Package\Ghostwriter\Container\ContainerRector;
-use Ghostwriter\Revamp\Package\Ghostwriter\Container\ContainerSetProvider;
 use Rector\Config\RectorConfig;
 
-return RectorConfig::configure()
-    ->withRules([ContainerRector::class])
-    // ->withSetProviders(ContainerSetProvider::class)
-;
+return static function (RectorConfig $rectorConfig): void {
+    if (! InstalledVersions::isInstalled('ghostwriter/container')) {
+        return;
+    }
+
+    if (! InstalledVersions::satisfies(new VersionParser(), 'ghostwriter/container', '*')) {
+        return;
+    }
+
+    $rectorConfig->rule(ContainerRector::class);
+};
