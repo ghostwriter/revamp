@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Revamp;
 
+use Closure;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Override;
@@ -27,6 +28,7 @@ use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\GroupUse;
+use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\TraitUse;
 use PhpParser\Node\Stmt\Use_;
@@ -43,6 +45,7 @@ use Rector\Application\ChangedNodeScopeRefresher;
 use Rector\Application\Provider\CurrentFileProvider;
 use Rector\BetterPhpDocParser\PhpDocInfo\PhpDocInfoFactory;
 use Rector\CodingStyle\Application\UseImportsAdder;
+use Rector\CodingStyle\Application\UseImportsRemover;
 use Rector\CodingStyle\ClassNameImport\ClassNameImportSkipper;
 use Rector\CodingStyle\Node\NameImporter;
 use Rector\Comments\NodeDocBlock\DocBlockUpdater;
@@ -56,6 +59,7 @@ use Rector\Php80\NodeFactory\NestedAttrGroupsFactory;
 use Rector\PhpDocParser\NodeTraverser\SimpleCallableNodeTraverser;
 use Rector\PhpParser\Comparing\NodeComparator;
 use Rector\PhpParser\Node\BetterNodeFinder;
+use Rector\PhpParser\Node\CustomNode\FileWithoutNamespace;
 use Rector\PhpParser\Node\NodeFactory;
 use Rector\PhpParser\Node\Value\ValueResolver;
 use Rector\PostRector\Collector\UseNodesToAddCollector;
@@ -63,6 +67,7 @@ use Rector\Rector\AbstractRector;
 use Rector\Reflection\ReflectionResolver;
 use Rector\Skipper\Skipper\Skipper;
 use Rector\ValueObject\Application\File;
+use ReflectionProperty;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 use Throwable;
@@ -78,6 +83,8 @@ abstract class AbstractRevampRector extends AbstractRector
      * Stop traversing the current node.
      */
     final public const int STOP_TRAVERSAL = NodeVisitor::STOP_TRAVERSAL;
+
+    public const string ORIGINAL_NODE = 'origNode';
 
     protected File $file;
 
@@ -100,6 +107,7 @@ abstract class AbstractRevampRector extends AbstractRector
         public readonly DocBlockNameImporter $docBlockNameImporter,
         public readonly DocBlockUpdater $docBlockUpdater,
         public readonly NameImporter $nameImporter,
+        public readonly UseImportsRemover $useImportsRemover,
         public readonly NestedAttrGroupsFactory $nestedAttrGroupsFactory,
         public readonly PhpAttributeAnalyzer $phpAttributeAnalyzer,
         public readonly PhpDocInfoFactory $phpDocInfoFactory,
@@ -231,6 +239,20 @@ abstract class AbstractRevampRector extends AbstractRector
     final public function addTraitUseToClass(Class_ $class, string $fullyQualifiedClassName): void
     {
         \array_unshift($class->stmts, new TraitUse([$this->importName($fullyQualifiedClassName)]));
+    }
+
+    final public function changeFileContent(string $newContent): array
+    {
+        $file = $this->currentFileProvider->getFile();
+
+        //        $newContent = $this->betterStandardPrinter->printFormatPreserving(
+        //            $file->getNewStmts(),
+        //            $file->getOldStmts(),
+        //            $file->getOldTokens()
+        //        );
+        $file->changeFileContent($newContent);
+
+        return $this->useNodesToAddCollector->getFunctionImportsByFilePath($this->file->getFilePath());
     }
 
     /**
@@ -519,11 +541,11 @@ abstract class AbstractRevampRector extends AbstractRector
         }) instanceof Node;
     }
 
-    final public function hasTrait(Class_ $class, string $desiredTrait): bool
+    final public function hasTrait(Class_ $class, string $trait): bool
     {
         foreach ($class->getTraitUses() as $traitUse) {
             foreach ($traitUse->traits as $traitName) {
-                if (! $this->nodeNameResolver->isName($traitName, $desiredTrait)) {
+                if (! $this->nodeNameResolver->isName($traitName, $trait)) {
                     continue;
                 }
 
@@ -554,6 +576,17 @@ abstract class AbstractRevampRector extends AbstractRector
         }
 
         return $this->nameImporter->importName($fullyQualified, $this->file, $currentUses);
+    }
+
+    final public function is(Node $node, string $class): bool
+    {
+        $classReflection = $this->reflectionResolver->resolveClassReflection($node);
+
+        if (! $classReflection instanceof ClassReflection) {
+            return false;
+        }
+
+        return $classReflection->is($class);
     }
 
     final public function isAbstract(Class_ $class): bool
@@ -597,6 +630,11 @@ abstract class AbstractRevampRector extends AbstractRector
         return $classReflection->isFinalByKeyword();
     }
 
+    final public function isMethodStaticCallOrClassMethodObjectType(Node $node, string $class): bool
+    {
+        return $this->nodeTypeResolver->isMethodStaticCallOrClassMethodObjectType($node, new ObjectType($class));
+    }
+
     /**
      * @throws Throwable
      */
@@ -615,11 +653,12 @@ abstract class AbstractRevampRector extends AbstractRector
         if (! $this->isPHPUnitTestCaseCall($node)) {
             return false;
         }
+
         /** @var MethodCall|StaticCall $node */
         return $this->nodeNameResolver->isNames($node->name, $names);
     }
 
-    final public function isPHPUnitTestCase(Class_ $class): bool
+    final public function isPHPUnitTestCase(Node $class): bool
     {
         return $this->isObjectType($class, new ObjectType(TestCase::class));
     }
@@ -629,6 +668,7 @@ abstract class AbstractRevampRector extends AbstractRector
         if (! $this->isSubclassOf($node, TestCase::class)) {
             return false;
         }
+
         return $node instanceof MethodCall || $node instanceof StaticCall;
     }
 
@@ -660,14 +700,14 @@ abstract class AbstractRevampRector extends AbstractRector
         return $classReflection->isSubclassOf($class);
     }
 
-    final public function isSubclassOfMockeryTestCase(Node $class): bool
+    final public function isSubclassOfMockeryTestCase(Node $node): bool
     {
-        return $this->isSubclassOf($class, MockeryTestCase::class);
+        return $this->isSubclassOf($node, MockeryTestCase::class);
     }
 
-    final public function isSubclassOfPHPUnitTestCase(Node $class): bool
+    final public function isSubclassOfPHPUnitTestCase(Node $node): bool
     {
-        return $this->isSubclassOf($class, TestCase::class);
+        return $this->isSubclassOf($node, TestCase::class);
     }
 
     public function isTestClassMethod(ClassMethod $classMethod): bool
@@ -682,6 +722,24 @@ abstract class AbstractRevampRector extends AbstractRector
 
         return $this->phpDocInfoFactory->createFromNodeOrEmpty($classMethod)
             ->hasByName('test');
+    }
+
+    final public function mergeFiles(File $existingFile, File $newFile): void
+    {
+        $existingStmts = $existingFile->getNewStmts();
+        /** @var FileWithoutNamespace $fileWithoutNamespace */
+        $fileWithoutNamespace = $existingStmts[0];
+        // This is very ugly but it works, see https://github.com/nikic/PHP-Parser/issues/1019
+        unset($fileWithoutNamespace->stmts[1]);
+        $existingArray = $this->getNodeArray($fileWithoutNamespace, 0);
+        // --- new php array
+        $newStmts = $newFile->getNewStmts();
+        /** @var FileWithoutNamespace $fileWithoutNamespace2 */
+        $fileWithoutNamespace2 = $newStmts[0];
+        $newArray = $this->getNodeArray($fileWithoutNamespace2, 1);
+        // Merge the two arrays
+        $existingArray->items[] = $newArray->items[0];
+        $existingFile->changeNewStmts($existingStmts);
     }
 
     final public function nameEndsWith(Node $node, string ...$suffixes): bool
@@ -734,7 +792,7 @@ abstract class AbstractRevampRector extends AbstractRector
     }
 
     #[Override]
-    public function refactor(Node $node): ?Node
+    public function refactor(Node $node): null|array|int|Node
     {
         return null;
     }
@@ -755,6 +813,7 @@ abstract class AbstractRevampRector extends AbstractRector
                 return self::REMOVE_NODE;
             }
         );
+
         return $class;
     }
 
@@ -785,6 +844,67 @@ abstract class AbstractRevampRector extends AbstractRector
     }
 
     /**
+     * @param Stmt[]   $stmts
+     * @param string[] $removedUses
+     *
+     * @return Stmt[]
+     */
+    final public function removeImportsFromStmts(array $stmts, array $removedUses): array
+    {
+        foreach ($stmts as $key => $stmt) {
+            if (! $stmt instanceof Use_) {
+                continue;
+            }
+
+            $stmt = $this->removeUseFromUse($removedUses, $stmt);
+            if ($stmt->uses !== []) {
+                continue;
+            }
+
+            //            dump_node($stmt);
+
+            // remove empty uses
+            unset($stmts[$key]);
+        }
+
+        return $stmts;
+    }
+
+    final public function removeNode(Node $node): void
+    {
+        $originalNode =
+            $node->getAttribute(self::ORIGINAL_NODE) ??
+            $node;
+
+        $nodeId = \spl_object_id($originalNode);
+        ###
+        $closure = Closure::bind(
+            static fn (
+                AbstractRector $self
+            ) => $self->nodesToReturn[$nodeId] = NodeVisitor::REMOVE_NODE,
+            null,
+            AbstractRector::class
+        );
+        $closure($this);
+        ###
+        $reflectionProperty = new ReflectionProperty(AbstractRector::class, 'toBeRemovedNodeId');
+        $reflectionProperty->setValue($this, $nodeId);
+        ###
+        $reflectionProperty = new ReflectionProperty(AbstractRector::class, 'nodesToReturn');
+        $value = $reflectionProperty->getValue($this);
+        $value[$nodeId] = NodeVisitor::REMOVE_NODE;
+        $reflectionProperty->setValue($this, $value);
+        ###
+
+        \dump([$value]);
+
+        ////                    $orignal = $stmt->getAttribute();
+        //        $nodeId = \spl_object_id($stmt);
+        //
+        //        $this->nodesToReturn[$nodeId] = NodeVisitor::REMOVE_NODE;
+    }
+
+    /**
      * @param Stmt[] $stmts
      *
      * @throws Throwable
@@ -805,6 +925,26 @@ abstract class AbstractRevampRector extends AbstractRector
     }
 
     /**
+     * @param string[] $removedUses
+     */
+    final public function removeUseFromUse(array $removedUses, Use_ $use): Use_
+    {
+        $uses = $use->uses;
+
+        foreach ($uses as $key => $useUse) {
+            if (! $this->isNames($useUse, $removedUses)) {
+                continue;
+            }
+
+            unset($uses[$key]);
+        }
+
+        $use->uses = \array_values($uses);
+
+        return $use;
+    }
+
+    /**
      * @template T of object
      *
      * @param list<class-string<T>> $removedUseStatements
@@ -812,32 +952,87 @@ abstract class AbstractRevampRector extends AbstractRector
     final public function removeUseStatements(string ...$removedUseStatements): void
     {
         $this->traverseFile(
-            function (Node $node) use ($removedUseStatements): ?int {
-                if (! $node instanceof Use_) {
+            function (Node $node) use ($removedUseStatements) {
+                if (
+                    (! $node instanceof FileWithoutNamespace) &&
+                    (! $node instanceof Namespace_)
+                ) {
                     return null;
                 }
 
-                //                $node->setAttribute('origNode', null);
-                //                dump([$node::class, count($node->uses)]);
+                $node->stmts = $this->removeImportsFromStmts($node->stmts, $removedUseStatements);
 
-                foreach ($node->uses as $usesKey => $useUse) {
-                    \dump([$usesKey, $this->getName($useUse)]);
+                \dump_node($node);
 
-                    foreach ($removedUseStatements as $removedUseStatement) {
-                        if (! $this->isName($useUse, $removedUseStatement)) {
+                return $node;
+            }
+        );
+    }
+
+    /**
+     * @template T of object
+     *
+     */
+    final public function replaceUseStatement(Node $node, string $from, string $to): void
+    {
+        $this->traverseFile(
+            function (Node $node) use ($from, $to) {
+                if (
+                    (! $node instanceof FileWithoutNamespace) &&
+                    (! $node instanceof Namespace_)
+                ) {
+                    return null;
+                }
+
+                foreach ($node->stmts as $stmt) {
+                    if (! $stmt instanceof Use_) {
+                        continue;
+                    }
+
+                    foreach ($stmt->uses as $use) {
+                        if (! $this->nodeNameResolver->isName($stmt, $from)) {
                             continue;
                         }
 
-                        unset($node->uses[$usesKey]);
-                        continue 2;
+                        $use->name = new Name($to);
+
+                        return $node;
                     }
                 }
 
-                \dump([$node::class, \count($node->uses)]);
-
-                return $node->uses === [] ? self::REMOVE_NODE : null;
+                return null;
             }
         );
+    }
+
+    final public function resolveNamespace(): null|FileWithoutNamespace|Namespace_
+    {
+        /** @var null|File $file */
+        $file = $this->currentFileProvider->getFile();
+
+        if (! $file instanceof File) {
+            return null;
+        }
+
+        $newStmts = $file->getNewStmts();
+        if ($newStmts === []) {
+            return null;
+        }
+
+        /** @var FileWithoutNamespace[]|Namespace_[] $namespaces */
+        $namespaces = \array_filter(
+            $newStmts,
+            static fn (
+                Stmt $stmt
+            ): bool => $stmt instanceof Namespace_ || $stmt instanceof FileWithoutNamespace,
+        );
+
+        // multiple namespaces is not supported
+        if (\count($namespaces) !== 1) {
+            return null;
+        }
+
+        return \current($namespaces);
     }
 
     final public function resolveParentClassName(Class_ $class): ?string
@@ -853,6 +1048,20 @@ abstract class AbstractRevampRector extends AbstractRector
         }
 
         return $nativeReflection->getParentClassName();
+    }
+
+    /**
+     * @return Use_[]
+     */
+    final public function resolveUses(): array
+    {
+        $namespace = $this->resolveNamespace();
+
+        if (! $namespace instanceof Node) {
+            return [];
+        }
+
+        return \array_filter($namespace->stmts, static fn (Stmt $stmt): bool => $stmt instanceof Use_);
     }
 
     final public function sortImplements(Class_ $class): void
@@ -871,8 +1080,7 @@ abstract class AbstractRevampRector extends AbstractRector
      */
     final public function traverseFile(callable $callback): void
     {
-        $this->simpleCallableNodeTraverser
-            ->traverseNodesWithCallable($this->file->getNewStmts(), $callback);
+        $this->traverseNodes($this->file->getNewStmts(), $callback);
     }
 
     /**
