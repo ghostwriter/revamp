@@ -2,11 +2,19 @@
 
 declare(strict_types=1);
 
+use Composer\InstalledVersions;
+use Composer\Semver\VersionParser;
 use Ghostwriter\Revamp\Package\Ghostwriter\Config\ConfigRector;
-use Ghostwriter\Revamp\Package\Ghostwriter\Config\ConfigSetProvider;
 use Rector\Config\RectorConfig;
 
-return RectorConfig::configure()
-    ->withRules([ConfigRector::class])
-    // ->withSetProviders(ConfigSetProvider::class)
-;
+return static function (RectorConfig $rectorConfig): void {
+    if (! InstalledVersions::isInstalled('ghostwriter/config')) {
+        return;
+    }
+
+    if (! InstalledVersions::satisfies(new VersionParser(), 'ghostwriter/config', '*')) {
+        return;
+    }
+
+    $rectorConfig->rule(ConfigRector::class);
+};
