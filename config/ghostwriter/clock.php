@@ -2,11 +2,19 @@
 
 declare(strict_types=1);
 
+use Composer\InstalledVersions;
+use Composer\Semver\VersionParser;
 use Ghostwriter\Revamp\Package\Ghostwriter\Clock\ClockRector;
-use Ghostwriter\Revamp\Package\Ghostwriter\Clock\ClockSetProvider;
 use Rector\Config\RectorConfig;
 
-return RectorConfig::configure()
-    ->withRules([ClockRector::class])
-    // ->withSetProviders(ClockSetProvider::class)
-;
+return static function (RectorConfig $rectorConfig): void {
+    if (! InstalledVersions::isInstalled('ghostwriter/clock')) {
+        return;
+    }
+
+    if (! InstalledVersions::satisfies(new VersionParser(), 'ghostwriter/clock', '*')) {
+        return;
+    }
+
+    $rectorConfig->rule(ClockRector::class);
+};
