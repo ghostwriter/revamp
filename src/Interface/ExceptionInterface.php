@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Revamp;
+namespace Ghostwriter\Revamp\Interface;
 
 use Throwable;
 
