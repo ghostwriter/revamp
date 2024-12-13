@@ -118,7 +118,7 @@ $projects = [
     //    ],
     'nikic' => [
         'php-parser' => [
-            '5.0' => [\pascalCase('Parser Factory create method')],
+            '5.0' => [\pascalCase('PhpParser50'), \pascalCase('Parser Factory create method')],
         ],
     ],
     'php' => [
