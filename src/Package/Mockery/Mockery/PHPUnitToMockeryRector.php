@@ -7,17 +7,13 @@ namespace Ghostwriter\Revamp\Package\Mockery\Mockery;
 use Ghostwriter\Revamp\AbstractRevampRector;
 use Override;
 use PhpParser\Node;
-use PhpParser\Node\Stmt\Class_;
-use Tests\Unit\Rule\Mockery\PHPUnitToMockeryRectorTest;
+use Tests\Unit\Package\Mockery\Mockery\PhpunitToMockeryRectorTest;
 
 /**
- * @see PHPUnitToMockeryRectorTest
+ * @see PhpunitToMockeryRectorTest
  */
-final class PHPUnitToMockeryRector extends AbstractRevampRector
+final class PhpunitToMockeryRector extends AbstractRevampRector
 {
-    /**
-     * @param Class_ $node
-     */
     #[Override]
     public function refactor(Node $node): ?Node
     {
