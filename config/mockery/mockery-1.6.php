@@ -28,6 +28,10 @@ use Rector\Config\RectorConfig;
 //    ])
 //;
 return static function (RectorConfig $rectorConfig): void {
+    if (! InstalledVersions::isInstalled('mockery/mockery')) {
+        return;
+    }
+
     if (! InstalledVersions::satisfies(new VersionParser(), 'mockery/mockery', '^1.6')) {
         return;
     }
