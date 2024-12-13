@@ -11,7 +11,7 @@ use Ghostwriter\Revamp\Package\Mockery\Mockery\PHPUnitToMockeryRector;
 use Ghostwriter\Revamp\Package\Mockery\Mockery\ProphecyToMockeryRector;
 use Ghostwriter\Revamp\Package\Mockery\Mockery\ShouldReceiveToAllowsRector;
 use Ghostwriter\Revamp\Package\Mockery\Mockery\ShouldReceiveToExpectsRector;
-use Ghostwriter\Revamp\Package\Mockery\Mockery\UseMockeryPHPUnitIntegrationTraitRector;
+use Ghostwriter\Revamp\Package\Mockery\Mockery\UseMockeryPhpunitIntegrationTraitRector;
 use Rector\Config\RectorConfig;
 
 return static function (RectorConfig $rectorConfig): void {
@@ -30,5 +30,5 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->rule(ProphecyToMockeryRector::class);
     $rectorConfig->rule(ShouldReceiveToAllowsRector::class);
     $rectorConfig->rule(ShouldReceiveToExpectsRector::class);
-    $rectorConfig->rule(UseMockeryPHPUnitIntegrationTraitRector::class);
+    $rectorConfig->rule(UseMockeryPhpunitIntegrationTraitRector::class);
 };
