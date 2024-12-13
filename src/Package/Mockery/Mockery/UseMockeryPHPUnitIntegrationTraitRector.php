@@ -9,6 +9,7 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Override;
 use PhpParser\Node;
+use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Class_;
 use Tests\Unit\Rule\Mockery\UseMockeryPHPUnitIntegrationTraitRectorTest;
 use Throwable;
@@ -46,7 +47,7 @@ final class UseMockeryPHPUnitIntegrationTraitRector extends AbstractRevampRector
     {
         $extends = $class->extends;
 
-        if ($extends === null) {
+        if (! $extends instanceof Name) {
             return null;
         }
 
