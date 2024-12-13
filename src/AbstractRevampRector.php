@@ -658,9 +658,9 @@ abstract class AbstractRevampRector extends AbstractRector
         return $this->nodeNameResolver->isNames($node->name, $names);
     }
 
-    final public function isPHPUnitTestCase(Node $class): bool
+    final public function isPHPUnitTestCase(Node $node): bool
     {
-        return $this->isObjectType($class, new ObjectType(TestCase::class));
+        return $this->isObjectType($node, new ObjectType(TestCase::class));
     }
 
     public function isPHPUnitTestCaseCall(Node $node): bool
@@ -880,8 +880,8 @@ abstract class AbstractRevampRector extends AbstractRector
         ###
         $closure = Closure::bind(
             static fn (
-                AbstractRector $self
-            ) => $self->nodesToReturn[$nodeId] = NodeVisitor::REMOVE_NODE,
+                AbstractRector $rector
+            ): int => $rector->nodesToReturn[$nodeId] = NodeVisitor::REMOVE_NODE,
             null,
             AbstractRector::class
         );
@@ -891,6 +891,7 @@ abstract class AbstractRevampRector extends AbstractRector
         $reflectionProperty->setValue($this, $nodeId);
         ###
         $reflectionProperty = new ReflectionProperty(AbstractRector::class, 'nodesToReturn');
+
         $value = $reflectionProperty->getValue($this);
         $value[$nodeId] = NodeVisitor::REMOVE_NODE;
         $reflectionProperty->setValue($this, $value);
@@ -952,7 +953,7 @@ abstract class AbstractRevampRector extends AbstractRector
     final public function removeUseStatements(string ...$removedUseStatements): void
     {
         $this->traverseFile(
-            function (Node $node) use ($removedUseStatements) {
+            function (Node $node) use ($removedUseStatements): null|FileWithoutNamespace|Namespace_ {
                 if (
                     (! $node instanceof FileWithoutNamespace) &&
                     (! $node instanceof Namespace_)
@@ -976,7 +977,7 @@ abstract class AbstractRevampRector extends AbstractRector
     final public function replaceUseStatement(Node $node, string $from, string $to): void
     {
         $this->traverseFile(
-            function (Node $node) use ($from, $to) {
+            function (Node $node) use ($from, $to): null|FileWithoutNamespace|Namespace_ {
                 if (
                     (! $node instanceof FileWithoutNamespace) &&
                     (! $node instanceof Namespace_)
