@@ -9,6 +9,7 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Override;
 use PhpParser\Node;
+use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Use_;
@@ -94,6 +95,7 @@ final class ExtendMockeryTestCaseRector extends AbstractRevampRector
                 if (! $this->isName($stmt, TestCase::class)) {
                     continue;
                 }
+
                 $useTestCaseStatement[$this->nodeId($stmt)] = $stmt;
             }
 
@@ -103,7 +105,7 @@ final class ExtendMockeryTestCaseRector extends AbstractRevampRector
 
             $extends = $stmt->extends;
 
-            if ($extends === null) {
+            if (! $extends instanceof Name) {
                 continue;
             }
 
@@ -126,6 +128,7 @@ final class ExtendMockeryTestCaseRector extends AbstractRevampRector
             if (! $this->isPHPUnitTestCase($stmt)) {
                 continue;
             }
+
             if (
                 ! $this->hasMockeryMockStaticCall($stmt)
                 && ! $this->hasMockeryGlobalMockFunctionCall($stmt)
