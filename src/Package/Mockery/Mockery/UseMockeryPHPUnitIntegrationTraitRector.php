@@ -11,13 +11,13 @@ use Override;
 use PhpParser\Node;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Class_;
-use Tests\Unit\Rule\Mockery\UseMockeryPHPUnitIntegrationTraitRectorTest;
+use Tests\Unit\Rule\Mockery\UseMockeryPhpunitIntegrationTraitRectorTest;
 use Throwable;
 
 /**
- * @see UseMockeryPHPUnitIntegrationTraitRectorTest
+ * @see UseMockeryPhpunitIntegrationTraitRectorTest
  */
-final class UseMockeryPHPUnitIntegrationTraitRector extends AbstractRevampRector
+final class UseMockeryPhpunitIntegrationTraitRector extends AbstractRevampRector
 {
     /**
      * @return array<class-string<Class_>>
