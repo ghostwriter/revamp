@@ -22,7 +22,7 @@
          failOnRisky="true"
          failOnSkipped="true"
          failOnWarning="true"
-         requireCoverageMetadata="false"
+         requireCoverageMetadata="true"
          stopOnFailure="false"
 >
     <coverage>
