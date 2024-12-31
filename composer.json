@@ -40,7 +40,7 @@
         "ext-mbstring": "*",
         "composer-plugin-api": "^2.6.0",
         "composer-runtime-api": "^2.2.2",
-        "nikic/php-parser": "^5.3.1",
+        "nikic/php-parser": "^5.4.0",
         "rector/rector": "^2.0.3"
     },
     "require-dev": {
