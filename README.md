@@ -1,10 +1,8 @@
 # Revamp
 
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/ghostwriter?label=Sponsor+@ghostwriter/revamp&logo=GitHub+Sponsors)](https://github.com/sponsors/ghostwriter)
 [![Automation](https://github.com/ghostwriter/revamp/actions/workflows/automation.yml/badge.svg)](https://github.com/ghostwriter/revamp/actions/workflows/automation.yml)
 [![Supported PHP Version](https://badgen.net/packagist/php/ghostwriter/revamp?color=8892bf)](https://www.php.net/supported-versions)
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/ghostwriter?label=Sponsor+@ghostwriter/revamp&logo=GitHub+Sponsors)](https://github.com/sponsors/ghostwriter)
-[![Code Coverage](https://codecov.io/gh/ghostwriter/revamp/branch/main/graph/badge.svg)](https://codecov.io/gh/ghostwriter/revamp)
-[![Latest Version on Packagist](https://badgen.net/packagist/v/ghostwriter/revamp)](https://packagist.org/packages/ghostwriter/revamp)
 [![Downloads](https://badgen.net/packagist/dt/ghostwriter/revamp?color=blue)](https://packagist.org/packages/ghostwriter/revamp)
 
 > [!NOTE]
