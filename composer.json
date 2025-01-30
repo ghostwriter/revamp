@@ -58,7 +58,7 @@
         "ghostwriter/psalm-plugin": "dev-main",
         "ghostwriter/result": "^1.3.0",
         "ghostwriter/shell": "^0.1.0",
-        "ghostwriter/uuid": "^1.0.1",
+        "ghostwriter/uuid": "^1.0.2",
         "mockery/mockery": "^1.6.12",
         "phpunit/phpunit": "^11.5.3",
         "symfony/var-dumper": "^7.2.0"
